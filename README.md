@@ -1,4 +1,10 @@
-This is the starter template for CS312 projects based on Next.js](https://nextjs.org/). _You should replace this portion with a description of your project._
+This is the starter template for CS312 projects based on Next.js](https://nextjs.org/). We will be creating an updated version of the MiddCourses. Everyone will still be able to make their own account, you will still be able to leave a review for a class, say the average amount of time per week you spent on the class, and filter by department or professor. However, with a larger group I hope to add some additional functionality such as a schedule planner. The end goal of this MiddCourses would not only be a repository to leave reviews, but also a website that you can use to build your next semesters schedule.
+
+Travis CI badge: [![Build Status](https://app.travis-ci.com/csci0312-f21/project-middcourses-2-0.svg?token=sgjMh2ower8npw8pypDe&branch=main)](https://app.travis-ci.com/csci0312-f21/project-middcourses-2-0)
+
+Heroku deployed application link: https://evening-hollows-86606.herokuapp.com/
+
+---
 
 The project was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), and includes a number of additional libraries, including the Rest Testing Library, Jest, and ESLint, among others. It also includes the basic configuration for using Travis CI.
 

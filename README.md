@@ -2,7 +2,7 @@ This is the starter template for CS312 projects based on Next.js](https://nextjs
 
 Travis CI badge: [![Build Status](https://app.travis-ci.com/csci0312-f21/project-middcourses-2-0.svg?token=sgjMh2ower8npw8pypDe&branch=main)](https://app.travis-ci.com/csci0312-f21/project-middcourses-2-0)
 
-Heroku deployed application link: https://evening-hollows-86606.herokuapp.com/
+Heroku deployed application link:  https://midd-courses.herokuapp.com/
 
 ---
 

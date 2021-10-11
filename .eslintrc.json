@@ -136,7 +136,7 @@
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "react/jsx-key": "error",
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/rules-of-hooks": "off", // Checks rules of Hooks - change to error later
     "react-hooks/exhaustive-deps": "off" // Checks effect dependencies
   }
 }

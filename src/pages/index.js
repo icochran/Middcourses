@@ -1,5 +1,4 @@
 
-
 import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
@@ -22,13 +21,13 @@ export default function MainPage() {
   return (
     <div className={styles.container}>
       <Head>
-          <h1>Project Main Layout</h1>
+          <h1>Midd Courses</h1>
       </Head>
 
       <main>
-            <SearchBar/>
-            <Filter/>
-            <CardGrid/>
+        <SearchBar/>
+        <Filter/>
+        <CardGrid/>
       </main>
     </div>
   );

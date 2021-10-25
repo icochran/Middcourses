@@ -4,19 +4,33 @@ import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 
+import CourseCard from "../components/CourseCard"
+
+import SearchBar from "../components/SearchBar"
+
+import Filter from "../components/Filter"
+
+import testData from "";
+
+import {useState} from "react"
+
 export default function MainPage() {
+
+    const [filterBy, setFilterBy] = useState (null)
+    const [searchBarInput, setSearchBarInput] = useState("")
+    const [collection, setCollection] = useState (testData)
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Final Project</title>
-        <link rel="icon" href="/favicon.ico" />
+          <SearchBar/>
+          <Filter/>
       </Head>
 
       <main>
-        <h1 className="title">Final Project</h1>
-        <p>Hooray, you got the project deployed!</p>
-        <p>Now go and give it some content...</p>
+        <CourseCard/>
+        <CourseCard/>
+        <CourseCard/>
       </main>
 
       <footer>A CS 312 Project</footer>

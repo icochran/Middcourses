@@ -1,6 +1,8 @@
 {
   "name": "project-template",
   "version": "0.1.0",
+  "author": "Alderik van der Heyde",
+  "URL": "https://github.com/csci0312-f21/practical07-Avanderheyde",
   "private": true,
   "contributors": [
     "Kaela Finegan",

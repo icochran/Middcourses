@@ -1,7 +1,10 @@
-export default function CourseCard({Course}) {
+export default function CourseCard({course}) {
     return(
         <div>
-            <h1>Design the card inside this using Course object</h1>
+            <h1>Course name from obj</h1>
+            <p>Difficulty</p>
+            <p>Interest</p>
+            <p>Time Commitment</p>
         </div>        
         );
 }

@@ -1,0 +1,64 @@
+[
+  {
+    "class_name": "Software Development",
+    "dept": "CSCI",
+    "class_num": "312",
+    "profs": [
+      {
+        "prof_name": "Christopher Andrews",
+        "satisfaction": [5, 5, 4, 5, 4, 3, 4],
+        "difficulty": [5, 5, 5, 5, 5, 5, 5],
+        "interest": [5, 4, 3, 2, 1, 3, 4],
+        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+      },
+      {
+        "prof_name": "Linderman",
+        "satisfaction": [5, 5, 4, 5, 4, 3, 4],
+        "difficulty": [5, 5, 5, 5, 5, 5, 5],
+        "interest": [5, 4, 3, 2, 1, 3, 4],
+        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+      }
+    ],
+    "course_desc":"Class where you learn Software Development",
+    "id": 0
+  },
+  {
+    "class_name": "Intro Data Science",
+    "dept": "MATH",
+    "class_num": "118",
+    "profs": [
+      {
+        "prof_name": "Kara Karpman",
+        "satisfaction": [5, 5, 4, 5, 4, 3, 4],
+        "difficulty": [5, 5, 5, 5, 5, 5, 5],
+        "interest": [5, 4, 3, 2, 1, 3, 4],
+        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+      },
+      {
+        "prof_name": "Alex Lyford",
+        "satisfaction": [5, 5, 4, 5, 4, 3, 4],
+        "difficulty": [5, 5, 5, 5, 5, 5, 5],
+        "interest": [5, 4, 3, 2, 1, 3, 4],
+        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+      }
+    ],
+    "course_desc":"Class where you learn Data Science",
+    "id": 0
+  },
+  {
+    "class_name": "Computer Architecture",
+    "dept": "CSCI",
+    "class_num": "312",
+    "profs": [
+      {
+        "prof_name": "Christopher Andrews",
+        "satisfaction": [5, 5, 4, 5, 4, 3, 4],
+        "difficulty": [5, 5, 5, 5, 5, 5, 5],
+        "interest": [5, 4, 3, 2, 1, 3, 4],
+        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+      }
+    ],
+    "course_desc":"Class where you learn Software Development",
+    "id": 0
+  }
+]

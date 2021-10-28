@@ -15,8 +15,16 @@ export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState (null)
     const [searchBarInput, setSearchBarInput] = useState("")
-    const [collection, setCollection] = useState (null) 
-    //switch null to test data once we import it  
+    const [collection] = useState (null) 
+    //need to import the collection
+
+    if (filterBy==="Difficulty"){
+        //do some thing
+    }
+
+    if (searchBarInput){
+        //search according to this input
+    }
 
   return (
     <div className={styles.container}>
@@ -25,9 +33,9 @@ export default function MainPage() {
       </Head>
 
       <main>
-            <SearchBar/>
-            <Filter/>
-            <CardGrid/>
+            <SearchBar searchByCallback={setSearchBarInput}/>
+            <Filter filterByCallback={setFilterBy}/>
+            <CardGrid collection={collection}/>
       </main>
     </div>
   );

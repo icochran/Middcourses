@@ -1,25 +1,42 @@
 
-
 import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+import CardGrid from "../components/CardGrid"
+
+import SearchBar from "../components/SearchBar"
+
+import Filter from "../components/Filter"
+
+import {useState} from "react"
+
+export default function MainPage() {
+
+    const [filterBy, setFilterBy] = useState (null)
+    const [searchBarInput, setSearchBarInput] = useState("")
+    const [collection] = useState (null) 
+    //need to import the collection
+
+    if (filterBy==="Difficulty"){
+        //do some thing
+    }
+
+    if (searchBarInput){
+        //search according to this input
+    }
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Final Project</title>
-        <link rel="icon" href="/favicon.ico" />
+            <h1>Midd Courses</h1>
       </Head>
 
       <main>
-        <h1 className="title">Final Project</h1>
-        <p>Hooray, you got the project deployed!</p>
-        <p>Now go and give it some content...</p>
+            <SearchBar searchByCallback={setSearchBarInput}/>
+            <Filter filterByCallback={setFilterBy}/>
+            <CardGrid collection={collection}/>
       </main>
-
-      <footer>A CS 312 Project</footer>
     </div>
   );
 }

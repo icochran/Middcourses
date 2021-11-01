@@ -1,4 +1,6 @@
 import CourseCard from "../components/CourseCard"
+import styles from '../styles/Home.module.css';
+
 
 export default function CardGrid({collection}) {
 
@@ -10,7 +12,7 @@ export default function CardGrid({collection}) {
     }
 
     return(
-        <div>
+        <div class={styles.listView}>
             <CourseCard course={dummy_course}/> 
             <CourseCard course={dummy_course}/>   
             <CourseCard course={dummy_course}/>  

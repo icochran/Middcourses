@@ -2,11 +2,15 @@ import styles from '../styles/Home.module.css';
 
 export default function CourseCard({course}) {
     
-    //for now we will set everything to this but we can simply change these values to the values of the prop course object when we get those
-    const courseName = "SoftwareDev"
-    const courseDifficulty = 60;
-    const courseInteresting = 60;
-    const courseTimeCommitment = 10;
+    //for now we are just using the array of the first professor, though there are multiple
+    const difficultyArray = course.profs[0].difficulty;
+    const interestingArray = course.profs[0].interest;
+    const timeCommitmentArray = course.profs[0].time_commitment;
+
+    const courseName = course.class_name;
+    const courseDifficulty = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10;
+    const courseInteresting = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10;
+    const courseTimeCommitment = (timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length)*10;
 
     const difficultyBarStyle = {
         width: `${courseDifficulty}%`,
@@ -33,13 +37,13 @@ export default function CourseCard({course}) {
                 <div class="difficultyName">
                     <p>Difficulty</p>
                 </div>
-                <div class={styles.difficultyBarBackground}>
+                <div class={styles.difficultyBarBackground}> 
                     <span class={styles.difficultyBar} style={difficultyBarStyle}>
                     </span>
                 </div>
             </div>
 
-            <div class="interesting">
+            <div class={styles.interesting}>
                 <div class="interesting-name">
                     <p>Interesting</p>
                 </div>
@@ -58,8 +62,7 @@ export default function CourseCard({course}) {
                         <span class={styles.timecommitmentBar} style={timeCommitmentBarStyle}>
                         </span>
                     </div>
-                    <div class="timecommitment-bar-number">
-                        <p>5 hours</p>
+                    <div class={styles.timecommitmentBarNumber}> 5 hours
                     </div>
                 </div>
             </div>

@@ -6,29 +6,47 @@ export default function CourseCard({course}) {
     const difficultyArray = course.profs[0].difficulty;
     const interestingArray = course.profs[0].interest;
     const timeCommitmentArray = course.profs[0].time_commitment;
+    const satisfactionArray = course.profs[0].satisfaction;
 
     const courseName = course.class_name;
-    const courseDifficulty = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10;
-    const courseInteresting = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10;
-    const courseTimeCommitment = (timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length)*10;
+    const courseProf = course.profs[0].prof_name;
+
+    //get the averages of the arrays as a number between 1 and 100
+    const courseDifficulty100 = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10;
+    const courseInteresting100 = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10;
+    const courseTimeCommitment100 = (timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length)*10;
+    const courseTimeCommitmentHours = Math.round(courseTimeCommitment100/10*100)/100;
+    const courseSatisfactionPercent = (satisfactionArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(satisfactionArray.length)/10;
+
+    //get the weights for the gradient between green and red
+    const wGreen = (courseSatisfactionPercent)*255;
+    const wRed = (1-courseSatisfactionPercent)*255;
 
     const difficultyBarStyle = {
-        width: `${courseDifficulty}%`,
+        width: `${courseDifficulty100}%`,
         background: "#47b5ff"
     }
     const interestingBarStyle = {
-        width:`${courseInteresting}%`,
+        width:`${courseInteresting100}%`,
         background: "#47b5ff"
     }
     const timeCommitmentBarStyle = {
-        width:`${courseTimeCommitment}%`,
+        width:`${courseTimeCommitment100}%`,
         background: "#47b5ff"
+    }
+    const classBoxStyle = {
+        borderColor: `rgb(${wRed}, ${wGreen}, 0)`
     }
 
     return(
-    <div class={styles.classBox}>
-        <div class={styles.className}>
-            <span>{courseName}</span>
+    <div class={styles.classBox} style={classBoxStyle}>
+        <div class={styles.classHeader}>
+            <div class={styles.className}>
+                <span>{courseName}</span>
+            </div>
+            <div class={styles.classProf}>
+                <span>{courseProf}</span>
+            </div>
         </div>
 
 
@@ -62,7 +80,7 @@ export default function CourseCard({course}) {
                         <span class={styles.timecommitmentBar} style={timeCommitmentBarStyle}>
                         </span>
                     </div>
-                    <div class={styles.timecommitmentBarNumber}> 5 hours
+                    <div class={styles.timecommitmentBarNumber}> {courseTimeCommitmentHours} hours
                     </div>
                 </div>
             </div>

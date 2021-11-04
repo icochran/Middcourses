@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css';
+import styles from "../styles/Home.module.css";
 
 export default function CourseCard({course}) {
     
@@ -39,48 +39,45 @@ export default function CourseCard({course}) {
     }
 
     return(
-    <div class={styles.classBox} style={classBoxStyle}>
-        <div class={styles.classHeader}>
-            <div class={styles.className}>
+    <div className={styles.classBox} style={classBoxStyle}>
+        <div className={styles.classHeader}>
+            <div className={styles.className}>
                 <span>{courseName}</span>
             </div>
-            <div class={styles.classProf}>
+            <div className={styles.classProf}>
                 <span>{courseProf}</span>
             </div>
         </div>
 
 
-        <div class={styles.courseBody}>
-            <div class={styles.difficulty}>
-                <div class="difficultyName">
+        <div className={styles.courseBody}>
+            <div className={styles.difficulty}>
+                <div className="difficultyName">
                     <p>Difficulty</p>
                 </div>
-                <div class={styles.difficultyBarBackground}> 
-                    <span class={styles.difficultyBar} style={difficultyBarStyle}>
-                    </span>
+                <div className={styles.difficultyBarBackground}> 
+                    <span className={styles.difficultyBar} style={difficultyBarStyle}/>
                 </div>
             </div>
 
-            <div class={styles.interesting}>
-                <div class="interesting-name">
+            <div className={styles.interesting}>
+                <div className="interesting-name">
                     <p>Interesting</p>
                 </div>
-                <div class={styles.interestingBarBackground}>
-                    <span class={styles.interestingBar} style={interestingBarStyle}>
-                    </span>
+                <div className={styles.interestingBarBackground}>
+                    <span className={styles.interestingBar} style={interestingBarStyle}/>
                 </div>
             </div>
 
-            <div class="timecommitment">
-                <div class="timecommitment-name">
+            <div className="timecommitment">
+                <div className="timecommitment-name">
                     <p>Time Commitment</p>
                 </div>
-                <div class="timecommitment-bar-wrapper">
-                    <div class={styles.timecommitmentBarBackground}>
-                        <span class={styles.timecommitmentBar} style={timeCommitmentBarStyle}>
-                        </span>
+                <div className="timecommitment-bar-wrapper">
+                    <div className={styles.timecommitmentBarBackground}>
+                        <span className={styles.timecommitmentBar} style={timeCommitmentBarStyle}/>
                     </div>
-                    <div class={styles.timecommitmentBarNumber}> {courseTimeCommitmentHours} hours
+                    <div className={styles.timecommitmentBarNumber}> {courseTimeCommitmentHours} hours
                     </div>
                 </div>
             </div>

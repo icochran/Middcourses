@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export default function CourseCard({course}) {
     

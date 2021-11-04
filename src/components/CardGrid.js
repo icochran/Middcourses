@@ -1,5 +1,6 @@
 import CourseCard from "../components/CourseCard"
 import styles from "../styles/Home.module.css";
+import PropTypes from 'prop-types';
 
 export default function CardGrid({collection}) {
 
@@ -14,4 +15,8 @@ export default function CardGrid({collection}) {
             {courseList} 
         </div> 
         );
+}
+
+CardGrid.propTypes = {
+    collection: PropTypes.arrayOf(PropTypes.object)
 }

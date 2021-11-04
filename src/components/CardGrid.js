@@ -1,19 +1,17 @@
 import CourseCard from "../components/CourseCard"
+import styles from "../styles/Home.module.css";
 
 export default function CardGrid({collection}) {
 
-    const dummy_course = {}
-    dummy_course.time = "a lot"
+    const courseList = collection.map(course => (<CourseCard key={course.class_name} course={course}/>)) ;
 
     if (collection===null){
         //we didn't get a collection
     }
 
     return(
-        <div>
-            <CourseCard course={dummy_course}/> 
-            <CourseCard course={dummy_course}/>   
-            <CourseCard course={dummy_course}/>  
+        <div className={styles.listView}>
+            {courseList} 
         </div> 
         );
 }

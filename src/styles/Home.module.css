@@ -5,4 +5,93 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.classHeader{
+  text-align: center;
+  margin: 10px 10px 30px;
+  height: 100px;
+}
+
+.className{
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.classProf{
+  font-size: 20px;
+}
+
+.courseBody{
+  margin: 0px 10px 0px;
+}
+
+.listView{
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.classBox{
+  width: 30%;
+  border-radius: 20px;
+  border-width: 15px;
+  position: relative;
+  margin: 10px;
+  background: #cecece;
+  border-style: solid;
+}
+
+.interestingBar {
+  display: block;
+  height: 4px;
+  border-radius: 6px;
+  }
+
+.interestingBarBackground {
+  display: block;
+  height: 4px;
+  border-radius: 6px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #000000;  
+}
+
+.difficultyBar {
+  display: block;
+  height: 4px;
+  border-radius: 6px;
+}
+
+.difficultyBarBackground{
+  display: block;
+  height: 4px;
+  border-radius: 6px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #000000;  
+}
+
+.timecommitmentBar {
+  display: block;
+  height: 4px;
+  border-radius: 6px;
+}
+
+.timecommitmentBarBackground{
+  display: block;
+  height: 4px;
+  border-radius: 6px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #000000;  
+}
+
+.timecommitmentBarNumber{
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.interesting{
 }

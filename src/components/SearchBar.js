@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function SearchBar({searchByCallback}) {
     searchByCallback()
     return(
@@ -5,4 +7,8 @@ export default function SearchBar({searchByCallback}) {
             <h1>Search Bar</h1>
         </div>
     );
+}
+
+SearchBar.propTypes = {
+    searchByCallback: PropTypes.func.isRequired()
 }

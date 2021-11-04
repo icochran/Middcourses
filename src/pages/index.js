@@ -10,16 +10,18 @@ import {useState} from "react"
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState()
-    const [searchBarInput, setSearchBarInput] = useState("")
+    const [searchBarInput, setSearchBarInput] = useState()
     const [collection] = useState(data) 
 
-    if (filterBy==="Difficulty"){
-        //do some thing
-    }
+    let courses = undefined;
 
     if (searchBarInput){
-        //search according to this input
-    }
+      courses = collection.filter((course) => course.class_name.toLowerCase() === searchBarInput.toLowerCase()) 
+    } 
+
+    if (filterBy==="Difficulty"){
+      //do some thing
+  }
 
   return (
     <div className={styles.container}>
@@ -30,7 +32,7 @@ export default function MainPage() {
       <main>
             <SearchBar searchByCallback={setSearchBarInput}/>
             <Filter filterByCallback={setFilterBy}/>
-            <CardGrid collection={collection}/>
+            {courses === undefined ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
       </main>
     </div>
   );

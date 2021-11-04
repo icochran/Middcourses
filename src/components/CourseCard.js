@@ -88,5 +88,5 @@ export default function CourseCard({course}) {
 }
 
 CourseCard.propTypes = {
-    course: PropTypes.object.isRequired()
+    course: PropTypes.object.isRequired
 }

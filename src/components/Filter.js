@@ -10,5 +10,5 @@ export default function Filter({filterByCallback}) {
 }
 
 Filter.propTypes = {
-    filterByCallback: PropTypes.func.isRequired()
+    filterByCallback: PropTypes.func.isRequired
 }

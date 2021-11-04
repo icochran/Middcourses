@@ -10,5 +10,5 @@ export default function SearchBar({searchByCallback}) {
 }
 
 SearchBar.propTypes = {
-    searchByCallback: PropTypes.func.isRequired()
+    searchByCallback: PropTypes.func.isRequired
 }

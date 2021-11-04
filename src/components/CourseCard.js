@@ -1,4 +1,5 @@
 import styles from "../styles/Home.module.css";
+import PropTypes from "prop-types";
 
 export default function CourseCard({course}) {
     
@@ -84,4 +85,8 @@ export default function CourseCard({course}) {
         </div>
     </div>        
         );
+}
+
+CourseCard.propTypes = {
+    course: PropTypes.object.isRequired
 }

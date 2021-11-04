@@ -1,4 +1,5 @@
 import {useState} from "react"
+import PropTypes from "prop-types";
 
 export default function SearchBar({searchByCallback}) {
     const [searchBarText, setSearchBarText] = useState();
@@ -28,4 +29,8 @@ export default function SearchBar({searchByCallback}) {
             >Clear</button>
         </div>
     );
+}
+
+SearchBar.propTypes = {
+    searchByCallback: PropTypes.func.isRequired
 }

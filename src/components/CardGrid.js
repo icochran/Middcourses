@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 
 export default function CardGrid({collection}) {
 
-    const courseList = collection.map(course => (<CourseCard course={course}/>)) ;
+    const courseList = collection.map(course => (<CourseCard key = {course["class_name"]} course={course}/>)) ;
 
     if (collection===null){
         //we didn't get a collection

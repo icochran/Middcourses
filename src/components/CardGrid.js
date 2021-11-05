@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 export default function CardGrid({courses}) {
 
+    //courses.forEach((course) => { console.log(course.class_name); });
     const courseList = courses.map(course => (<CourseCard key={course.class_name} course={course}/>)) ;
 
     if (courses===null){

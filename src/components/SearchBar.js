@@ -16,12 +16,10 @@ export default function SearchBar({searchByCallback}) {
                 }}
             /> 
             <button 
-                type = "button" 
                 disabled = {(searchBarText === undefined ? true : false)}
                 onClick = {() => searchByCallback(searchBarText)}
             >Search</button>
             <button 
-                type = "button" 
                 onClick = {() => {
                     setSearchBarText();
                     searchByCallback();

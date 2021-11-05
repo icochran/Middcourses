@@ -16,7 +16,8 @@ export default function MainPage() {
     let courses = undefined;
 
     if (searchBarInput){
-      courses = collection.filter((course) => course.class_name.toLowerCase() === searchBarInput.toLowerCase()) 
+      const newInput = searchBarInput.toLowerCase();
+      courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
     } 
 
     if (filterBy==="Difficulty"){

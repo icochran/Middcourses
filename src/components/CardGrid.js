@@ -1,5 +1,5 @@
 import CourseCard from "../components/CourseCard"
-import styles from '../styles/Home.module.css';
+import styles from "../styles/Home.module.css";
 
 export default function CardGrid({collection}) {
 

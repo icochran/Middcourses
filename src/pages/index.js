@@ -13,7 +13,7 @@ export default function MainPage() {
     const [searchBarInput, setSearchBarInput] = useState()
     const [collection] = useState(data) 
 
-    let courses = undefined;
+    let courses = [];
 
     if (searchBarInput){
       const newInput = searchBarInput.toLowerCase();
@@ -33,7 +33,7 @@ export default function MainPage() {
       <main>
             <SearchBar searchByCallback={setSearchBarInput}/>
             <Filter filterByCallback={setFilterBy}/>
-            {courses === undefined ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
+            {courses.length === 0 ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
       </main>
     </div>
   );

@@ -1,4 +1,5 @@
 import styles from "../styles/Home.module.css";
+import PropTypes from "prop-types";
 
 export default function CourseCard({course}) {
     
@@ -6,29 +7,47 @@ export default function CourseCard({course}) {
     const difficultyArray = course.profs[0].difficulty;
     const interestingArray = course.profs[0].interest;
     const timeCommitmentArray = course.profs[0].time_commitment;
+    const satisfactionArray = course.profs[0].satisfaction;
 
     const courseName = course.class_name;
-    const courseDifficulty = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10;
-    const courseInteresting = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10;
-    const courseTimeCommitment = (timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length)*10;
+    const courseProf = course.profs[0].prof_name;
+
+    //get the averages of the arrays as a number between 1 and 100
+    const courseDifficulty100 = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10;
+    const courseInteresting100 = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10;
+    const courseTimeCommitment100 = (timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length)*10;
+    const courseTimeCommitmentHours = Math.round(courseTimeCommitment100/10*100)/100;
+    const courseSatisfactionPercent = (satisfactionArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(satisfactionArray.length)/10;
+
+    //get the weights for the gradient between green and red
+    const wGreen = (courseSatisfactionPercent)*255;
+    const wRed = (1-courseSatisfactionPercent)*255;
 
     const difficultyBarStyle = {
-        width: `${courseDifficulty}%`,
+        width: `${courseDifficulty100}%`,
         background: "#47b5ff"
     }
     const interestingBarStyle = {
-        width:`${courseInteresting}%`,
+        width:`${courseInteresting100}%`,
         background: "#47b5ff"
     }
     const timeCommitmentBarStyle = {
-        width:`${courseTimeCommitment}%`,
+        width:`${courseTimeCommitment100}%`,
         background: "#47b5ff"
+    }
+    const classBoxStyle = {
+        borderColor: `rgb(${wRed}, ${wGreen}, 0)`
     }
 
     return(
-    <div className={styles.classBox}>
-        <div className={styles.className}>
-            <span>{courseName}</span>
+    <div className={styles.classBox} style={classBoxStyle}>
+        <div className={styles.classHeader}>
+            <div className={styles.className}>
+                <span>{courseName}</span>
+            </div>
+            <div className={styles.classProf}>
+                <span>{courseProf}</span>
+            </div>
         </div>
 
 
@@ -59,11 +78,15 @@ export default function CourseCard({course}) {
                     <div className={styles.timecommitmentBarBackground}>
                         <span className={styles.timecommitmentBar} style={timeCommitmentBarStyle}/>
                     </div>
-                    <div className={styles.timecommitmentBarNumber}> 5 hours
+                    <div className={styles.timecommitmentBarNumber}> {courseTimeCommitmentHours} hours
                     </div>
                 </div>
             </div>
         </div>
     </div>        
         );
+}
+
+CourseCard.propTypes = {
+    course: PropTypes.object.isRequired
 }

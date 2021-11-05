@@ -10,7 +10,7 @@ export default function CardGrid({collection}) {
     }
 
     return(
-        <div class={styles.listView}>
+        <div className={styles.listView}>
             {courseList} 
         </div> 
         );

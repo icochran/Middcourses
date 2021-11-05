@@ -26,43 +26,43 @@ export default function CourseCard({course}) {
     }
 
     return(
-    <div class={styles.classBox}>
-        <div class={styles.className}>
+    <div className={styles.classBox}>
+        <div className={styles.className}>
             <span>{courseName}</span>
         </div>
 
 
-        <div class={styles.courseBody}>
-            <div class={styles.difficulty}>
-                <div class="difficultyName">
+        <div className={styles.courseBody}>
+            <div className={styles.difficulty}>
+                <div className="difficultyName">
                     <p>Difficulty</p>
                 </div>
-                <div class={styles.difficultyBarBackground}> 
-                    <span class={styles.difficultyBar} style={difficultyBarStyle}>
+                <div className={styles.difficultyBarBackground}> 
+                    <span className={styles.difficultyBar} style={difficultyBarStyle}>
                     </span>
                 </div>
             </div>
 
-            <div class={styles.interesting}>
-                <div class="interesting-name">
+            <div className={styles.interesting}>
+                <div className="interesting-name">
                     <p>Interesting</p>
                 </div>
-                <div class={styles.interestingBarBackground}>
-                    <span class={styles.interestingBar} style={interestingBarStyle}>
+                <div className={styles.interestingBarBackground}>
+                    <span className={styles.interestingBar} style={interestingBarStyle}>
                     </span>
                 </div>
             </div>
 
-            <div class="timecommitment">
-                <div class="timecommitment-name">
+            <div className="timecommitment">
+                <div className="timecommitment-name">
                     <p>Time Commitment</p>
                 </div>
-                <div class="timecommitment-bar-wrapper">
-                    <div class={styles.timecommitmentBarBackground}>
-                        <span class={styles.timecommitmentBar} style={timeCommitmentBarStyle}>
+                <div className="timecommitment-bar-wrapper">
+                    <div className={styles.timecommitmentBarBackground}>
+                        <span className={styles.timecommitmentBar} style={timeCommitmentBarStyle}>
                         </span>
                     </div>
-                    <div class={styles.timecommitmentBarNumber}> 5 hours
+                    <div className={styles.timecommitmentBarNumber}> 5 hours
                     </div>
                 </div>
             </div>

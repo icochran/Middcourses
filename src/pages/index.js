@@ -33,7 +33,7 @@ export default function MainPage() {
       <main>
             <SearchBar searchByCallback={setSearchBarInput}/>
             <Filter filterByCallback={setFilterBy}/>
-            {courses.length === 0 ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
+            {(!searchBarInput && !filterBy) ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
       </main>
     </div>
   );

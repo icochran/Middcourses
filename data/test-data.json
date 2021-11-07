@@ -46,7 +46,7 @@
     "id": 0
   },
   {
-    "class_name": "Computer Architecture",
+    "class_name": "Computer Systems",
     "dept": "CSCI",
     "class_num": "312",
     "profs": [
@@ -62,7 +62,7 @@
     "id": 0
   },
   {
-    "class_name": "Computer Architecture",
+    "class_name": "Computer Engineering",
     "dept": "CSCI",
     "class_num": "312",
     "profs": [
@@ -84,6 +84,22 @@
     "profs": [
       {
         "prof_name": "Christopher Andrews",
+        "satisfaction": [9,9,9,9,9],
+        "difficulty": [5, 5, 5, 5, 5, 5, 5],
+        "interest": [5, 4, 3, 2, 1, 3, 4],
+        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+      }
+    ],
+    "course_desc":"Class where you learn Software Development",
+    "id": 0
+  },
+  {
+    "class_name": "Art Test",
+    "dept": "ART",
+    "class_num": "100",
+    "profs": [
+      {
+        "prof_name": "Pablo Picasso",
         "satisfaction": [9,9,9,9,9],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],

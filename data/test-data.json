@@ -43,7 +43,7 @@
       }
     ],
     "course_desc":"Class where you learn Data Science",
-    "id": 0
+    "id": 1
   },
   {
     "class_name": "Computer Architecture",
@@ -91,6 +91,6 @@
       }
     ],
     "course_desc":"Class where you learn Software Development",
-    "id": 0
+    "id": 2
   }
 ]

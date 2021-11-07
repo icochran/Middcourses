@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function CardGrid({collection}) {
 
-    const courseList = collection.map(course => (<CourseCard key={course.class_name} course={course}/>)) ;
+    const courseList = collection.map(course => (<CourseCard key={course.id} course={course}/>)) ;
 
     if (collection===null){
         //we didn't get a collection

@@ -1,0 +1,80 @@
+
+.filter {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 14vw;
+}
+
+.filterButton {
+    background-color: rgb(27, 27, 160);
+    color: white;
+    min-width: 160px;
+    padding: 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 7.5px;
+}
+
+.fitlerContent {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: black;
+    padding: 10px 12px;
+    z-index: 1;
+    display: none;
+}
+
+.filterContent li ul {
+    display: none; 
+}
+
+.filterContent ul li { 
+    display: none; 
+}
+
+.filterContent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: none;
+  }
+
+.filterContent a:hover{
+    background-color: #f1f1f1;
+}
+
+.filter:hover .filterContent{
+    display: block;
+}
+
+.filter:hover .filterContent a{
+    display: block;
+}
+
+.filter:hover .filterContent ul{
+    list-style: none;
+    display: block;
+}
+
+.filter:hover .filterContent li{
+    list-style: none;
+    display: block;
+}
+
+
+.filterContent ul li a {
+  display: none;
+}
+
+
+.filterContent ul li{
+    position: relative;
+}
+
+.filterSubmenu ul{
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+  }

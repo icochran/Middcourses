@@ -15,5 +15,5 @@ export default function CardGrid({courses}) {
 }
 
 CardGrid.propTypes = {
-    collection: PropTypes.arrayOf(PropTypes.object)
+    courses: PropTypes.arrayOf(PropTypes.object)
 }

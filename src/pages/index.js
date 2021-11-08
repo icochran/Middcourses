@@ -9,24 +9,20 @@ import { useState } from "react"
 
 export default function MainPage() {
 
-  const [filterBy, setFilterBy] = useState()
-  const [searchBarInput, setSearchBarInput] = useState()
-  const [collection] = useState(data) 
+    const [filterBy, setFilterBy] = useState()
+    const [searchBarInput, setSearchBarInput] = useState()
+    const [collection] = useState(data) 
 
-  let courses = [];
+    let courses = collection;
 
-  if (searchBarInput){
-    const newInput = searchBarInput.toLowerCase();
-    courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
-  } 
+    if (searchBarInput){
+      const newInput = searchBarInput.toLowerCase();
+      courses = courses.filter((course) => course.class_name.toLowerCase().includes(newInput));
+    }
 
-  if (filterBy==="MATH"){
-    courses = collection.filter((course) => course.dept==="MATH");
-  } else if (filterBy==="ART") {
-    courses = collection.filter((course) => course.dept==="ART");
-  } else if (filterBy==="CSCI") {
-    courses = collection.filter((course) => course.dept==="CSCI");
-  }
+    if (filterBy){
+      courses = courses.filter((course) => course.dept===filterBy);
+    }
 
   return (
     <div className={styles.container}>
@@ -37,7 +33,7 @@ export default function MainPage() {
       <main className={styles.main}>
             <SearchBar searchByCallback={setSearchBarInput}/>
             <Filter setFilterBy={setFilterBy}/>
-            {(!searchBarInput && !filterBy) ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
+            <CardGrid courses={courses}/>
       </main>
     </div>
   );

@@ -1,4 +1,5 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 
 URL = "https://catalog.middlebury.edu/archive/MCUG/2021-2022/MCUG-2021-2022_latest.html"
@@ -12,6 +13,8 @@ courses = results.find_all("article", class_="course")
 
 id_generator = 0 
 
+data = []
+
 for course in courses:
     title =  course.find("h3").text 
     class_name = title[10:title.index("(")]
@@ -21,8 +24,14 @@ for course in courses:
         professors_list = professors_list[professors_list.index("(")+1:professors_list.index(")")]
     
     #parsing for multiple professors
-    profs = professors_list.split (",")
+    prof_names = professors_list.split (",")
     
+    for prof_name in prof_names:
+        profs = {"prof_name":prof_name, "satisfaction": [],
+        "difficulty": [],
+        "interest": [],
+        "time_commitment": []}
+
     course_desc = course.find(attrs = {"class":"course_description"}).text
 
     class_obj = {"class_name": class_name,
@@ -31,8 +40,9 @@ for course in courses:
     "profs": profs,
     "id": id_generator}
     
-    print (class_obj)
+    data.append (class_obj)
 
     id_generator+=1
 
-
+with open('./data/seed.json', 'w') as outfile:
+    json.dump(data, outfile)

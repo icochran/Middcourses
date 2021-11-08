@@ -75,7 +75,7 @@
       }
     ],
     "course_desc":"Class where you learn Computer Architecture",
-    "id": 2
+    "id": 3
   },
   {
     "class_name": "Computer Architecture",
@@ -91,6 +91,6 @@
       }
     ],
     "course_desc":"Class where you learn Computer Architecture",
-    "id": 2
+    "id": 4
   }
 ]

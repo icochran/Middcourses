@@ -2,10 +2,10 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 import ProfDropDown from "./ProfDropDown";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export default function CourseCard({ course }) {
-  const [prof, setprof] = useState(course.profs[0]);
+  const [prof] = useState(course.profs[0]);
   
   //for now we are just using the array of the first professor, though there are multiple
   const difficultyArray = prof.difficulty;
@@ -70,7 +70,7 @@ export default function CourseCard({ course }) {
           <span>{courseName}</span>
         </div>
         <div>
-          <ProfDropDown profs={course.profs} setProf={setprof}/>
+          <ProfDropDown profs={course.profs}/>
         </div>
       </div>
 

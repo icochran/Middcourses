@@ -1,25 +1,26 @@
-import { useMemo, useState } from "react";  
-import { DropDownList } from "@progress/kendo-react-dropdowns";  
-  
+import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 
-export default function ProfDropDown({profs, setprof}) {
-    // Store currently selected category  
-    const [category, setCategory] = useState("");   
+export default function ProfDropDown({profs}) {
+  
+  function showOptions() {
+    Document.getElementById("myDropdown").classList.toggle("show");
+  }
 
-    const categories = profs.map(prof => prof.prof_name)
-    console.log(categories)
-
-    return (
-        <section className="k-my-8">
-          <form className="k-form k-mb-4">
-            <label className="k-label k-mb-3">Professor</label>
-            <DropDownList data={categories} onChange={e => setCategory(e.value)} />
-          </form>
-        </section>
-      );
-    };
+  // courses.forEach((course) => { console.log(course.class_name); });
+  const profList = profs.map(prof => (<a href="#" key={prof.prof_name}>{prof.prof_name}</a>)) ;
+  return (
+    <div className={styles.dropdown}>
+      <button onClick={showOptions} classDown={styles.dropbtn}>
+        Professors
+      </button>
+      <div id="myDropdown" classDown={styles.dropdowncontent}>
+        {profList}
+      </div>
+    </div>
+  );
+}
 
 ProfDropDown.propTypes = {
-    courses: PropTypes.arrayOf(PropTypes.string)
-}
+  courses: PropTypes.arrayOf(PropTypes.string),
+};

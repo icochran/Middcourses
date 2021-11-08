@@ -5,7 +5,7 @@ import CardGrid from "../components/CardGrid"
 import SearchBar from "../components/SearchBar"
 import Filter from "../components/Filter"
 import data from "../../data/test-data.json"
-import {useState} from "react"
+import { useState } from "react"
 
 export default function MainPage() {
 
@@ -27,10 +27,10 @@ export default function MainPage() {
   return (
     <div className={styles.container}>
       <Head>
-            <h1>Midd Courses</h1>
+        <h1>Midd Courses</h1>
       </Head>
 
-      <main>
+      <main className={styles.main}>
             <SearchBar searchByCallback={setSearchBarInput}/>
             <Filter filterByCallback={setFilterBy}/>
             {(!searchBarInput && !filterBy) ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}

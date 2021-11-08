@@ -9,21 +9,19 @@ import { useState } from "react"
 
 export default function MainPage() {
 
-  const [filterByCategory, setFilterByCategory] = useState("")
-  const [filterBySub, setFilterBySub] = useState("")
-  const [searchBarInput, setSearchBarInput] = useState("")
-  const [collection] = useState(data)
+    const [filterBy, setFilterBy] = useState()
+    const [searchBarInput, setSearchBarInput] = useState()
+    const [collection] = useState(data) 
 
-  let filteredCollection = collection;
+    let courses = [];
 
-  //Testing for filter functionality
-  //Will add all filtering capabilites after this works
-  if (filterByCategory === "Department") {
-    filteredCollection = collection.filter(course => course.dept === filterBySub);
-  }
+    if (searchBarInput){
+      const newInput = searchBarInput.toLowerCase();
+      courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
+    } 
 
-  if (searchBarInput) {
-    //search according to this input
+    if (filterBy==="Difficulty"){
+      //do some thing
   }
 
   return (
@@ -33,12 +31,9 @@ export default function MainPage() {
       </Head>
 
       <main className={styles.main}>
-        <SearchBar searchByCallback={setSearchBarInput} />
-        <Filter
-          setFilterByCategory={setFilterByCategory}
-          setFilterBySub={setFilterBySub}
-        />
-        <CardGrid collection={filteredCollection} />
+            <SearchBar searchByCallback={setSearchBarInput}/>
+            <Filter filterByCallback={setFilterBy}/>
+            {(!searchBarInput && !filterBy) ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
       </main>
     </div>
   );

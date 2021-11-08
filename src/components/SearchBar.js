@@ -1,10 +1,30 @@
+import {useState} from "react"
 import PropTypes from "prop-types";
 
 export default function SearchBar({searchByCallback}) {
-    searchByCallback()
+    const [searchBarText, setSearchBarText] = useState();
+    
     return(
         <div>
-            <h1>Search Bar</h1>
+            <input 
+                type = "text" 
+                value = {searchBarText}
+                id = "searchBar"
+                placeholder = "Search"
+                onChange = {(e) => {
+                    setSearchBarText(e.target.value);
+                }}
+            /> 
+            <button 
+                disabled = {(searchBarText === undefined ? true : false)}
+                onClick = {() => searchByCallback(searchBarText)}
+            >Search</button>
+            <button 
+                onClick = {() => {
+                    setSearchBarText();
+                    searchByCallback();
+                }}
+            >Clear</button>
         </div>
     );
 }

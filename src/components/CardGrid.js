@@ -2,21 +2,18 @@ import CourseCard from "../components/CourseCard"
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 
-export default function CardGrid({collection}) {
+export default function CardGrid({courses}) {
 
-    const courseList = collection.map(course => (<CourseCard key={course.class_name} course={course}/>)) ;
-
-    if (collection===null){
-        //we didn't get a collection
-    }
+    // courses.forEach((course) => { console.log(course.class_name); });
+    const courseList = courses.map(course => (<CourseCard key={course.id} course={course}/>)) ;
 
     return(
         <div className={styles.listView}>
-            {courseList} 
+            {courseList.length === 0 ? "No courses match your search criteria." : courseList} 
         </div> 
         );
 }
 
 CardGrid.propTypes = {
-    collection: PropTypes.arrayOf(PropTypes.object)
+    courses: PropTypes.arrayOf(PropTypes.object)
 }

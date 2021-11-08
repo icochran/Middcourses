@@ -1,25 +1,21 @@
 import styles from "../styles/Filter.module.css";
 import PropTypes from "prop-types";
 
-export default function Filter({setFilterByCategory, setFilterBySub}) {
+export default function Filter({setFilterBy}) {
     return(
         <div className={styles.filter}>
             <button className={styles.filterButton}>Filter ▾</button>
             <div className={styles.filterContent}>
                 <ul>
-                <li><a onClick={() => setFilterByCategory("")}>None</a></li>
+                <li><a onClick={() => setFilterBy()}>None</a></li>
                 <li><a>Department</a>
                     <ul>
                     <li><a onClick={() => {
-                        setFilterByCategory("Department");
-                        setFilterBySub("MATH");}
-                        }>MATH</a></li>
+                        setFilterBy("MATH");}}>MATH</a></li>
                     <li><a onClick={() => {
-                        setFilterByCategory("Department");
-                        setFilterBySub("CSCI");}}>CSCI</a></li>
+                        setFilterBy("CSCI");}}>CSCI</a></li>
                     <li><a onClick={() => {
-                        setFilterByCategory("Department");
-                        setFilterBySub("ART");}}>ART</a></li>
+                        setFilterBy("ART");}}>ART</a></li>
                     </ul>
                 </li>
                 </ul>
@@ -29,5 +25,5 @@ export default function Filter({setFilterByCategory, setFilterBySub}) {
 }
 
 Filter.propTypes = {
-    filterByCallback: PropTypes.func.isRequired
+    setFilterBy: PropTypes.func.isRequired
 }

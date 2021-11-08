@@ -32,7 +32,7 @@ export default function MainPage() {
         <h1>Midd Courses</h1>
       </Head>
 
-      <main>
+      <main className={styles.main}>
         <SearchBar searchByCallback={setSearchBarInput} />
         <Filter
           setFilterByCategory={setFilterByCategory}

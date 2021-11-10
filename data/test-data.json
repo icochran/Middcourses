@@ -23,7 +23,7 @@
     "id": 0
   },
   {
-    "class_name": "Intro Data Science",
+    "class_name": "Intro to Data Science",
     "dept": "MATH",
     "class_num": "118",
     "profs": [
@@ -43,12 +43,12 @@
       }
     ],
     "course_desc":"Class where you learn Data Science",
-    "id": 0
+    "id": 1
   },
   {
-    "class_name": "Computer Architecture",
+    "class_name": "Computer Systems",
     "dept": "CSCI",
-    "class_num": "312",
+    "class_num": "202",
     "profs": [
       {
         "prof_name": "Christopher Andrews",
@@ -58,13 +58,13 @@
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Software Development",
-    "id": 0
+    "course_desc":"Class where you learn Computer Architecture",
+    "id": 2
   },
   {
-    "class_name": "Computer Architecture",
+    "class_name": "Computer Engineering",
     "dept": "CSCI",
-    "class_num": "312",
+    "class_num": "202",
     "profs": [
       {
         "prof_name": "Christopher Andrews",
@@ -74,13 +74,13 @@
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Software Development",
-    "id": 0
+    "course_desc":"Class where you learn Computer Architecture",
+    "id": 3
   },
   {
     "class_name": "Computer Architecture",
     "dept": "CSCI",
-    "class_num": "312",
+    "class_num": "202",
     "profs": [
       {
         "prof_name": "Christopher Andrews",
@@ -90,7 +90,7 @@
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Software Development",
-    "id": 0
+    "course_desc":"Class where you learn Computer Architecture",
+    "id": 4
   }
 ]

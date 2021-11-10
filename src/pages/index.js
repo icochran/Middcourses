@@ -7,30 +7,34 @@ import Filter from "../components/Filter"
 import data from "../../data/seed.json"
 import {useState} from "react"
 
+
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState()
-    const [searchBarInput, setSearchBarInput] = useState("")
+    const [searchBarInput, setSearchBarInput] = useState()
     const [collection] = useState(data) 
 
-    if (filterBy==="Difficulty"){
-        //do some thing
-    }
+    let courses = collection;
 
     if (searchBarInput){
-        //search according to this input
+      const newInput = searchBarInput.toLowerCase();
+      courses = courses.filter((course) => course.class_name.toLowerCase().includes(newInput));
+    }
+
+    if (filterBy){
+      courses = courses.filter((course) => course.dept===filterBy);
     }
 
   return (
     <div className={styles.container}>
       <Head>
-            <h1>Midd Courses</h1>
+        <h1>Midd Courses</h1>
       </Head>
 
-      <main>
+      <main className={styles.main}>
             <SearchBar searchByCallback={setSearchBarInput}/>
-            <Filter filterByCallback={setFilterBy}/>
-            <CardGrid collection={collection}/>
+            <Filter setFilterBy={setFilterBy}/>
+            <CardGrid courses={courses}/>
       </main>
     </div>
   );

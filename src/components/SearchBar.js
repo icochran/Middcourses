@@ -15,6 +15,11 @@ export default function SearchBar({searchByCallback}) {
                 onChange = {(e) => {
                     setSearchBarText(e.target.value);
                 }}
+                onKeyPress = {(e) => {
+                    if (e.key === "Enter" && searchBarText){
+                        searchByCallback(searchBarText);
+                    }
+                }}
             /> 
             <button 
                 disabled = {(searchBarText === "" ? true : false)}

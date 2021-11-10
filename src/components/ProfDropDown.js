@@ -1,24 +1,47 @@
-import styles from "../styles/Home.module.css";
+
+import styles from "../styles/dropdown.module.css";
 import PropTypes from "prop-types";
 
-export default function ProfDropDown({profs}) {
+export default function ProfDropDown({profs, setProf}) {
   
-  function showOptions() {
-    Document.getElementById("myDropdown").classList.toggle("show");
+  const profSetter =(pname)=>{
+    const newProf = profs.find(a => a.prof_name === pname)
+    setProf(newProf)
+    
+    // if(pname!=="Aggregate"){
+      
+    // }else{
+    //   setProf(pname)
+    // }
+    
   }
-
-  // courses.forEach((course) => { console.log(course.class_name); });
-  const profList = profs.map(prof => (<a href="#" key={prof.prof_name}>{prof.prof_name}</a>)) ;
-  return (
-    <div className={styles.dropdown}>
-      <button onClick={showOptions} classDown={styles.dropbtn}>
-        Professors
-      </button>
-      <div id="myDropdown" classDown={styles.dropdowncontent}>
-        {profList}
+  const profList = profs.map(prof => (<li key={prof.prof_name}><a onClick={profSetter(prof.prof_name)}>{prof.prof_name}</a></li>)) ;
+  
+  if(profs.length>1){
+    return (
+      <div className={styles.filter}>
+        <button className={styles.filterButton}>Professors ▾</button>
+              <div className={styles.filterContent}>
+                  <ul>
+                  <li key={"Aggregate"}><a onClick={profSetter("Aggregate")}>{"Aggregate"}</a></li>
+                  {profList}
+                  </ul>
+              </div>
       </div>
-    </div>
-  );
+    );
+  } else{
+    return(
+      <div className={styles.filter}>
+        <button className={styles.filterButton}>Professors ▾</button>
+              <div className={styles.filterContent}>
+                  <ul>
+                  {profList}
+                  </ul>
+              </div>
+      </div>
+    )
+  }
+  
 }
 
 ProfDropDown.propTypes = {

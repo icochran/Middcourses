@@ -5,13 +5,13 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
 export default function CourseCard({ course }) {
-  const [prof] = useState(course.profs[0]);
+  const [prof, setProf] = useState(course.profs[0]);
   
   //for now we are just using the array of the first professor, though there are multiple
-  const difficultyArray = prof.difficulty;
-  const interestingArray = prof.interest;
-  const timeCommitmentArray = prof.time_commitment;
-  const satisfactionArray = prof.satisfaction;
+  const difficultyArray = course.profs[0].difficulty;
+  const interestingArray = course.profs[0].interest;
+  const timeCommitmentArray = course.profs[0].time_commitment;
+  const satisfactionArray = course.profs[0].satisfaction;
 
   const courseName = course.class_name;
 
@@ -70,7 +70,7 @@ export default function CourseCard({ course }) {
           <span>{courseName}</span>
         </div>
         <div>
-          <ProfDropDown profs={course.profs}/>
+          <ProfDropDown profs={course.profs} setProf={setProf}/>
         </div>
       </div>
 

@@ -4,8 +4,9 @@ import styles from "../styles/Home.module.css";
 import CardGrid from "../components/CardGrid"
 import SearchBar from "../components/SearchBar"
 import Filter from "../components/Filter"
-import data from "../../data/test-data.json"
+import data from "../../data/seed.json"
 import {useState} from "react"
+
 
 export default function MainPage() {
 
@@ -13,27 +14,27 @@ export default function MainPage() {
     const [searchBarInput, setSearchBarInput] = useState()
     const [collection] = useState(data) 
 
-    let courses = [];
+    let courses = collection;
 
     if (searchBarInput){
       const newInput = searchBarInput.toLowerCase();
-      courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
-    } 
+      courses = courses.filter((course) => course.class_name.toLowerCase().includes(newInput));
+    }
 
-    if (filterBy==="Difficulty"){
-      //do some thing
-  }
+    if (filterBy){
+      courses = courses.filter((course) => course.dept===filterBy);
+    }
 
   return (
     <div className={styles.container}>
       <Head>
-            <h1>Midd Courses</h1>
+        <h1>Midd Courses</h1>
       </Head>
 
-      <main>
+      <main className={styles.main}>
             <SearchBar searchByCallback={setSearchBarInput}/>
-            <Filter filterByCallback={setFilterBy}/>
-            {(!searchBarInput && !filterBy) ? <CardGrid courses={collection}/> : <CardGrid courses={courses}/>}
+            <Filter setFilterBy={setFilterBy}/>
+            <CardGrid courses={courses}/>
       </main>
     </div>
   );

@@ -1,8 +1,9 @@
 import {useState} from "react"
 import PropTypes from "prop-types";
 
+
 export default function SearchBar({searchByCallback}) {
-    const [searchBarText, setSearchBarText] = useState();
+    const [searchBarText, setSearchBarText] = useState("");
     
     return(
         <div>
@@ -16,16 +17,17 @@ export default function SearchBar({searchByCallback}) {
                 }}
             /> 
             <button 
-                disabled = {(searchBarText === undefined ? true : false)}
+                disabled = {(searchBarText === "" ? true : false)}
                 onClick = {() => searchByCallback(searchBarText)}
             >Search</button>
             <button 
                 onClick = {() => {
-                    setSearchBarText();
+                    setSearchBarText("");
                     searchByCallback();
                 }}
             >Clear</button>
         </div>
+        
     );
 }
 

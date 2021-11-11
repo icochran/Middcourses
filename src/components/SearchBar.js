@@ -19,6 +19,9 @@ export default function SearchBar({searchByCallback}) {
                     if (e.key === "Enter" && searchBarText){
                         searchByCallback(searchBarText);
                     }
+                    else if (e.key === "Enter") {
+                        searchByCallback();
+                    }
                 }}
             /> 
             <button 

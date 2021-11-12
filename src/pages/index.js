@@ -11,7 +11,7 @@ import {useState} from "react"
 
 export default function MainPage() {
 
-    const [filterBy, setFilterBy] = useState()
+    const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
     const [collection] = useState(data) 
 
@@ -21,6 +21,11 @@ export default function MainPage() {
       const newInput = searchBarInput.toLowerCase();
       courses = courses.filter((course) => course.class_name.toLowerCase().includes(newInput));
     }
+
+    const deptSet = new Set();
+    const sortedDepts = collection.map(course => course.dept).sort();
+    sortedDepts.forEach(e => deptSet.add(e));
+    const departments = Array.from(deptSet);
 
     if (filterBy){
       courses = courses.filter((course) => course.dept===filterBy);
@@ -34,7 +39,10 @@ export default function MainPage() {
 
       <main className={styles.main}>
             <SearchBar searchByCallback={setSearchBarInput}/>
-            <Filter setFilterBy={setFilterBy}/>
+            <Filter 
+            setFilterBy={setFilterBy}
+            departments = {departments}
+            />
             <CardGrid courses={courses}/>
       </main>
     </div>

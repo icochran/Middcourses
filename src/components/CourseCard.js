@@ -40,7 +40,7 @@ export default function CourseCard({course}) {
     }
 
     return(
-    <div className={styles.classBox} style={classBoxStyle}>
+    <div className={styles.classBox} style={classBoxStyle} role="gridcell">
         <div className={styles.classHeader}>
             <div className={styles.className}>
                 <span>{courseName}</span>

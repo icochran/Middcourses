@@ -17,8 +17,12 @@ data = []
 
 for course in courses:
     title =  course.find("h3").text 
-    class_name = title[10:title.index("(")]
-    dept  = title[:4]
+    dept  = title[:4].strip()
+    dept = dept.strip()
+    if len(dept)==3:
+        class_name = title[9:title.index("(")]
+    else:
+        class_name = title[10:title.index("(")]
     class_num = title[5:9]
     professors_list = course.find (attrs = {"class":"course_instructors"}).text
     if (len(professors_list)>0):
@@ -38,7 +42,7 @@ for course in courses:
     course_desc = course.find(attrs = {"class":"course_description"}).text
 
     class_obj = {"class_name": class_name,
-    "dept": dept.strip(),
+    "dept": dept,
     "class_num": class_num,
     "course_desc": course_desc,
     "profs": profs,

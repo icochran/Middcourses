@@ -37,9 +37,12 @@
     "@progress/kendo-react-intl": "^4.10.0",
     "@progress/kendo-react-treeview": "^4.10.0",
     "@progress/kendo-theme-default": "^4.42.0",
+    "knex": "^0.95.14",
     "next": "11.1.2",
+    "pg": "^8.7.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.8",

@@ -11,7 +11,7 @@ import {useState,useEffect} from "react"
 
 export default function MainPage() {
 
-    const [filterBy, setFilterBy] = useState()
+    const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
     const [collection] = useState(data) 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
@@ -44,6 +44,11 @@ export default function MainPage() {
       courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
     }
 
+    const deptSet = new Set();
+    const sortedDepts = collection.map(course => course.dept).sort();
+    sortedDepts.forEach(e => deptSet.add(e));
+    const departments = Array.from(deptSet);
+
     if (filterBy){
       courses = collection.filter((course) => course.dept===filterBy);
       if (searchBarInput){
@@ -63,6 +68,7 @@ export default function MainPage() {
         <SearchBar searchByCallback={setSearchBarInput}/>
         <Filter setFilterBy={setFilterBy} departments = {departments}/>
         <CardGrid courses={courses}/>
+
       </main>
     </div>
   );

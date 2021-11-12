@@ -34,10 +34,6 @@ export default function MainPage() {
         return course
       }});
 
-    const deptSet = new Set();
-    const sortedDepts = collection.map(course => course.dept).sort();
-    sortedDepts.forEach(e => deptSet.add(e));
-    const departments = Array.from(deptSet);
 
     if (searchBarInput){
       const newInput = searchBarInput.toLowerCase();

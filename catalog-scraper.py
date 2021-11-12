@@ -38,7 +38,7 @@ for course in courses:
     course_desc = course.find(attrs = {"class":"course_description"}).text
 
     class_obj = {"class_name": class_name,
-    "dept": dept,
+    "dept": dept.strip(),
     "class_num": class_num,
     "course_desc": course_desc,
     "profs": profs,

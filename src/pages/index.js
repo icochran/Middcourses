@@ -34,6 +34,11 @@ export default function MainPage() {
         return course
       }});
 
+    const deptSet = new Set();
+    const sortedDepts = collection.map(course => course.dept).sort();
+    sortedDepts.forEach(e => deptSet.add(e));
+    const departments = Array.from(deptSet);
+
     if (searchBarInput){
       const newInput = searchBarInput.toLowerCase();
       courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
@@ -56,7 +61,7 @@ export default function MainPage() {
       <main className={styles.main}>
         <h1 className="title">Midd Courses</h1>
         <SearchBar searchByCallback={setSearchBarInput}/>
-        <Filter setFilterBy={setFilterBy}/>
+        <Filter setFilterBy={setFilterBy} departments = {departments}/>
         <CardGrid courses={courses}/>
       </main>
     </div>

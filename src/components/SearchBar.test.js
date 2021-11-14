@@ -1,7 +1,9 @@
 import { screen, fireEvent, render } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
-
+//still need tests to actually see the functionality of the search bar
+//but think we might need to reorganize some of the components so that
+//the search bar has access to the collection?
 
 
 describe("SearchBar tests", () => {
@@ -38,6 +40,18 @@ describe("SearchBar tests", () => {
         expect(handler).toHaveBeenCalledWith("Software");
     });
 
+
+    test("Hitting clear button clears contents of search input", () => {
+        render(<SearchBar searchByCallback ={handler} />);
+        const searchInput = screen.getByPlaceholderText("Search");
+        fireEvent.change(searchInput, {target: {value: "Software"}});
+        expect(searchInput.value).toBe("Software");
+
+        const clearbutton = screen.queryByRole("button", { name: "Clear" });
+        fireEvent.click(clearbutton);
+
+        expect(searchInput.value).toBe("");
+    });
 
 
 

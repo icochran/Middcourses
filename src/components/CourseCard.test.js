@@ -29,14 +29,14 @@ describe("CourseCard: CourseCard tests", () => {
         expect(screen.getByText(course.class_name)).toBeVisible();
     });
 
-    test.only("CourseCard: displays difficulty bar (not necessarily the right level)", () => {
+    test("CourseCard: displays difficulty bar (not necessarily the right level)", () => {
         render(<CourseCard course={course} />);
         const difficultyArray = course.profs[0].difficulty;
         const courseDifficulty100 = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10
         expect(screen.getByRole("progressbar", { name:'difficultyBar'})).toBeVisible();
     });
 
-    test("CourseCard: displays interesting level bar (not necessarily the right level)", () => {
+    test.only("CourseCard: displays interesting level bar (not necessarily the right level)", () => {
         render(<CourseCard course={course} />);
         const interestingArray = course.profs[0].interest;
         const courseInteresting100 = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10

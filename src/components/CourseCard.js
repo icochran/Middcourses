@@ -66,62 +66,59 @@ export default function CourseCard({ course }) {
     return(
     <div className={styles.classBox} style={classBoxStyle} role="gridcell">
         <div className={styles.classHeader}>
-            <div className={styles.className}>
-                <span>{courseName}</span>
-            </div>
-            <div className={styles.classProf}>
-                <span>{courseProf}</span>
-            </div>
+          <div className={styles.className}>
+            <span>{courseName}</span>
+          </div>
+          <div className={styles.classProf}>
+            <span>{prof}</span>
+          </div>
         </div>
         <div>
-          <ProfDropDown profs={course.profs} setProf={setProf}/>
+          <ProfDropDown profs={course.profs} setProf={setProf} />
         </div>
-      </div>
-
       <div className={styles.courseBody}>
-        <div className={styles.difficulty}>
-          <div className="difficultyName">
-            <p>Difficulty</p>
+          <div className={styles.difficulty}>
+            <div className="difficultyName">
+              <p>Difficulty</p>
+            </div>
+            <div className={styles.difficultyBarBackground}>
+              <span className={styles.difficultyBar} style={difficultyBarStyle} />
+            </div>
           </div>
-          <div className={styles.difficultyBarBackground}>
-            <span className={styles.difficultyBar} style={difficultyBarStyle} />
-          </div>
-        </div>
 
-        <div className={styles.courseBody}>
+          <div className={styles.courseBody}>
             <div className={styles.difficulty}>
-                <div className="difficultyName">
-                    <p>Difficulty</p>
-                </div>
-                <div className={styles.difficultyBarBackground}> 
-                    <span name="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar"/>
-                </div>
+              <div className="difficultyName">
+                <p>Difficulty</p>
+              </div>
+              <div className={styles.difficultyBarBackground}>
+                <span name="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar" />
+              </div>
             </div>
 
             <div className={styles.interesting}>
-                <div className="interesting-name">
-                    <p>Interesting</p>
-                </div>
-                <div className={styles.interestingBarBackground}>
-                    <span name="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar"/>
-                </div>
+              <div className="interesting-name">
+                <p>Interesting</p>
+              </div>
+              <div className={styles.interestingBarBackground}>
+                <span name="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar" />
+              </div>
             </div>
 
             <div className="timecommitment">
-                <div className="timecommitment-name">
-                    <p>Time Commitment</p>
+              <div className="timecommitment-name">
+                <p>Time Commitment</p>
+              </div>
+              <div className="timecommitment-bar-wrapper">
+                <div className={styles.timecommitmentBarBackground}>
+                  <span name="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar" />
                 </div>
-                <div className="timecommitment-bar-wrapper">
-                    <div className={styles.timecommitmentBarBackground}>
-                        <span name="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar"/>
-                    </div>
-                    <p name="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
-                </div>
+                <p name="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

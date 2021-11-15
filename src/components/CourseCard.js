@@ -5,9 +5,9 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
 export default function CourseCard({ course }) {
-  let wGreen;
-  let wRed;
-  let wYellow;
+  let wGreen = 0;
+  let wRed = 0;
+  let wYellow = 0;
   const [prof, setProf] = useState(course.profs[0]);
   
   //for now we are just using the array of the first professor, though there are multiple
@@ -64,8 +64,12 @@ export default function CourseCard({ course }) {
     borderColor: `rgb(${wRed}, ${wGreen}, ${wYellow})`,
   };
 
+  function flip() {
+    $(".card").toggleClass("flipped");
+    }   
+
   return (
-    <div className={styles.classBox} style={classBoxStyle}>
+    <div className={styles.classBox} style={classBoxStyle} >
       <div className={styles.classHeader}>
         <div className={styles.className}>
           <span>{courseName}</span>
@@ -115,6 +119,13 @@ export default function CourseCard({ course }) {
           </div>
         </div>
       </div>
+      <button onClick="flip()">Leave a review</button>
+      <section className="container">
+        <div className="card" onClick="flip()">
+            <div className="front">1</div>
+            <div className="back">2</div>
+        </div>
+    </section>
     </div>
   );
 }

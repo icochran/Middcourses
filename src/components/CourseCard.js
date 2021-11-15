@@ -57,7 +57,7 @@ export default function CourseCard({course}) {
                     <p>Difficulty</p>
                 </div>
                 <div className={styles.difficultyBarBackground}> 
-                    <span className={styles.difficultyBar} style={difficultyBarStyle}/>
+                    <span name="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar"/>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@ export default function CourseCard({course}) {
                     <p>Interesting</p>
                 </div>
                 <div className={styles.interestingBarBackground}>
-                    <span className={styles.interestingBar} style={interestingBarStyle}/>
+                    <span name="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar"/>
                 </div>
             </div>
 
@@ -76,10 +76,9 @@ export default function CourseCard({course}) {
                 </div>
                 <div className="timecommitment-bar-wrapper">
                     <div className={styles.timecommitmentBarBackground}>
-                        <span className={styles.timecommitmentBar} style={timeCommitmentBarStyle}/>
+                        <span name="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar"/>
                     </div>
-                    <div className={styles.timecommitmentBarNumber}> {courseTimeCommitmentHours} hours
-                    </div>
+                    <p name="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
                 </div>
             </div>
         </div>

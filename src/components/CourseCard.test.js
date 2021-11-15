@@ -29,10 +29,36 @@ describe("CourseCard: CourseCard tests", () => {
         expect(screen.getByText(course.class_name)).toBeVisible();
     });
 
-    test("CourseCard: displays professor name", () => {
+    test.only("CourseCard: displays difficulty bar (not necessarily the right level)", () => {
         render(<CourseCard course={course} />);
-        expect(screen.getByText(course.profs[0].prof_name)).toBeVisible();
+        const difficultyArray = course.profs[0].difficulty;
+        const courseDifficulty100 = (difficultyArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(difficultyArray.length)*10
+        expect(screen.getByRole("progressbar", { name:'difficultyBar'})).toBeVisible();
     });
+
+    test("CourseCard: displays interesting level bar (not necessarily the right level)", () => {
+        render(<CourseCard course={course} />);
+        const interestingArray = course.profs[0].interest;
+        const courseInteresting100 = (interestingArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(interestingArray.length)*10
+        expect(screen.getByRole("progressbar", { name:'interestingBar'})).toBeVisible();
+    });
+
+    test("CourseCard: displays course time commitment bar (not necessarily the right level)", () => {
+        render(<CourseCard course={course} />);
+        const timecommitmentArray = course.profs[0].time_commitment;
+        const courseTimeCommitment100 = (timecommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timecommitmentArray.length)*10
+        expect(screen.getByRole("progressbar", { name:'timecommitmentBar'})).toBeVisible();
+    });
+
+    test("CourseCard: displays course time commitment in hours", () => {
+        const { getByText } = render(<CourseCard course={course} />);
+        const timecommitmentArray = course.profs[0].time_commitment;
+        const courseTimeCommitment100 = (timecommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timecommitmentArray.length)*10
+        const courseTimeCommitmentHours = Math.round(courseTimeCommitment100/10*100)/100;
+        expect(getByText(courseTimeCommitmentHours)).toBeInTheDocument();
+        expect(getByText(courseTimeCommitmentHours)).toBeVisible();
+        });
+
 
             
 });

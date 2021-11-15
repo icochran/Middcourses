@@ -37,7 +37,16 @@ export default function MainPage() {
 
     if (searchBarInput){
       const newInput = searchBarInput.toLowerCase();
-      courses = collection.filter((course) => course.class_name.toLowerCase().includes(newInput));
+      courses = collection.filter((course) => {
+        if (course.class_name.toLowerCase().includes(newInput)) {
+          return course;
+        }
+        for (let i = 0; i < course.profs.length; i++) {
+          if (course.profs[i].prof_name.toLowerCase().includes(newInput)) {
+            return course;
+          }
+        }
+        });
     }
 
     const deptSet = new Set();
@@ -49,7 +58,16 @@ export default function MainPage() {
       courses = collection.filter((course) => course.dept===filterBy);
       if (searchBarInput){
         const newInput = searchBarInput.toLowerCase();
-        courses = courses.filter((course) => course.class_name.toLowerCase().includes(newInput));
+        courses = courses.filter((course) => {
+          if (course.class_name.toLowerCase().includes(newInput)) {
+            return course;
+          }
+          for (let i = 0; i < course.profs.length; i++) {
+            if (course.profs[i].prof_name.toLowerCase().includes(newInput)) {
+              return course;
+            }
+          }
+          });
       }
     }
 

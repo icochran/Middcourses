@@ -33,6 +33,9 @@ export default function CourseCard({ course }) {
       time_commitment: p_time,
     };
   }
+  let wGreen;
+  let wRed;
+  let wYellow;
 
   //for now we are just using the array of the first professor, though there are multiple
   const difficultyArray = prof.difficulty;
@@ -43,35 +46,32 @@ export default function CourseCard({ course }) {
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
-    (difficultyArray.reduce(
-      (previousValue, currentValue) => previousValue + currentValue
-    ) /
-      difficultyArray.length) *
-    10;
+    (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
   const courseInteresting100 =
-    (interestingArray.reduce(
-      (previousValue, currentValue) => previousValue + currentValue
-    ) /
-      interestingArray.length) *
-    10;
+    (interestingArray.reduce(reducer) / interestingArray.length) *10;
   const courseTimeCommitment100 =
-    (timeCommitmentArray.reduce(
-      (previousValue, currentValue) => previousValue + currentValue
-    ) /
-      timeCommitmentArray.length) *
-    10;
+    (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
   const courseTimeCommitmentHours =
     Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionPercent =
-    satisfactionArray.reduce(
-      (previousValue, currentValue) => previousValue + currentValue
-    ) /
-    satisfactionArray.length /
-    10;
+  const courseSatisfactionAverage =
+    satisfactionArray.reduce(reducer) / satisfactionArray.length;
 
-  //get the weights for the gradient between green and red
-  const wGreen = courseSatisfactionPercent * 255;
-  const wRed = (1 - courseSatisfactionPercent) * 255;
+  //using the courseSatisfactionAverage set the color to red green or yellow
+  if (courseSatisfactionAverage >= 4) {
+    wGreen = 255;
+    wRed = 0;
+    wYellow = 0;
+  }
+  else if (courseSatisfactionAverage >= 2) {
+    wGreen = 255;
+    wRed = 255;
+    wYellow = 0;
+  }
+  else {
+    wGreen = 0;
+    wRed = 255;
+    wYellow = 0;
+  }
 
   const difficultyBarStyle = {
     width: `${courseDifficulty100}%`,
@@ -86,12 +86,12 @@ export default function CourseCard({ course }) {
     background: "#47b5ff",
   };
   const classBoxStyle = {
-    borderColor: `rgb(${wRed}, ${wGreen}, 0)`,
+    borderColor: `rgb(${wRed}, ${wGreen}, ${wYellow})`,
   };
 
   return (
     <div className={styles.classBox} style={classBoxStyle}>
-      <div className={styles.classHeader}>
+      <div className={styles.wrapper}>
         <div className={styles.className}>
           <span>{courseName}</span>
         </div>

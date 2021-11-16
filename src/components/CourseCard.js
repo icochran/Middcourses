@@ -66,7 +66,7 @@ export default function CourseCard({ course }) {
 
   return (
     <div className={styles.classBox} style={classBoxStyle}>
-      <div className={styles.classHeader}>
+      <div className={styles.wrapper}>
         <div className={styles.className}>
           <span>{courseName}</span>
         </div>

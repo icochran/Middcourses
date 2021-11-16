@@ -66,11 +66,11 @@ export default function CourseCard({ course }) {
 
   return (
     <div className={styles.classBox} style={classBoxStyle}>
-      <div className={styles.wrapper}>
-        <div className={styles.className}>
-          <span>{courseName}</span>
-        </div>
+      <div className={styles.classHeader}>
         <div>
+          <span className={styles.className}>{courseName}</span>
+        </div>
+        <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProf={setProf}/>
         </div>
       </div>

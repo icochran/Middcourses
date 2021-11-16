@@ -16,6 +16,11 @@
   display: flex;
 }
 
+.profBar {
+  align-items: center;
+  margin: 10px;
+}
+
 .classHeader{
   text-align: center;
   margin: 10px 10px 30px;
@@ -24,6 +29,12 @@
 
 .className{
   font-size: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
 }
 
 .classProf{
@@ -37,6 +48,7 @@
 .listView{
   display: flex;
   flex-wrap: wrap;
+  width: 1000px;
 }
 
 .classBox{

@@ -5,9 +5,7 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
 export default function CourseCard({ course }) {
-  let wGreen;
-  let wRed;
-  let wYellow;
+  let backgroundColor;
   const [prof, setProf] = useState(course.profs[0]);
   
   //for now we are just using the array of the first professor, though there are multiple
@@ -33,19 +31,13 @@ export default function CourseCard({ course }) {
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {
-    wGreen = 255;
-    wRed = 0;
-    wYellow = 0;
+    backgroundColor = "#d8ffc7"
   }
   else if (courseSatisfactionAverage >= 2) {
-    wGreen = 255;
-    wRed = 255;
-    wYellow = 0;
+    backgroundColor = "#fffeb3";
   }
   else {
-    wGreen = 0;
-    wRed = 255;
-    wYellow = 0;
+    backgroundColor = "#ffbaba"
   }
 
   const difficultyBarStyle = {
@@ -61,7 +53,8 @@ export default function CourseCard({ course }) {
     background: "#47b5ff",
   };
   const classBoxStyle = {
-    borderColor: `rgb(${wRed}, ${wGreen}, ${wYellow})`,
+    borderColor: backgroundColor,
+    background: backgroundColor,
   };
 
   return (

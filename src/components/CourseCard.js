@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function CourseCard({ course }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
+  const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
   const courseDetails = {...course}
   let prof;

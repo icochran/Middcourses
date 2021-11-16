@@ -71,7 +71,7 @@ export default function CourseCard({ course }) {
             <span>{courseName}</span>
           </div>
           <div className={styles.classProf}>
-            <span>{prof}</span>
+            <span>{prof.prof_name}</span>
           </div>
         </div>
         <div>
@@ -93,7 +93,7 @@ export default function CourseCard({ course }) {
                 <p>Difficulty</p>
               </div>
               <div className={styles.difficultyBarBackground}>
-                <span name="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar" />
+                <span data-testid="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar" />
               </div>
             </div>
 
@@ -102,7 +102,7 @@ export default function CourseCard({ course }) {
                 <p>Interesting</p>
               </div>
               <div className={styles.interestingBarBackground}>
-                <span name="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar" />
+                <span data-testid="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar" />
               </div>
             </div>
 
@@ -112,9 +112,9 @@ export default function CourseCard({ course }) {
               </div>
               <div className="timecommitment-bar-wrapper">
                 <div className={styles.timecommitmentBarBackground}>
-                  <span name="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar" />
+                  <span data-testid="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar" />
                 </div>
-                <p name="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
+                <p data-testid="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
               </div>
             </div>
           </div>

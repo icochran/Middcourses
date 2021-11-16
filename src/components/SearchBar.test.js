@@ -1,12 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import MainPage from "../pages/index.js"
-import Filter from "./Filter";
+import SearchBar from "./SearchBar";
 
 /*
 
 Once we get the database running, testing this will change so we should wait until that happens to write this
 
-describe("Filter: Filter tests", () => {
+describe("SearchBar: SearchBar tests", () => {
   let courses;
 
   //creates a common courses before each test is run

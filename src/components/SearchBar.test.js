@@ -1,80 +1,58 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import MainPage from "../pages/index.js"
+import { screen, fireEvent, render } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
-/*
+//still need tests to actually see the functionality of the search bar
+//but think we might need to reorganize some of the components so that
+//the search bar has access to the collection?
 
-Once we get the database running, testing this will change so we should wait until that happens to write this
 
-describe("SearchBar: SearchBar tests", () => {
-  let courses;
+describe("SearchBar tests", () => {
+    const handler = jest.fn();
 
-  //creates a common courses before each test is run
-  beforeEach(() => {
-    courses = [
-            {
-              "class_name": "Software Development",
-              "dept": "CSCI",
-              "class_num": "312",
-              "profs": [
-                {
-                  "prof_name": "Christopher Andrews",
-                  "satisfaction": [1,1,1,1,1],
-                  "difficulty": [8,8,8],
-                  "interest": [5, 4, 3, 2, 1, 3, 4],
-                  "time_commitment": [9,9,9]
-                }
-              ],
-              "course_desc":"Class where you learn Software Development",
-              "id": 0
-            },
-            {
-              "class_name": "Intro to Data Science",
-              "dept": "MATH",
-              "class_num": "118",
-              "profs": [
-                {
-                  "prof_name": "Kara Karpman",
-                  "satisfaction": [3,3,3,3],
-                  "difficulty": [5, 5, 5, 5, 5, 5, 5],
-                  "interest": [5, 4, 3, 2, 1, 3, 4],
-                  "time_commitment": [5, 4, 3, 4, 3, 2, 1]
-                }
-              ],
-              "course_desc":"Class where you learn Data Science",
-              "id": 1
-            },
-            {
-              "class_name": "Data Structures",
-              "dept": "CSCI",
-              "class_num": "201",
-              "profs": [
-                {
-                  "prof_name": "Akhil Rao",
-                  "satisfaction": [3,3,3,3],
-                  "difficulty": [5, 5, 5, 5, 5, 5, 5],
-                  "interest": [5, 4, 3, 2, 1, 3, 4],
-                  "time_commitment": [5, 4, 3, 4, 3, 2, 1]
-                }
-              ],
-              "course_desc":"Class where you learn Data Structures",
-              "id": 2
-            }]  });
+    beforeEach(() => {
+        handler.mockReset();
+      });
 
-  test.skip("CardGrid: displays grid", () => {
-    const { getByRole } = render(<CardGrid courses={courses} />);
-    expect(getByRole("grid")).toBeInTheDocument();
-  });
 
-  test("CardGrid: correctly filters by department", async () => {
-    render(<MainPage courses={courses} />);
+    test("Search button is disabled if no input text", () => {
+        render(<SearchBar searchByCallback ={handler} />);
+        const searchInput = screen.getByPlaceholderText("Search");
+        expect(searchInput.value).toBe("");
 
-    expect(screen.queryAllByRole("gridcell").length === 3).toBeTruthy();
+        let searchbutton = screen.queryByRole("button", { name: "Search" });
+        expect(searchbutton).toBeDisabled();
 
-    const compSciFilter = await screen.findByText("CSCI");
-    fireEvent.click(compSciFilter);
-    expect(screen.queryAllByRole("gridcell").length === 2).toBeTruthy();
-  });
+        fireEvent.change(searchInput, {target: {value: "criteria"}});
+        searchbutton = screen.queryByRole("button", { name: "Search" });
+        expect(searchbutton).not.toBeDisabled();
+    });
 
-});
-*/
+    test("Hitting enter key triggers search button", () => {
+        render(<SearchBar searchByCallback ={handler} />);
+        const searchInput = screen.getByPlaceholderText("Search");
+        fireEvent.change(searchInput, {target: {value: "Software"}});
+        expect(searchInput.value).toBe("Software");
+
+        const searchbutton = screen.queryByRole("button", { name: "Search" });
+        fireEvent.click(searchbutton);
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler).toHaveBeenCalledWith("Software");
+    });
+
+
+    test("Hitting clear button clears contents of search input", () => {
+        render(<SearchBar searchByCallback ={handler} />);
+        const searchInput = screen.getByPlaceholderText("Search");
+        fireEvent.change(searchInput, {target: {value: "Software"}});
+        expect(searchInput.value).toBe("Software");
+
+        const clearbutton = screen.queryByRole("button", { name: "Clear" });
+        fireEvent.click(clearbutton);
+
+        expect(searchInput.value).toBe("");
+    });
+
+
+
+})

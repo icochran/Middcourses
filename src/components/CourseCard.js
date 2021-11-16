@@ -62,11 +62,7 @@ export default function CourseCard({ course }) {
   };
   const classBoxStyle = {
     borderColor: `rgb(${wRed}, ${wGreen}, ${wYellow})`,
-  };
-
-  function flip() {
-    $(".card").toggleClass("flipped");
-    }   
+  };   
 
   return (
     <div className={styles.classBox} style={classBoxStyle} >
@@ -119,13 +115,7 @@ export default function CourseCard({ course }) {
           </div>
         </div>
       </div>
-      <button onClick="flip()">Leave a review</button>
-      <section className="container">
-        <div className="card" onClick="flip()">
-            <div className="front">1</div>
-            <div className="back">2</div>
-        </div>
-    </section>
+      <button className="review">Leave a Review</button>
     </div>
   );
 }

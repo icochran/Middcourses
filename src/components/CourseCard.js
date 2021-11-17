@@ -64,13 +64,19 @@ export default function CourseCard({ course }) {
   const classBoxStyle = {
     borderColor: `rgb(${wRed}, ${wGreen}, ${wYellow})`,
   };
-
+  
     return(
     <div className={styles.classBox} style={classBoxStyle} role="gridcell">
-        <div className={styles.classHeader}>
+        <div className={styles.wrapper}>
           <div className={styles.className}>
             <span>{courseName}</span>
           </div>
+<<<<<<< HEAD
+=======
+          <div className={styles.classProf}>
+            <span>{prof.prof_name}</span>
+          </div>
+>>>>>>> b3a643bcfd2ec122d2a533788414daff563857ba
 
         </div>
         <div>

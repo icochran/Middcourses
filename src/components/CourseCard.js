@@ -54,7 +54,7 @@ export default function CourseCard({ course }) {
   };
   const classBoxStyle = {
     borderColor: backgroundColor,
-    background: backgroundColor,
+    //background: backgroundColor,
   };
 
   return (

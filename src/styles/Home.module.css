@@ -61,6 +61,7 @@
   position: left;
   margin: 10px;
   border-style: solid;
+  background: #cecece;
 }
 
 /* The interesting progress bar */

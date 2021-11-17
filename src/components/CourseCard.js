@@ -139,8 +139,10 @@ export default function CourseCard({ course }) {
           </div>
         </div>
       </div>
+      </div>
   );
 }
+
 
 CourseCard.propTypes = {
   course: PropTypes.object.isRequired,

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
-export default function CourseCard({ course }) {
+export default function CourseCard({ course, changeState }) {
   let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
@@ -137,8 +137,7 @@ export default function CourseCard({ course }) {
           </div>
         </div>
       </div>
-      look at filmReviewer
-      <button className="review" onClick= "set review..." >Leave a Review</button>
+      <button className="review" onClick= {changeState} >Leave a Review</button>
     </div>
   );
 }

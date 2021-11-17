@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar"
 import Filter from "../components/Filter"
 import data from "../../data/seed.json"
 //import data from "../../data/test-data.json"
-import {useState,useEffect} from "react"
+import {useState} from "react"
 
 
 

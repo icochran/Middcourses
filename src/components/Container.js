@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
-import CardGrid from "../components/CardGrid";
+import CourseCard from "../components/CourseCard";
 import Review from "../components/Review"
 
-function Container() {
+function Container({course}) {
   const [reviewing, setReviewing] = useState(false);
-  const View = reviewing ? Review : CardGrid;
+  const View = reviewing ? Review : CourseCard;
+
   return (
     <View
-      onClick={() => {
+        course = {course}
+      changeState={() => {
         setReviewing(!reviewing);
       }}
     />

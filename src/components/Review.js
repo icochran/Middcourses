@@ -4,7 +4,7 @@ import React from "react";
 import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
-export default function Review({ course }) {
+export default function Review({ course, changeState}) {
 //   let wGreen = 0;
 //   let wRed = 0;
 //   let wYellow = 0;
@@ -130,6 +130,7 @@ export default function Review({ course }) {
           </div>
         </div>
       </div>
+      <button className="back" onClick= {changeState} >Back</button>
     </div>
   );
 }

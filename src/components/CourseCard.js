@@ -96,6 +96,7 @@ export default function CourseCard({ course }) {
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
+       </div>
       <div className={styles.courseBody}>
           <div className={styles.difficulty}>
             <div className="difficultyName">
@@ -138,7 +139,6 @@ export default function CourseCard({ course }) {
             </div>
           </div>
         </div>
-      </div>
       </div>
   );
 }

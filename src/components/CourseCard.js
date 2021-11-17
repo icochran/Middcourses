@@ -115,7 +115,8 @@ export default function CourseCard({ course }) {
           </div>
         </div>
       </div>
-      <button className="review">Leave a Review</button>
+      look at filmReviewer
+      <button className="review" onClick= "set review..." >Leave a Review</button>
     </div>
   );
 }

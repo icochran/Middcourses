@@ -9,6 +9,7 @@ import data from "../../data/seed.json"
 import {useState,useEffect} from "react"
 
 
+
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")

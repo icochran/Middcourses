@@ -98,15 +98,6 @@ export default function CourseCard({ course }) {
         </div>
        </div>
       <div className={styles.courseBody}>
-          <div className={styles.difficulty}>
-            <div className="difficultyName">
-              <p>Difficulty</p>
-            </div>
-            <div className={styles.difficultyBarBackground}>
-              <span className={styles.difficultyBar} style={difficultyBarStyle} />
-            </div>
-          </div>
-
           <div className={styles.courseBody}>
             <div className={styles.difficulty}>
               <div className="difficultyName">

@@ -2,6 +2,7 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
+import RatingBar from "./RatingBar.js";
 
 export default function CourseCard({ course }) {
   let backgroundColor;
@@ -70,6 +71,7 @@ export default function CourseCard({ course }) {
     backgroundColor = "#ffbaba"
   }
 
+  //sets the width and color of each bar
   const difficultyBarStyle = {
     width: `${courseDifficulty100}%`,
     background: "#47b5ff",
@@ -82,55 +84,28 @@ export default function CourseCard({ course }) {
     width: `${courseTimeCommitment100}%`,
     background: "#47b5ff",
   };
+
+  //sets the color of the boxes
   const classBoxStyle = {
     borderColor: backgroundColor,
-    //background: backgroundColor,
   };
 
   return (
     <div className={styles.classBox} style={classBoxStyle} role="gridcell">
+
       <div className={styles.classHeader}>
-        <div>
-          <span className={styles.className}>{courseName}</span>
-        </div>
+        <span className={styles.className}>{courseName}</span>
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
-       </div>
-      <div className={styles.courseBody}>
-          <div className={styles.courseBody}>
-            <div className={styles.difficulty}>
-              <div className="difficultyName">
-                <p>Difficulty</p>
-              </div>
-              <div className={styles.difficultyBarBackground}>
-                <span data-testid="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar" />
-              </div>
-            </div>
-
-            <div className={styles.interesting}>
-              <div className="interesting-name">
-                <p>Interesting</p>
-              </div>
-              <div className={styles.interestingBarBackground}>
-                <span data-testid="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar" />
-              </div>
-            </div>
-
-            <div className="timecommitment">
-              <div className="timecommitment-name">
-                <p>Time Commitment</p>
-              </div>
-              <div className="timecommitment-bar-wrapper">
-                <div className={styles.timecommitmentBarBackground}>
-                  <span data-testid="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar" />
-                </div>
-                <p data-testid="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+
+      <div className={styles.courseBody}>
+            <RatingBar aspect="Difficulty" barStyle={difficultyBarStyle} numHours={undefined}/>
+            <RatingBar aspect="Interesting" barStyle={interestingBarStyle} numHours={undefined}/>
+            <RatingBar aspect="Time Commitment" barStyle={timeCommitmentBarStyle} numHours={courseTimeCommitmentHours}/>
+      </div>
+    </div>
   );
 }
 

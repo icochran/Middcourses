@@ -42,7 +42,7 @@
 
 /* Defines the box with the progress bars in the course card */
 .courseBody{
-  margin: 0px 10px 0px;
+  margin: 0px 10px 30px;
 }
 
 /* The box containing the grid of course cards */
@@ -64,49 +64,15 @@
   background: #cecece;
 }
 
-/* The interesting progress bar */
-.interestingBar {
+/* The rating display bar */
+.ratingBar {
   display: block;
   height: 4px;
   border-radius: 6px;
   }
 
-/* The black bar behind the interesting progress bar */
-.interestingBarBackground {
-  display: block;
-  height: 4px;
-  border-radius: 6px;
-  width: 100%;
-  border-radius: 6px;
-  background-color: #000000;  
-}
-
-/* The difficulty progress bar */
-.difficultyBar {
-  display: block;
-  height: 4px;
-  border-radius: 6px;
-}
-
-/* The black bar behind the difficulty progress bar */
-.difficultyBarBackground{
-  display: block;
-  height: 4px;
-  border-radius: 6px;
-  width: 100%;
-  border-radius: 6px;
-  background-color: #000000;  
-}
-
-/* The time commitment progress bar */
-.timecommitmentBar {
-  display: block;
-  height: 4px;
-  border-radius: 6px;
-}
-
-/* The black bar behind the time commitment progress bar */
-.timecommitmentBarBackground{
+/* The black bar behind the progress bars */
+.BarBackground{
   display: block;
   height: 4px;
   border-radius: 6px;
@@ -118,10 +84,7 @@
 /* The number showing the time commitment at the bottom of each card */
 .timecommitmentBarNumber{
   text-align: right;
-  margin-bottom: 10px;
-}
-
-.interesting{
+  margin: 0px;
 }
 
 /* Dropdown Button */

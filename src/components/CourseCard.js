@@ -18,6 +18,7 @@ export default function CourseCard({ course }) {
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
   const courseName = course.class_name;
+ 
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
@@ -70,9 +71,7 @@ export default function CourseCard({ course }) {
           <div className={styles.className}>
             <span>{courseName}</span>
           </div>
-          <div className={styles.classProf}>
-            <span>{prof.prof_name}</span>
-          </div>
+
         </div>
         <div>
           <ProfDropDown profs={course.profs} setProf={setProf} />

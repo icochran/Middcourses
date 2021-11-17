@@ -4,6 +4,7 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
 export default function CourseCard({ course }) {
+  let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -11,6 +12,9 @@ export default function CourseCard({ course }) {
   let prof;
   if (profName !== "Aggregate") {
     prof = course.profs.find((a) => a.prof_name === profName);
+    if (!prof) {
+      prof.prof_name = "No specific Professor"
+    }
   } else {
     //cumulative value
     const p_in = courseDetails.profs.reduce((previous, current) => {
@@ -34,9 +38,6 @@ export default function CourseCard({ course }) {
       time_commitment: p_time,
     };
   }
-  let wGreen;
-  let wRed;
-  let wYellow;
 
   //for now we are just using the array of the first professor, though there are multiple
   const difficultyArray = prof.difficulty;
@@ -59,19 +60,13 @@ export default function CourseCard({ course }) {
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {
-    wGreen = 255;
-    wRed = 0;
-    wYellow = 0;
+    backgroundColor = "#d8ffc7"
   }
   else if (courseSatisfactionAverage >= 2) {
-    wGreen = 255;
-    wRed = 255;
-    wYellow = 0;
+    backgroundColor = "#fffeb3";
   }
   else {
-    wGreen = 0;
-    wRed = 255;
-    wYellow = 0;
+    backgroundColor = "#ffbaba"
   }
 
   const difficultyBarStyle = {
@@ -87,16 +82,17 @@ export default function CourseCard({ course }) {
     background: "#47b5ff",
   };
   const classBoxStyle = {
-    borderColor: `rgb(${wRed}, ${wGreen}, ${wYellow})`,
+    borderColor: backgroundColor,
+    //background: backgroundColor,
   };
 
   return (
     <div className={styles.classBox} style={classBoxStyle}>
-      <div className={styles.wrapper}>
-        <div className={styles.className}>
-          <span>{courseName}</span>
-        </div>
+      <div className={styles.classHeader}>
         <div>
+          <span className={styles.className}>{courseName}</span>
+        </div>
+        <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
       </div>

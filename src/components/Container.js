@@ -3,14 +3,13 @@ import React, { useState } from "react";
 import CardGrid from "../components/CardGrid";
 import Review from "../components/Review"
 
-function Container(props) {
+function Container() {
   const [reviewing, setReviewing] = useState(false);
   const View = reviewing ? Review : CardGrid;
   return (
     <View
-      {...props}
       onClick={() => {
-        setShowDetail(!showDetail);
+        setReviewing(!reviewing);
       }}
     />
   );

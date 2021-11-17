@@ -1,22 +1,49 @@
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
-import React from "react";
 import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 
 export default function CourseCard({ course }) {
-  let wGreen = 0;
-  let wRed = 0;
-  let wYellow = 0;
-  const [prof, setProf] = useState(course.profs[0]);
-  
-  //for now we are just using the array of the first professor, though there are multiple
-  const difficultyArray = course.profs[0].difficulty;
-  const interestingArray = course.profs[0].interest;
-  const timeCommitmentArray = course.profs[0].time_commitment;
-  const satisfactionArray = course.profs[0].satisfaction;
+  let backgroundColor;
+  const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
+  const courseDetails = {...course}
+  let prof;
+  if (profName !== "Aggregate") {
+    prof = course.profs.find((a) => a.prof_name === profName);
+  } else {
+    //cumulative value
+    const p_in = courseDetails.profs.reduce((previous, current) => {
+      return previous.concat(current.interest);
+    }, []);
+    const p_time = courseDetails.profs.reduce((previous, current) => {
+      return previous.concat(current.time_commitment);
+    }, []);
+    const p_satisfaction = courseDetails.profs.reduce((previous, current) => {
+      return previous.concat(current.satisfaction);
+    }, []);
+    const p_dif = courseDetails.profs.reduce((previous, current) => {
+      return previous.concat(current.difficulty);
+    }, []);
+
+    prof = {
+      prof_name: "Aggregate",
+      satisfaction: p_satisfaction,
+      difficulty: p_dif,
+      interest: p_in,
+      time_commitment: p_time,
+    };
+  }
+  let wGreen;
+  let wRed;
+  let wYellow;
+
+  //for now we are just using the array of the first professor, though there are multiple
+  const difficultyArray = prof.difficulty;
+  const interestingArray = prof.interest;
+  const timeCommitmentArray = prof.time_commitment;
+  const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
   //get the averages of the arrays as a number between 1 and 100
@@ -65,13 +92,13 @@ export default function CourseCard({ course }) {
   };   
 
   return (
-    <div className={styles.classBox} style={classBoxStyle} >
-      <div className={styles.classHeader}>
+    <div className={styles.classBox} style={classBoxStyle}>
+      <div className={styles.wrapper}>
         <div className={styles.className}>
           <span>{courseName}</span>
         </div>
         <div>
-          <ProfDropDown profs={course.profs} setProf={setProf}/>
+          <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
       </div>
 

@@ -29,17 +29,17 @@
     "profs": [
       {
         "prof_name": "Kara Karpman",
-        "satisfaction": [3,3,3,3],
-        "difficulty": [5, 5, 5, 5, 5, 5, 5],
-        "interest": [5, 4, 3, 2, 1, 3, 4],
-        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+        "satisfaction": [3,3,3,3,2,1],
+        "difficulty": [5, 5, 3, 5, 2, 5, 1],
+        "interest": [5, 4, 3, 2, 5, 3, 4],
+        "time_commitment": [1, 1, 1, 1, 3, 2, 1]
       },
       {
         "prof_name": "Alex Lyford",
         "satisfaction": [5, 5, 4, 5, 4, 3, 4],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
-        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+        "time_commitment": [4, 4, 4, 2, 3, 2, 1]
       }
     ],
     "course_desc":"Class where you learn Data Science",

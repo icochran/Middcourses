@@ -11,8 +11,8 @@ export default function Filter({setFilterBy, departments, prof}) {
                 <h1 className={styles.filterButtonDept}>Department ▾</h1>
                 <div className={styles.filterContent}>
                     <ul>
-                    <li><a onClick={() => setFilterBy()}>None</a></li>
-                    {depts}
+                        <li><a key="none" onClick={() => setFilterBy()}>None</a></li>
+                        {depts}
                     </ul>
                 </div>
             </div>
@@ -20,8 +20,8 @@ export default function Filter({setFilterBy, departments, prof}) {
                 <h1 className={styles.filterButtonProf}>Professor ▾</h1>
                 <div className={styles.filterContent}>
                     <ul>
-                    <li><a onClick={() => setFilterBy()}>None</a></li>
-                    {profs}
+                        <li><a onClick={() => setFilterBy()}>None</a></li>
+                        {profs}
                     </ul>
                 </div>
             </div>

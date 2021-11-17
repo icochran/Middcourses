@@ -45,6 +45,7 @@ export default function CourseCard({ course }) {
   const timeCommitmentArray = prof.time_commitment;
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
+ 
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
@@ -87,7 +88,7 @@ export default function CourseCard({ course }) {
   };
 
   return (
-    <div className={styles.classBox} style={classBoxStyle}>
+    <div className={styles.classBox} style={classBoxStyle} role="gridcell">
       <div className={styles.classHeader}>
         <div>
           <span className={styles.className}>{courseName}</span>
@@ -95,51 +96,44 @@ export default function CourseCard({ course }) {
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
-      </div>
-
+       </div>
       <div className={styles.courseBody}>
-        <div className={styles.difficulty}>
-          <div className="difficultyName">
-            <p>Difficulty</p>
-          </div>
-          <div className={styles.difficultyBarBackground}>
-            <span className={styles.difficultyBar} style={difficultyBarStyle} />
-          </div>
-        </div>
-
-        <div className={styles.interesting}>
-          <div className="interesting-name">
-            <p>Interesting</p>
-          </div>
-          <div className={styles.interestingBarBackground}>
-            <span
-              className={styles.interestingBar}
-              style={interestingBarStyle}
-            />
-          </div>
-        </div>
-
-        <div className="timecommitment">
-          <div className="timecommitment-name">
-            <p>Time Commitment</p>
-          </div>
-          <div className="timecommitment-bar-wrapper">
-            <div className={styles.timecommitmentBarBackground}>
-              <span
-                className={styles.timecommitmentBar}
-                style={timeCommitmentBarStyle}
-              />
+          <div className={styles.courseBody}>
+            <div className={styles.difficulty}>
+              <div className="difficultyName">
+                <p>Difficulty</p>
+              </div>
+              <div className={styles.difficultyBarBackground}>
+                <span data-testid="difficultyBar" className={styles.difficultyBar} style={difficultyBarStyle} role="progressbar" />
+              </div>
             </div>
-            <div className={styles.timecommitmentBarNumber}>
-              {" "}
-              {courseTimeCommitmentHours} hours
+
+            <div className={styles.interesting}>
+              <div className="interesting-name">
+                <p>Interesting</p>
+              </div>
+              <div className={styles.interestingBarBackground}>
+                <span data-testid="interestingBar" className={styles.interestingBar} style={interestingBarStyle} role="progressbar" />
+              </div>
+            </div>
+
+            <div className="timecommitment">
+              <div className="timecommitment-name">
+                <p>Time Commitment</p>
+              </div>
+              <div className="timecommitment-bar-wrapper">
+                <div className={styles.timecommitmentBarBackground}>
+                  <span data-testid="timecommitmentBar" className={styles.timecommitmentBar} style={timeCommitmentBarStyle} role="progressbar" />
+                </div>
+                <p data-testid="timecommitmentBarNumber" role="contentinfo" className={styles.timecommitmentBarNumber}>{courseTimeCommitmentHours} hours</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
+
 
 CourseCard.propTypes = {
   course: PropTypes.object.isRequired,

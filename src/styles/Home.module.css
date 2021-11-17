@@ -12,6 +12,10 @@
   width: 100%;
 }
 
+.wrapper {
+  display: flex;
+}
+
 .classHeader{
   text-align: center;
   margin: 10px 10px 30px;
@@ -19,8 +23,7 @@
 }
 
 .className{
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 25px;
 }
 
 .classProf{
@@ -34,14 +37,14 @@
 .listView{
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
 }
 
 .classBox{
-  width: 30%;
+  width: 300px;
   border-radius: 20px;
   border-width: 15px;
-  position: relative;
+  float: left;
+  position: left;
   margin: 10px;
   background: #cecece;
   border-style: solid;

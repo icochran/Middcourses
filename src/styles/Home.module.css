@@ -12,47 +12,66 @@
   width: 100%;
 }
 
+.wrapper {
+  display: flex;
+}
+
+/* The bar around the professors drop down */
+.profBar {
+  align-items: center;
+  margin: 10px;
+}
+
+/* Defines the box with the title and professors drop down */
 .classHeader{
   text-align: center;
   margin: 10px 10px 30px;
   height: 100px;
 }
 
+/* Defines the name of the course in the course card */
 .className{
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
 }
 
-.classProf{
-  font-size: 20px;
-}
-
+/* Defines the box with the progress bars in the course card */
 .courseBody{
   margin: 0px 10px 0px;
 }
 
+/* The box containing the grid of course cards */
 .listView{
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
+  width: 1000px;
 }
 
+/* Defines the actual box of the class card */
 .classBox{
-  width: 30%;
+  width: 300px;
   border-radius: 20px;
   border-width: 15px;
-  position: relative;
+  float: left;
+  position: left;
   margin: 10px;
-  background: #cecece;
   border-style: solid;
+  background: #cecece;
 }
 
+/* The interesting progress bar */
 .interestingBar {
   display: block;
   height: 4px;
   border-radius: 6px;
   }
 
+/* The black bar behind the interesting progress bar */
 .interestingBarBackground {
   display: block;
   height: 4px;
@@ -62,12 +81,14 @@
   background-color: #000000;  
 }
 
+/* The difficulty progress bar */
 .difficultyBar {
   display: block;
   height: 4px;
   border-radius: 6px;
 }
 
+/* The black bar behind the difficulty progress bar */
 .difficultyBarBackground{
   display: block;
   height: 4px;
@@ -77,12 +98,14 @@
   background-color: #000000;  
 }
 
+/* The time commitment progress bar */
 .timecommitmentBar {
   display: block;
   height: 4px;
   border-radius: 6px;
 }
 
+/* The black bar behind the time commitment progress bar */
 .timecommitmentBarBackground{
   display: block;
   height: 4px;
@@ -92,6 +115,7 @@
   background-color: #000000;  
 }
 
+/* The number showing the time commitment at the bottom of each card */
 .timecommitmentBarNumber{
   text-align: right;
   margin-bottom: 10px;

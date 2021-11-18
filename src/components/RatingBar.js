@@ -1,11 +1,15 @@
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
-import ProfDropDown from "./ProfDropDown";
-import { useState } from "react";
 
-export default function RatingBar({ aspect, barStyle, numHours}) {
+export default function RatingBar({ aspect, percentage, numHours}) {
 
-  const timeHours = aspect==="Time Commitment" ? <p data-testid="timecommitmentBarNumber" className={styles.timecommitmentBarNumber}>{numHours} hours</p> : undefined;
+  const barStyle = {
+    width: `${percentage}%`,
+    background: "#47b5ff",
+  }
+
+  const hour_s = numHours===1 ? "hour" : "hours";
+  const timeHours = aspect==="Time Commitment" ? <p data-testid="timecommitmentBarNumber" className={styles.timecommitmentBarNumber}>{numHours} {hour_s}</p> : undefined;
 
   return (
     <>
@@ -20,5 +24,5 @@ export default function RatingBar({ aspect, barStyle, numHours}) {
 
 RatingBar.propTypes = {
   aspect: PropTypes.string.isRequired,
-  barStyle: PropTypes.object.isRequired,
+  percentage: PropTypes.number.isRequired,
 };

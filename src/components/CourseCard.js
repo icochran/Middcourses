@@ -71,20 +71,6 @@ export default function CourseCard({ course }) {
     backgroundColor = "#ffbaba"
   }
 
-  //sets the width and color of each bar
-  const difficultyBarStyle = {
-    width: `${courseDifficulty100}%`,
-    background: "#47b5ff",
-  };
-  const interestingBarStyle = {
-    width: `${courseInteresting100}%`,
-    background: "#47b5ff",
-  };
-  const timeCommitmentBarStyle = {
-    width: `${courseTimeCommitment100}%`,
-    background: "#47b5ff",
-  };
-
   //sets the color of the boxes
   const classBoxStyle = {
     borderColor: backgroundColor,
@@ -101,9 +87,9 @@ export default function CourseCard({ course }) {
       </div>
 
       <div className={styles.courseBody}>
-            <RatingBar aspect="Difficulty" barStyle={difficultyBarStyle} numHours={undefined}/>
-            <RatingBar aspect="Interesting" barStyle={interestingBarStyle} numHours={undefined}/>
-            <RatingBar aspect="Time Commitment" barStyle={timeCommitmentBarStyle} numHours={courseTimeCommitmentHours}/>
+            <RatingBar aspect="Difficulty" percentage={courseDifficulty100} numHours={undefined}/>
+            <RatingBar aspect="Interesting" percentage={courseInteresting100} numHours={undefined}/>
+            <RatingBar aspect="Time Commitment" percentage={courseTimeCommitment100} numHours={courseTimeCommitmentHours}/>
       </div>
     </div>
   );

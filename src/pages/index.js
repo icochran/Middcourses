@@ -64,7 +64,11 @@ export default function MainPage() {
 
     const profSet = new Set();
     collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name)));
-    const professors = Array.from(profSet).sort();
+    const professors = Array.from(profSet).sort((prof1, prof2) => {
+      const prof1Last = prof1.substr(prof1.indexOf(" "));
+      const prof2Last = prof2.substr(prof2.indexOf(" "));
+      return prof1Last === prof2Last ? 0 : prof1Last < prof2Last ? -1 : 1;
+    });
 
     //  It looks like this way of getting professors was only getting the first prof in each class
     /*

@@ -2,6 +2,7 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
+import RatingBar from "./RatingBar.js";
 
 export default function CourseCard({ course }) {
   let backgroundColor;
@@ -45,6 +46,7 @@ export default function CourseCard({ course }) {
   const timeCommitmentArray = prof.time_commitment;
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
+ 
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
@@ -69,77 +71,30 @@ export default function CourseCard({ course }) {
     backgroundColor = "#ffbaba"
   }
 
-  const difficultyBarStyle = {
-    width: `${courseDifficulty100}%`,
-    background: "#47b5ff",
-  };
-  const interestingBarStyle = {
-    width: `${courseInteresting100}%`,
-    background: "#47b5ff",
-  };
-  const timeCommitmentBarStyle = {
-    width: `${courseTimeCommitment100}%`,
-    background: "#47b5ff",
-  };
+  //sets the color of the boxes
   const classBoxStyle = {
     borderColor: backgroundColor,
-    //background: backgroundColor,
   };
 
   return (
-    <div className={styles.classBox} style={classBoxStyle}>
+    <div className={styles.classBox} style={classBoxStyle} role="gridcell">
+
       <div className={styles.classHeader}>
-        <div>
-          <span className={styles.className}>{courseName}</span>
-        </div>
+        <span className={styles.className}>{courseName}</span>
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
       </div>
 
       <div className={styles.courseBody}>
-        <div className={styles.difficulty}>
-          <div className="difficultyName">
-            <p>Difficulty</p>
-          </div>
-          <div className={styles.difficultyBarBackground}>
-            <span className={styles.difficultyBar} style={difficultyBarStyle} />
-          </div>
-        </div>
-
-        <div className={styles.interesting}>
-          <div className="interesting-name">
-            <p>Interesting</p>
-          </div>
-          <div className={styles.interestingBarBackground}>
-            <span
-              className={styles.interestingBar}
-              style={interestingBarStyle}
-            />
-          </div>
-        </div>
-
-        <div className="timecommitment">
-          <div className="timecommitment-name">
-            <p>Time Commitment</p>
-          </div>
-          <div className="timecommitment-bar-wrapper">
-            <div className={styles.timecommitmentBarBackground}>
-              <span
-                className={styles.timecommitmentBar}
-                style={timeCommitmentBarStyle}
-              />
-            </div>
-            <div className={styles.timecommitmentBarNumber}>
-              {" "}
-              {courseTimeCommitmentHours} hours
-            </div>
-          </div>
-        </div>
+            <RatingBar aspect="Difficulty" percentage={courseDifficulty100} numHours={undefined}/>
+            <RatingBar aspect="Interesting" percentage={courseInteresting100} numHours={undefined}/>
+            <RatingBar aspect="Time Commitment" percentage={courseTimeCommitment100} numHours={courseTimeCommitmentHours}/>
       </div>
     </div>
   );
 }
+
 
 CourseCard.propTypes = {
   course: PropTypes.object.isRequired,

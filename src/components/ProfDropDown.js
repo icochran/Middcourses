@@ -1,5 +1,5 @@
-
-import styles from "../styles/dropdown.module.css";
+import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button"
 import PropTypes from "prop-types";
 
 export default function ProfDropDown({profs, setProfName}) {
@@ -15,29 +15,33 @@ export default function ProfDropDown({profs, setProfName}) {
     profSet.add(e)
   }});
   const professors = Array.from(profSet);
+  
+  let profList = professors.map((prof) => (
+    <Dropdown.Item key={prof.prof_name} onClick={() => setProfName(prof.prof_name)}>{prof.prof_name}</Dropdown.Item>
+  ));
 
-  const profList = professors.map(prof => (<li key={prof}><a onClick={()=>setProfName(prof)}>{prof}</a></li>)) ;
-  
-  if(profs.length>1){
+  if (profs.length > 1) {
+    profList = [<Dropdown.Item key={"agg"} onClick={() => setProfName("Aggregate")}>Aggregate</Dropdown.Item>,profList]
     return (
-      <div className={styles.filter}>
-        <button className={styles.filterButton}>Professors ▾</button>
-              <div className={styles.filterContent}>
-                  <ul>
-                  <li key={"Aggregate"}><a onClick={()=>setProfName("Aggregate")}>{"Aggregate"}</a></li>
-                  {profList}
-                  </ul>
-              </div>
-      </div>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Professors
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {profList}
+        </Dropdown.Menu>
+      </Dropdown>
     );
-  } else{
-    return(
-      <div className={styles.filter}>
-        <button className={styles.filterButton}>{profs[0].prof_name}</button>
-      </div>
-    )
+  } else {
+    return (
+      <Button variant="success">{profs[0].prof_name}</Button>
+      // <Dropdown>
+      //   <Dropdown.Toggle variant="success" id="dropdown-basic">
+      //     {profs[0].prof_name}
+      //   </Dropdown.Toggle>
+      // </Dropdown>
+    );
   }
-  
 }
 
 ProfDropDown.propTypes = {

@@ -38,11 +38,6 @@ export default function Review({ course, changeState}) {
                 <Button variant="secondary">3</Button>
                 <Button variant="secondary">4</Button>
                 <Button variant="secondary">5</Button>
-                <Button variant="secondary">6</Button>
-                <Button variant="secondary">7</Button>
-                <Button variant="secondary">8</Button>
-                <Button variant="secondary">9</Button>
-                <Button variant="secondary">10</Button>
             </ButtonGroup>
         </div>
 
@@ -54,11 +49,6 @@ export default function Review({ course, changeState}) {
                 <Button variant="secondary">3</Button>
                 <Button variant="secondary">4</Button>
                 <Button variant="secondary">5</Button>
-                <Button variant="secondary">6</Button>
-                <Button variant="secondary">7</Button>
-                <Button variant="secondary">8</Button>
-                <Button variant="secondary">9</Button>
-                <Button variant="secondary">10</Button>
             </ButtonGroup>
         </div>
 
@@ -70,11 +60,6 @@ export default function Review({ course, changeState}) {
                 <Button variant="secondary">3</Button>
                 <Button variant="secondary">4</Button>
                 <Button variant="secondary">5</Button>
-                <Button variant="secondary">6</Button>
-                <Button variant="secondary">7</Button>
-                <Button variant="secondary">8</Button>
-                <Button variant="secondary">9</Button>
-                <Button variant="secondary">10</Button>
             </ButtonGroup>
         </div>
 

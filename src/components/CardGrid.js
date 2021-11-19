@@ -13,6 +13,8 @@ export default function CardGrid({courses}) {
 
     return(
         <div className={styles.listView} role="grid">
+            <View {...courses} onClick={() => { 
+                setShowDetailedView(!showDetailedView)}}/>
             {courseList.length === 0 ? "No courses match your search criteria." : courseList} 
         </div> 
         );

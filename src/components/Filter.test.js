@@ -1,80 +1,59 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import MainPage from "../pages/index.js"
+import { screen, fireEvent, render } from "@testing-library/react";
 import Filter from "./Filter";
+import collection from "../../data/test-data.json";
 
-/*
 
-Once we get the database running, testing this will change so we should wait until that happens to write this
 
-describe("Filter: Filter tests", () => {
-  let courses;
+describe("Filter tests", () => {
+    const handler = jest.fn();
+    const deptSet = new Set();
+    const sortedDepts = collection.map(course => course.dept).sort();
+    sortedDepts.forEach(e => deptSet.add(e));
+    const departments = Array.from(deptSet);
 
-  //creates a common courses before each test is run
-  beforeEach(() => {
-    courses = [
-            {
-              "class_name": "Software Development",
-              "dept": "CSCI",
-              "class_num": "312",
-              "profs": [
-                {
-                  "prof_name": "Christopher Andrews",
-                  "satisfaction": [1,1,1,1,1],
-                  "difficulty": [8,8,8],
-                  "interest": [5, 4, 3, 2, 1, 3, 4],
-                  "time_commitment": [9,9,9]
-                }
-              ],
-              "course_desc":"Class where you learn Software Development",
-              "id": 0
-            },
-            {
-              "class_name": "Intro to Data Science",
-              "dept": "MATH",
-              "class_num": "118",
-              "profs": [
-                {
-                  "prof_name": "Kara Karpman",
-                  "satisfaction": [3,3,3,3],
-                  "difficulty": [5, 5, 5, 5, 5, 5, 5],
-                  "interest": [5, 4, 3, 2, 1, 3, 4],
-                  "time_commitment": [5, 4, 3, 4, 3, 2, 1]
-                }
-              ],
-              "course_desc":"Class where you learn Data Science",
-              "id": 1
-            },
-            {
-              "class_name": "Data Structures",
-              "dept": "CSCI",
-              "class_num": "201",
-              "profs": [
-                {
-                  "prof_name": "Akhil Rao",
-                  "satisfaction": [3,3,3,3],
-                  "difficulty": [5, 5, 5, 5, 5, 5, 5],
-                  "interest": [5, 4, 3, 2, 1, 3, 4],
-                  "time_commitment": [5, 4, 3, 4, 3, 2, 1]
-                }
-              ],
-              "course_desc":"Class where you learn Data Structures",
-              "id": 2
-            }]  });
+    const profSet = new Set();
+    const sortedProfs = collection.map((course) => {
+      for (let i = 0; i < course.profs.length; i++) {
+        const str = course.profs[i].prof_name;
+        if (str.includes("Fall 2021")) {
+          const ind = str.indexOf(":") + 2;
+          const lInd = str.indexOf(";");
+          return str.substring(ind,lInd);
+        }
+        if (str.includes("Spring 2022")) {
+          const lInd = str.indexOf(";");
+          const ind2 = str.indexOf(":", lInd) + 2;
+          return str.substring(ind2);
+        }
+        if (str !== "") {
+          return str;
+        }
+      }}).sort();
+    sortedProfs.forEach((e) => {
+      if (!(profSet.has(e))) {
+        profSet.add(e)
+      }});
+    const professors = Array.from(profSet);
 
-  test.skip("CardGrid: displays grid", () => {
-    const { getByRole } = render(<CardGrid courses={courses} />);
-    expect(getByRole("grid")).toBeInTheDocument();
-  });
+    beforeEach(() => {
+        handler.mockReset();
+      });
 
-  test("CardGrid: correctly filters by department", async () => {
-    render(<MainPage courses={courses} />);
+    test("Each department is shown as filter option", () => {
+        render(<Filter setFilterBy ={handler} departments = {departments} prof = {professors}/>);
 
-    expect(screen.queryAllByRole("gridcell").length === 3).toBeTruthy();
+        departments.forEach((dept) => {
+            expect(screen.getByText(dept)).toBeVisible();
+          });
+    })
 
-    const compSciFilter = await screen.findByText("CSCI");
-    fireEvent.click(compSciFilter);
-    expect(screen.queryAllByRole("gridcell").length === 2).toBeTruthy();
-  });
+    test("Each professor is shown as filter option", () => {
+      render(<Filter setFilterBy ={handler} departments = {departments} prof = {professors}/>);
 
-});
-*/
+      departments.forEach((prof) => {
+          expect(screen.getByText(prof)).toBeVisible();
+        });
+  })
+
+
+})

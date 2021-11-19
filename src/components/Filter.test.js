@@ -86,20 +86,48 @@ describe("Filter tests", () => {
       */
   })
 
-  test("Clicking a dept sets the filter to that dept", () => {
+  test("Clicking a dept sets the filter to that dept and displays on screen", () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
     const deptText = screen.getByText("CSCI");
     fireEvent.click(deptText);
-    expect(screen.getByTestId("filterBy")).toEqual("Filtering by: CSCI");
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: CSCI");
   })
 
-  test("Clicking a prof sets the filter to that prof", () => {
+  test("Clicking a prof sets the filter to that prof and displays on screen", () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
     const profText = screen.getByText("Alex Lyford");
     fireEvent.click(profText);
-    expect(screen.getByTestId("filterBy")).toEqual("Filtering by: Alex Lyford");
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: Alex Lyford");
+  })
+
+  test("Clicking none sets the dept filter to none", () => {
+    useCollection.mockReturnValue(testData);
+    render(<MainPage/>);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
+    const deptText = screen.getByText("CSCI");
+    fireEvent.click(deptText);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: CSCI");
+
+    const none = screen.getAllByText("None")[0];
+    fireEvent.click(none);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
+  })
+
+  test("Clicking none sets the prof filter to none", () => {
+    useCollection.mockReturnValue(testData);
+    render(<MainPage/>);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
+    const profText = screen.getByText("Alex Lyford");
+    fireEvent.click(profText);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: Alex Lyford");
+
+    const none = screen.getAllByText("None")[1];
+    fireEvent.click(none);
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
   })
 
 

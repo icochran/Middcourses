@@ -22,12 +22,6 @@ export default function MainPage() {
 
     const collection = useCollection();
 
-    /*
-    useEffect(() => {
-      
-    }, [])
-    */
-
     // maybe want to useEffect here?
 
     /*useEffect(() => {

@@ -1,10 +1,13 @@
 import { screen, fireEvent, render } from "@testing-library/react";
-import Filter from "./Filter";
-import collection from "../../data/test-data.json";
+//import Filter from "./Filter";
+import MainPage from "../pages/index.js";
+import testData from "../../data/test-data.json";
+import useCollection from "../hooks/useCollection";
 
-
+jest.mock("../hooks/useCollection");
 
 describe("Filter tests", () => {
+    /*
     const handler = jest.fn();
     const deptSet = new Set();
     const sortedDepts = collection.map(course => course.dept).sort();
@@ -37,22 +40,66 @@ describe("Filter tests", () => {
 
     beforeEach(() => {
         handler.mockReset();
-      });
+    });
+    */
+    const handler = jest.fn();
+
+    beforeEach(() => {
+      handler.mockReset();
+    });
 
     test("Each department is shown as filter option", () => {
-        render(<Filter setFilterBy ={handler} departments = {departments} prof = {professors}/>);
+      useCollection.mockReturnValue(testData);
+      render(<MainPage/>);
+      const depts = screen.queryAllByTestId("dept").map((dept) => dept.textContent);
+      expect(depts).toEqual(["None", "CSCI", "MATH"]);
 
-        departments.forEach((dept) => {
-            expect(screen.getByText(dept)).toBeVisible();
-          });
+      /*
+      render(<Filter setFilterBy ={handler} departments = {departments} prof = {professors}/>);
+
+      departments.forEach((dept) => {
+        expect(screen.getByText(dept)).toBeVisible();
+      });
+      */
     })
 
     test("Each professor is shown as filter option", () => {
+      useCollection.mockReturnValue(testData);
+      render(<MainPage/>);
+      const profs = screen.queryAllByTestId("prof").map((prof) => prof.textContent);
+      expect(profs).toEqual(
+        [
+          "None",
+          "Alex Lyford",
+          "Christopher Andrews", 
+          "Kara Karpman",
+          "Michael Linderman"
+        ]
+      );
+
+      /*
       render(<Filter setFilterBy ={handler} departments = {departments} prof = {professors}/>);
 
-      departments.forEach((prof) => {
+      professors.forEach((prof) => {
           expect(screen.getByText(prof)).toBeVisible();
         });
+      */
+  })
+
+  test("Clicking a dept sets the filter to that dept", () => {
+    useCollection.mockReturnValue(testData);
+    render(<MainPage/>);
+    const deptText = screen.getByText("CSCI");
+    fireEvent.click(deptText);
+    expect(screen.getByTestId("filterBy")).toEqual("Filtering by: CSCI");
+  })
+
+  test("Clicking a prof sets the filter to that prof", () => {
+    useCollection.mockReturnValue(testData);
+    render(<MainPage/>);
+    const profText = screen.getByText("Alex Lyford");
+    fireEvent.click(profText);
+    expect(screen.getByTestId("filterBy")).toEqual("Filtering by: Alex Lyford");
   })
 
 

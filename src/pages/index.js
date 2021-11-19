@@ -51,11 +51,23 @@ export default function MainPage() {
         }});
     }
 
+    /*
     const deptSet = new Set();
     const sortedDepts = collection.map(course => course.dept).sort();
     sortedDepts.forEach(e => deptSet.add(e));
     const departments = Array.from(deptSet);
+    */
 
+    const deptSet = new Set();
+    collection.forEach((course) => deptSet.add(course.dept));
+    const departments = Array.from(deptSet).sort();
+
+    const profSet = new Set();
+    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name)));
+    const professors = Array.from(profSet).sort();
+
+    //  It looks like this way of getting professors was only getting the first prof in each class
+    /*
     const profSet = new Set();
     const sortedProfs = collection.map((course) => {
       for (let i = 0; i < course.profs.length; i++) {
@@ -68,6 +80,7 @@ export default function MainPage() {
         }
       }});
     const professors = Array.from(profSet);
+    */
 
     if (filterBy){
       courses = collection.filter((course) => {
@@ -104,7 +117,7 @@ export default function MainPage() {
       <main>
         <h1 className="title">Midd Courses</h1>
         <SearchBar searchByCallback={setSearchBarInput}/>
-        <div className={styles.wrapper}>
+        <div data-testid = "filterBy" className={styles.wrapper}>
           <h2>Filtering by: {!filterBy ? "None" : filterBy}</h2>
         </div>
         <div className={styles.wrapper}>

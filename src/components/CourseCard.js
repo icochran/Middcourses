@@ -4,11 +4,14 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 
-export default function CourseCard({ course, setShowDetailedView }) {
+export default function CourseCard({ course }) {
   let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
+  console.log("below is course");
+  console.log(course);
+  
   const courseDetails = {...course}
   let prof;
   if (profName !== "Aggregate") {

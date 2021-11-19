@@ -6,10 +6,10 @@ import { useState } from "react";
 
 export default function CardGrid({courses}) {
 
-    const [showDetailedView, setShowDetailedView] = useState(false);
-    const View = showDetailedView ? CourseCard : DetailedCourseCard;
+    const [showDetailedView, setShowDetailedView] = useState(true);
+    const View = showDetailedView ? DetailedCourseCard : CourseCard;
 
-    const courseList = courses.map(course => (<View key={course.id} course={course} setShowDetailedView={setShowDetailedView}/>)) ;
+    const courseList = courses.map(course => (<View key={course.id} course={course} />)) ;
 
     return(
         <div className={styles.listView} role="grid">

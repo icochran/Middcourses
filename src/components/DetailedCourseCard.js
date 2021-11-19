@@ -5,91 +5,63 @@ import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 
 export default function CourseCard({ course, setShowDetailedView }) {
-  let backgroundColor;
-  const [profName, setProfName] = useState(course.profs[0].prof_name);
-  const reducer = (previousValue, currentValue) => previousValue + currentValue;
+  
+const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
-  const courseDetails = {...course}
-  let prof;
-  if (profName !== "Aggregate") {
-    prof = course.profs.find((a) => a.prof_name === profName);
-    if (!prof) {
-      prof.prof_name = "No specific Professor"
-    }
-  } else {
-    //cumulative value
-    const p_in = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.interest);
-    }, []);
-    const p_time = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.time_commitment);
-    }, []);
-    const p_satisfaction = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.satisfaction);
-    }, []);
-    const p_dif = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.difficulty);
-    }, []);
+const courseDetails = {...course}
 
-    prof = {
-      prof_name: "Aggregate",
-      satisfaction: p_satisfaction,
-      difficulty: p_dif,
-      interest: p_in,
-      time_commitment: p_time,
-    };
-  }
-
-  //for now we are just using the array of the first professor, though there are multiple
-  const difficultyArray = prof.difficulty;
-  const interestingArray = prof.interest;
-  const timeCommitmentArray = prof.time_commitment;
+//get the courseSatisfaction
+/*
+This should eventually get the course satisfaction...?
+  const p_satisfaction = courseDetails.profs.reduce((previous, current) => {
+    return previous.concat(current.satisfaction);
+  }, []);
   const satisfactionArray = prof.satisfaction;
-  const courseName = course.class_name;
- 
-
-  //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 =
-    (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
-  const courseInteresting100 =
-    (interestingArray.reduce(reducer) / interestingArray.length) *10;
-  const courseTimeCommitment100 =
-    (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
-  const courseTimeCommitmentHours =
-    Math.round((courseTimeCommitment100 / 10) * 100) / 100;
   const courseSatisfactionAverage =
-    satisfactionArray.reduce(reducer) / satisfactionArray.length;
-
+  satisfactionArray.reduce(reducer) / satisfactionArray.length;
   //using the courseSatisfactionAverage set the color to red green or yellow
+  let backgroundColor;
   if (courseSatisfactionAverage >= 4) {
-    backgroundColor = "#d8ffc7"
+    backgroundColor = "#d8ffc7";
   }
   else if (courseSatisfactionAverage >= 2) {
     backgroundColor = "#fffeb3";
   }
   else {
-    backgroundColor = "#ffbaba"
+    backgroundColor = "#ffbaba";
   }
+*/
+
+const courseName = course.class_name;
+let courseDescription = course.course_desc;
+//to get the prereqs I should look for the last ) in the description. If it is more than say 10 characters away from the end set prereqs to undefined
+let prereqs; 
+if ((courseDescription.lastIndexOf(")"))!=-1 && courseDescription.length-courseDescription.lastIndexOf(")")<29) { //if there are prereqs
+  //get the prereqs as a string
+  const begginingOfPreReqs = courseDescription.lastIndexOf("(");
+  const endOfPreReqs = courseDescription.lastIndexOf(")")+1;
+  prereqs = courseDescription.substring(begginingOfPreReqs+1, endOfPreReqs-1);
+  //take the prereqs out of the courseDescription string
+  const begginingOfDescription = courseDescription.substring(0, begginingOfPreReqs);
+  const endOfDescription = courseDescription.substring(endOfPreReqs+1);
+  courseDescription = begginingOfDescription.concat(endOfDescription);
+}
 
   //sets the color of the boxes
   const classBoxStyle = {
-    borderColor: backgroundColor,
+    borderColor: "#d8ffc7",
   };
 
   return (
-    <div className={styles.classBox} style={classBoxStyle} role="gridcell">
+    <div className={styles.detailedClassBox} style={classBoxStyle} role="gridcell">
 
-      <div className={styles.classHeader}>
+      <div className={styles.detailedClassHeader}>
         <span className={styles.className}>{courseName}</span>
-        <div className={styles.profBar}>
-          <ProfDropDown profs={course.profs} setProfName={setProfName} />
-        </div>
       </div>
 
       <div className={styles.courseBody}>
-            <RatingBar aspect="Difficulty" percentage={courseDifficulty100} numHours={undefined}/>
-            <RatingBar aspect="Interesting" percentage={courseInteresting100} numHours={undefined}/>
-            <RatingBar aspect="Time Commitment" percentage={courseTimeCommitment100} numHours={courseTimeCommitmentHours}/>
+            <p>{courseDescription}</p>
+            <p>{prereqs}</p>
       </div>
     </div>
   );

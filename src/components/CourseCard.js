@@ -91,7 +91,7 @@ export default function CourseCard({ course }) {
     <div className={styles.classBox} style={classBoxStyle} role="gridcell">
       <div className={styles.classHeader}>
         <div>
-          <span className={styles.className}>{courseName}</span>
+          <span data-testid = "courseName" className={styles.className}>{courseName}</span>
         </div>
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />

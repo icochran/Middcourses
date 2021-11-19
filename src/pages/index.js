@@ -7,18 +7,26 @@ import Filter from "../components/Filter"
 import data from "../../data/seed.json"
 //import data from "../../data/test-data.json"
 import {useState,useEffect} from "react"
-
+import useCollection from "../hooks/useCollection";
 
 
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
-    const [collection] = useState(data) 
+    //const [collection, setCollection] = useState(data) 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
       return numbers.reduce(reducer) / numbers.length;
     })
+
+    const collection = useCollection();
+
+    /*
+    useEffect(() => {
+      
+    }, [])
+    */
 
     // maybe want to useEffect here?
 

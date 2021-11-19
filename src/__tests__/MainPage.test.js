@@ -1,6 +1,10 @@
 import { screen, fireEvent, render } from "@testing-library/react";
 import MainPage from "../pages/index.js";
 import testData from "../../data/test-data.json";
+import useCollection from "../hooks/useCollection";
+
+
+jest.mock("../hooks/useCollection");
 
 describe("MainPage: Integration Tests", () => {
     const handler = jest.fn();
@@ -11,29 +15,30 @@ describe("MainPage: Integration Tests", () => {
 
 
     test("Search by title (lowercase): only courses with titles that match search are displayed", () => {
+        useCollection.mockReturnValue(testData);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
-        fireEvent.change(searchInput, {target: {value: "software"}});
-        expect(searchInput.value).toBe("software");
+        fireEvent.change(searchInput, {target: {value: "computer"}});
+        expect(searchInput.value).toBe("computer");
+        const searchbutton = screen.queryByRole("button", { name: "Search" });
+        fireEvent.click(searchbutton);
 
-        const courses = screen.queryAllByTitle("CourseCard").map((course) => course.class_name);
-        console.log(courses);
-        expect(courses).toEqual(["Software Development"]);
+        const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
+        expect(courses).toEqual(["Computer Systems", "Computer Engineering", "Computer Architecture"]);
 
-        // where am i putting in test data? how can i get each course card?
-        
+    });
 
-        /*
-        render(<SearchBar searchByCallback ={handler} />);
+    test("Search by title (uppercase): only courses with titles that match search are displayed", () => {
+        useCollection.mockReturnValue(testData);
+        render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
-        expect(searchInput.value).toBe("");
+        fireEvent.change(searchInput, {target: {value: "ComPUter"}});
+        expect(searchInput.value).toBe("ComPUter");
+        const searchbutton = screen.queryByRole("button", { name: "Search" });
+        fireEvent.click(searchbutton);
 
-        let searchbutton = screen.queryByRole("button", { name: "Search" });
-        expect(searchbutton).toBeDisabled();
+        const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
+        expect(courses).toEqual(["Computer Systems", "Computer Engineering", "Computer Architecture"]);
 
-        fireEvent.change(searchInput, {target: {value: "criteria"}});
-        searchbutton = screen.queryByRole("button", { name: "Search" });
-        expect(searchbutton).not.toBeDisabled();
-        */
     });
 })

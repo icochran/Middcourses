@@ -4,11 +4,10 @@ import styles from "../styles/Home.module.css";
 import CardGrid from "../components/CardGrid"
 import SearchBar from "../components/SearchBar"
 import Filter from "../components/Filter"
-import data from "../../data/seed.json"
-//import data from "../../data/test-data.json"
+// import data from "../../data/seed.json"
+import data from "../../data/test-data.json"
 import {useState} from "react"
-
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function MainPage() {
 
@@ -46,8 +45,7 @@ export default function MainPage() {
           if (course.profs[i].prof_name.toLowerCase().includes(newInput)) {
             return course;
           }
-        }
-        });
+        }});
     }
 
     const deptSet = new Set();
@@ -58,24 +56,13 @@ export default function MainPage() {
     const profSet = new Set();
     const sortedProfs = collection.map((course) => {
       for (let i = 0; i < course.profs.length; i++) {
-        const str = course.profs[i].prof_name;
-        if (str.includes("Fall 2021")) {
-          const ind = str.indexOf(":") + 2;
-          const lInd = str.indexOf(";");
-          return str.substring(ind,lInd);
-        }
-        if (str.includes("Spring 2022")) {
-          const lInd = str.indexOf(";");
-          const ind2 = str.indexOf(":", lInd) + 2;
-          return str.substring(ind2);
-        }
-        if (str !== "") {
-          return str;
-        }
+        return course.profs[i].prof_name;
       }}).sort();
     sortedProfs.forEach((e) => {
       if (!(profSet.has(e))) {
-        profSet.add(e)
+        if (e) {
+          profSet.add(e)
+        }
       }});
     const professors = Array.from(profSet);
 
@@ -115,7 +102,7 @@ export default function MainPage() {
         <h1 className="title">Midd Courses</h1>
         <SearchBar searchByCallback={setSearchBarInput}/>
         <div className={styles.wrapper}>
-          <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
+          <h2>Filtering by: {!filterBy ? "None" : filterBy}</h2>
         </div>
         <div className={styles.wrapper}>
           <div>

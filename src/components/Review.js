@@ -5,7 +5,6 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 
 export default function Review({ course, changeState}) {
    const [prof, setProf] = useState(course.profs[0]);
@@ -54,7 +53,7 @@ export default function Review({ course, changeState}) {
 
         <div className="satisfaction">
             <p>Overall Satisfaction</p>
-            <ButtonGroup aria-label="interestingButtons">
+            <ButtonGroup aria-label="satisfactionButtons">
                 <Button variant="secondary">1</Button>
                 <Button variant="secondary">2</Button>
                 <Button variant="secondary">3</Button>
@@ -63,14 +62,15 @@ export default function Review({ course, changeState}) {
             </ButtonGroup>
         </div>
 
-        <div className="satisfaction">
-            <p>Overall Satisfaction</p>
-            <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Time Commitment (hours) </Form.Label>
-                    <Form.Control as="textarea" rows={1} />
-                </Form.Group>
-            </Form>
+        <div className="time commitment">
+            <p>Time Commitment</p>
+            <ButtonGroup aria-label="timeButtons">
+                <Button variant="secondary">1</Button>
+                <Button variant="secondary">2</Button>
+                <Button variant="secondary">3</Button>
+                <Button variant="secondary">4</Button>
+                <Button variant="secondary">5</Button>
+            </ButtonGroup>
         </div>
 
       </div>

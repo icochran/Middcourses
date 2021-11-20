@@ -63,7 +63,7 @@ export default function MainPage() {
     const departments = Array.from(deptSet).sort();
 
     const profSet = new Set();
-    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name)));
+    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name.trim())));
     let professors = Array.from(profSet).sort((prof1, prof2) => {
       const prof1Last = prof1.substr(prof1.indexOf("."));
       const prof2Last = prof2.substr(prof2.indexOf("."));

@@ -70,10 +70,10 @@ describe("Filter tests", () => {
       expect(profs).toEqual(
         [
           "None",
-          "Alex Lyford",
-          "Christopher Andrews", 
-          "Kara Karpman",
-          "Michael Linderman"
+          "C. Andrews",
+          "K. Karpman",
+          "M. Linderman",
+          "A. Lyford"
         ]
       );
 
@@ -99,9 +99,9 @@ describe("Filter tests", () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
     expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
-    const profText = screen.getByText("Alex Lyford");
+    const profText = screen.getByText("A. Lyford");
     fireEvent.click(profText);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: Alex Lyford");
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: A. Lyford");
   })
 
   test("Clicking none sets the dept filter to none", () => {
@@ -121,9 +121,9 @@ describe("Filter tests", () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
     expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
-    const profText = screen.getByText("Alex Lyford");
+    const profText = screen.getByText("A. Lyford");
     fireEvent.click(profText);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: Alex Lyford");
+    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: A. Lyford");
 
     const none = screen.getAllByText("None")[1];
     fireEvent.click(none);

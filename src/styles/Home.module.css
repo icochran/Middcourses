@@ -28,6 +28,11 @@
   margin: 10px 10px 30px;
   height: 100px;
 }
+.detailedClassHeader{
+  text-align: center;
+  margin: 10px 10px 30px;
+}
+
 
 /* Defines the name of the course in the course card */
 .className{
@@ -63,6 +68,18 @@
   border-style: solid;
   background: #cecece;
 }
+
+.detailedClassBox{
+  width: 900px;
+  border-radius: 20px;
+  border-width: 15px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+}
+
 
 /* The rating display bar */
 .ratingBar {

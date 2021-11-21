@@ -82,4 +82,5 @@ export default function Review({ course, changeState}) {
 
 Review.propTypes = {
   course: PropTypes.object.isRequired,
+  changeState: PropTypes.func
 };

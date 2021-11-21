@@ -13,7 +13,6 @@ describe("MainPage: Integration Tests", () => {
         handler.mockReset();
     });
 
-
     test("Search by title (lowercase): only courses with titles that match search are displayed", () => {
         useCollection.mockReturnValue(testData);
         render(<MainPage/>);
@@ -64,5 +63,25 @@ describe("MainPage: Integration Tests", () => {
 
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
         expect(courses).toEqual(["Intro to Data Science"]);
+    });
+
+    test("Filter by dept: only courses with dept that match filter are displayed", () => {
+        useCollection.mockReturnValue(testData);
+        render(<MainPage/>);
+        const deptText = screen.getByText("CSCI");
+        fireEvent.click(deptText);
+
+        const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
+        expect(courses).toEqual(["Software Development", "Computer Systems", "Computer Engineering", "Computer Architecture"]);
+    });
+
+    test("Filter by prof: only courses with profs that match filter are displayed", () => {
+        useCollection.mockReturnValue(testData);
+        render(<MainPage/>);
+        const profText = screen.getByText("M. Linderman");
+        fireEvent.click(profText);
+
+        const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
+        expect(courses).toEqual(["Software Development"]);
     });
 })

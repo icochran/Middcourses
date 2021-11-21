@@ -31,7 +31,7 @@ describe("CourseCard: CourseCard tests", () => {
 
     test("CourseCard: displays 3 different rating bars (not necessarily the right level)", () => {
         render(<CourseCard course={course} />);
-        expect(screen.queryAllByTestId('Bar').length === 3).toBeTruthy();
+        expect(screen.queryAllByTestId("Bar").length === 3).toBeTruthy();
     });
 
     test("CourseCard: displays course time commitment in hours", () => {

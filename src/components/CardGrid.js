@@ -1,20 +1,16 @@
-import CourseCard from "./CourseCard"
-import DetailedCourseCard from "./DetailedCourseCard"
+//import CourseCard from "../components/CourseCard"
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import Container from "../components/Container";
 
 export default function CardGrid({courses}) {
 
-    const [showDetailedView, setShowDetailedView] = useState(true);
-    const View = showDetailedView ? DetailedCourseCard : CourseCard;
-
-    const courseList = courses.map(course => (<View key={course.id} course={course} />)) ;
+    // courses.forEach((course) => { console.log(course.class_name); });
+     const courseList = courses.map(course => (<Container key={course.id} course={course}/>)) ;
+    //const courseList = courses.map(course => {reviewing ? (<CourseCard key={course.id} course={course}/>) : (<Review key={course.id} course={course}/>)}) ;
 
     return(
         <div className={styles.listView} role="grid">
-            <View {...courses} onClick={() => { 
-                setShowDetailedView(!showDetailedView)}}/>
             {courseList.length === 0 ? "No courses match your search criteria." : courseList} 
         </div> 
         );

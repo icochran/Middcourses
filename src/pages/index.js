@@ -4,8 +4,9 @@ import styles from "../styles/Home.module.css";
 import CardGrid from "../components/CardGrid"
 import SearchBar from "../components/SearchBar"
 import Filter from "../components/Filter"
-// import data from "../../data/seed.json"
-import data from "../../data/test-data.json"
+//import data from "../../data/test-data.json"
+import useCollection from "../hooks/useCollection";
+
 import {useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,11 +14,13 @@ export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
-    const [collection] = useState(data) 
+    //const [collection, setCollection] = useState(data) 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
       return numbers.reduce(reducer) / numbers.length;
     })
+
+    const collection = useCollection();
 
     // maybe want to useEffect here?
 
@@ -48,11 +51,30 @@ export default function MainPage() {
         }});
     }
 
+    /*
     const deptSet = new Set();
     const sortedDepts = collection.map(course => course.dept).sort();
     sortedDepts.forEach(e => deptSet.add(e));
     const departments = Array.from(deptSet);
+    */
 
+    const deptSet = new Set();
+    collection.forEach((course) => deptSet.add(course.dept));
+    const departments = Array.from(deptSet).sort();
+
+    const profSet = new Set();
+    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name.trim())));
+    let professors = Array.from(profSet).sort((prof1, prof2) => {
+      const prof1Last = prof1.substr(prof1.indexOf("."));
+      const prof2Last = prof2.substr(prof2.indexOf("."));
+      return prof1Last === prof2Last ? 0 : prof1Last < prof2Last ? -1 : 1;
+    });
+    if (!professors[0]){
+      professors = professors.slice(1);
+    }
+
+    //  It looks like this way of getting professors was only getting the first prof in each class
+    /*
     const profSet = new Set();
     const sortedProfs = collection.map((course) => {
       for (let i = 0; i < course.profs.length; i++) {
@@ -65,6 +87,7 @@ export default function MainPage() {
         }
       }});
     const professors = Array.from(profSet);
+    */
 
     if (filterBy){
       courses = collection.filter((course) => {
@@ -101,7 +124,7 @@ export default function MainPage() {
       <main>
         <h1 className="title">Midd Courses</h1>
         <SearchBar searchByCallback={setSearchBarInput}/>
-        <div className={styles.wrapper}>
+        <div data-testid = "filterBy" className={styles.wrapper}>
           <h2>Filtering by: {!filterBy ? "None" : filterBy}</h2>
         </div>
         <div className={styles.wrapper}>

@@ -5,14 +5,14 @@
     "class_num": "312",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [1,1,1,1,1],
         "difficulty": [8,8,8],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [9,9,9]
       },
       {
-        "prof_name": "Linderman",
+        "prof_name": "M. Linderman",
         "satisfaction": [5, 5, 4, 5, 4, 3, 4],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
@@ -28,14 +28,14 @@
     "class_num": "118",
     "profs": [
       {
-        "prof_name": "Kara Karpman",
+        "prof_name": "K. Karpman",
         "satisfaction": [3,3,3,3,2,1],
         "difficulty": [5, 5, 3, 5, 2, 5, 1],
         "interest": [5, 4, 3, 2, 5, 3, 4],
         "time_commitment": [1, 1, 1, 1, 3, 2, 1]
       },
       {
-        "prof_name": "Alex Lyford",
+        "prof_name": "A. Lyford",
         "satisfaction": [5, 5, 4, 5, 4, 3, 4],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
@@ -51,7 +51,7 @@
     "class_num": "202",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [5,5,5,5,5],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
@@ -67,7 +67,7 @@
     "class_num": "202",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [7,7,7,7,7],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
@@ -83,7 +83,7 @@
     "class_num": "202",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [9,9,9,9,9],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],

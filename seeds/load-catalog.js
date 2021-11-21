@@ -11,11 +11,30 @@ exports.seed = function (knex) {
     "course_desc": item.course_desc,
     "id": item.id}})
 
-    //const prof_data = data.map (item => {return {"prof_name": item}})
+    const prof_data = []
+
+    let prof_id_count = 0
+
+    data.forEach (item => {
+        const professors = item["profs"]
+        for (let i=0; i<professors.length; i++){
+            const current_prof = professors[i]
+            // eslint-disable-next-line prefer-destructuring
+            const prof_name = current_prof["prof_name"]
+            const prof_id = prof_id_count
+            prof_id_count += 1
+            const new_prof = {"prof_name": prof_name, "id": prof_id}
+            prof_data.push (new_prof)
+        }
+    });
   
-    // Deletes ALL existing entries
-    // Use batch insert because we have too many articles for simple insert
-    return knex("Courses")
+    const prof_map = []
+
+    await knex("Courses")
       .del()
       .then(() => knex.batchInsert("Courses", course_data, 100));
+
+    await knex("Professors")
+      .del()
+      .then(() => knex.batchInsert("Professors", prof_data, 100));
   };

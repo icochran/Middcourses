@@ -16,7 +16,6 @@ export async function getCourses() {
     return rows;
 }
 
-
 export async function getCourse(id) {
     const course = await knex("Courses").select().where("id", id);
     if (course[0]===undefined){
@@ -24,3 +23,7 @@ export async function getCourse(id) {
     }
     return course[0];
 }
+
+/*export async function reviewCourse(id, professor, satisfaction, time_commitment, difficulty) {
+
+}*/

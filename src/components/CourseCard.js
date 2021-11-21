@@ -4,7 +4,7 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 
-export default function CourseCard({ course, changeState }) {
+export default function CourseCard({ course, changeState, seeDetails }) {
   let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
@@ -95,6 +95,7 @@ export default function CourseCard({ course, changeState }) {
             <RatingBar aspect="Time Commitment" percentage={courseTimeCommitment100} numHours={courseTimeCommitmentHours}/>
       </div>
       <button className="review" onClick= {changeState} >Leave a Review</button>
+      <button className="detailed" onClick = {seeDetails}>Details</button>
     </div>
   );
 }

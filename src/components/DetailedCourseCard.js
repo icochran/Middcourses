@@ -4,7 +4,7 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 
-export default function CourseCard({ course, setShowDetailedView }) {
+export default function DetailedCourseCard({ course, seeDetails }) {
   
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -63,11 +63,14 @@ if ((courseDescription.lastIndexOf(")"))!=-1 && courseDescription.length-courseD
             <p>{courseDescription}</p>
             <p>{prereqs}</p>
       </div>
+
+      <button className="back" onClick= {seeDetails} >Back</button>
+
     </div>
   );
 }
 
 
-CourseCard.propTypes = {
+DetailedCourseCard.propTypes = {
   course: PropTypes.object.isRequired,
 };

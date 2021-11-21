@@ -4,6 +4,9 @@ import styles from "../styles/Home.module.css";
 import CardGrid from "../components/CardGrid"
 import SearchBar from "../components/SearchBar"
 import Filter from "../components/Filter"
+import NavBar from "../components/NavBar"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import data from "../../data/seed.json"
 //import data from "../../data/test-data.json"
 import useCollection from "../hooks/useCollection";
 
@@ -115,6 +118,9 @@ export default function MainPage() {
       }
     }
 
+   // <SearchBar searchByCallback={setSearchBarInput}/>
+   //<Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
+
   return (
     <div className={styles.container}>
       <Head>
@@ -123,18 +129,18 @@ export default function MainPage() {
 
       <main>
         <h1 className="title">Midd Courses</h1>
-        <SearchBar searchByCallback={setSearchBarInput}/>
-        <div data-testid = "filterBy" className={styles.wrapper}>
-          <h2>Filtering by: {!filterBy ? "None" : filterBy}</h2>
+        <NavBar 
+        setSearchBar = {setSearchBarInput}
+        departments={departments} 
+        prof={professors}
+        setFilterBy={setFilterBy}/>
+        <div className={styles.wrapper}>
+          <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
         </div>
         <div className={styles.wrapper}>
           <div>
             <CardGrid courses={courses}/>
           </div>
-          <div>
-            <Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
-          </div>
-          
         </div>
       </main>
     </div>

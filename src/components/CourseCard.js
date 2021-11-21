@@ -80,7 +80,7 @@ export default function CourseCard({ course, changeState }) {
     <div className={styles.classBox} style={classBoxStyle} role="gridcell">
 
       <div className={styles.classHeader}>
-        <span className={styles.className}>{courseName}</span>
+        <span data-testid = "courseName" className={styles.className}>{courseName}</span>
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>

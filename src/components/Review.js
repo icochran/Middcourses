@@ -7,9 +7,13 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 
 export default function Review({ course, changeState}) {
-   const [prof, setProf] = useState(course.profs[0]);
+  const [prof, setProf] = useState(course.profs[0]);
+  const [difficulty, setDifficulty] = useState();
+  const [interest, setInterest] = useState();
+  const [satisfaction, setSatisfaction] = useState();
+  const [time, setTime] = useState();
 
-   const courseName = course.class_name;
+  const courseName = course.class_name;
 
   
   const classBoxStyle = {
@@ -32,11 +36,11 @@ export default function Review({ course, changeState}) {
         <div className="difficulty">
             <p>Difficulty</p>
             <ButtonGroup aria-label="difficultyButtons">
-                <Button variant="secondary">1</Button>
-                <Button variant="secondary">2</Button>
-                <Button variant="secondary">3</Button>
-                <Button variant="secondary">4</Button>
-                <Button variant="secondary">5</Button>
+                <Button variant="secondary" onClick={() => setDifficulty(1)}>1</Button>
+                <Button variant="secondary" onClick={() => setDifficulty(2)}>2</Button>
+                <Button variant="secondary" onClick={() => setDifficulty(3)}>3</Button>
+                <Button variant="secondary" onClick={() => setDifficulty(4)}>4</Button>
+                <Button variant="secondary" onClick={() => setDifficulty(5)}>5</Button>
             </ButtonGroup>
         </div>
 

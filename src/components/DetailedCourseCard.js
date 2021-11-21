@@ -49,7 +49,7 @@ if ((courseDescription.lastIndexOf(")"))!=-1 && courseDescription.length-courseD
 
   //sets the color of the boxes
   const classBoxStyle = {
-    borderColor: "#d8ffc7",
+    borderColor: "#000000",
   };
 
   return (

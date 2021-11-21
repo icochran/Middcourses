@@ -9,8 +9,8 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
-  console.log("below is course");
-  console.log(course);
+  // console.log("below is course");
+  // console.log(course);
   
   const courseDetails = {...course}
   let prof;

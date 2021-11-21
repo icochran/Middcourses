@@ -29,8 +29,26 @@ for course in courses:
         professors_list = professors_list[professors_list.index("(")+1:professors_list.index(")")]
     
     #parsing for multiple professors
-    prof_names = professors_list.split (",")
-    
+    if (professors_list.startswith("Fall 2021")):
+        new = professors_list.replace("Fall 2021: ", "")
+        new = new.replace(";", ",")
+        new = new.replace("Spring 2022: ", "")
+        prof_names = new.split(",")
+    else:
+        prof_names = professors_list.split(",")
+     
+    #for i in professors_list:
+        #if (i.startswith("Fall 2021")):
+            
+          #ind = i.find(":") + 2
+          #if (i.find(",") != -1):
+              #lInd = i.find(",")
+          #lInd = i.find(";")
+          #prof_names.append(i[ind:lInd])
+          #ind2 = i.find(":", lInd) + 2
+          #prof_names.append(i[ind2:])
+        #else:
+        #professor.append(i)
     profs = []
 
     for prof_name in prof_names:

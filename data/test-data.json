@@ -5,21 +5,21 @@
     "class_num": "312",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [1,1,1,1,1],
         "difficulty": [8,8,8],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [9,9,9]
       },
       {
-        "prof_name": "Linderman",
+        "prof_name": "M. Linderman",
         "satisfaction": [5, 5, 4, 5, 4, 3, 4],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Software Development",
+    "course_desc":"In this course we will apply the tools of economic analysis to the problem of global climate change. The goal is to expose students to how economists approach this important policy problem. The course will begin with a review of reasons for policy interventions in markets and policy instrument choice. We will then focus on the measurement of damages from emissions of greenhouse gases. Subsequent topics will include: discounting, technology and abatement costs, benefit-cost analysis, uncertainty and catastrophic risk, and policies in practice. (ECON 0255; ECON 0265 encouraged). 3 hrs. lect.",
     "id": 0
   },
   {
@@ -28,21 +28,21 @@
     "class_num": "118",
     "profs": [
       {
-        "prof_name": "Kara Karpman",
+        "prof_name": "K. Karpman",
         "satisfaction": [3,3,3,3,2,1],
         "difficulty": [5, 5, 3, 5, 2, 5, 1],
         "interest": [5, 4, 3, 2, 5, 3, 4],
         "time_commitment": [1, 1, 1, 1, 3, 2, 1]
       },
       {
-        "prof_name": "Alex Lyford",
+        "prof_name": "A. Lyford",
         "satisfaction": [5, 5, 4, 5, 4, 3, 4],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [4, 4, 4, 2, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Data Science",
+    "course_desc":"In this course regression analysis is introduced. The major focus is on quantifying relationships between economic variables. Multiple regression identifies the effect of several exogenous variables on an endogenous variable. After exploring the classical regression model, fundamental assumptions underlying this model will be relaxed, and further new techniques will be introduced. Methods for testing hypotheses about the regression coefficients are developed throughout the course. Both theoretical principles and practical applications will be emphasized. The course goal is for each student to employ regression analysis as a research tool and to justify and defend the techniques used. (MATH 0121; and ECON 0150 or ECON 0155; and ECON 0210) 3 hrs. lect., 1 hr. lab",
     "id": 1
   },
   {
@@ -51,14 +51,14 @@
     "class_num": "202",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [5,5,5,5,5],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Computer Architecture",
+    "course_desc":"The 19th century is the era of \u201cpeak novel,\u201d for never before or since has the genre exhibited such confidence in its ability to tell the truth about both the teeming world and the private life.  But far from merely reflecting social reality, the novelists and poets of the period played an active part in constructing their readers' ideas about gender and sexuality, imperialism and colonialism, class, religion, and technology, insisting that literature be relevant and revelatory in a time of swift and sometimes frightening cultural and intellectual innovation.  Works to be covered will include novels by Emily Bronte, Dickens, George Eliot, and Hardy, and the poetry of Tennyson, Browning, and Christina Rossetti. 3 hrs. lect./disc.",
     "id": 2
   },
   {
@@ -67,14 +67,14 @@
     "class_num": "202",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [7,7,7,7,7],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Computer Architecture",
+    "course_desc":"How do geographers study spatial interactions between people and the environment? How does socio-economic status relate to spatial patterns of settlement, social organization, access to resources, and exposure to risks? How can geographic information systems (GIS) help geographers explain these spatial patterns and processes? In this course we will apply GIS to a wide range of topics in human geography including urban, environmental, political, hazards, and health. We will learn how to gather, create, analyze, visualize, and critically interpret geographic data through tutorials, collaborative labs, and independent work that culminate in cartographic layouts of our results. 3 hrs. lect./3 hrs. lab.",
     "id": 3
   },
   {
@@ -83,14 +83,14 @@
     "class_num": "202",
     "profs": [
       {
-        "prof_name": "Christopher Andrews",
+        "prof_name": "C. Andrews",
         "satisfaction": [9,9,9,9,9],
         "difficulty": [5, 5, 5, 5, 5, 5, 5],
         "interest": [5, 4, 3, 2, 1, 3, 4],
         "time_commitment": [5, 4, 3, 4, 3, 2, 1]
       }
     ],
-    "course_desc":"Class where you learn Computer Architecture",
+    "course_desc":"In this course students will learn about agroecology as a set of practices, a philosophy, and a social movement, with an emphasis on the first two perspectives. Agroecology takes advantage of natural processes to the greatest extent possible, using biological inputs rather than purchased pesticides and fertilizers. In addition to having major benefits for poor farmers in developing countries, it is attracting increased attention as an alternative to industrialized agriculture in wealthy countries.  The course will include field trips to farms, lab exercises, and discussion of readings. (formerly INTD 0310) 3 hrs. lect./disc.",
     "id": 4
   }
 ]

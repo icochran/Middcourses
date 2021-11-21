@@ -8,19 +8,22 @@ import NavBar from "../components/NavBar"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import data from "../../data/seed.json"
 //import data from "../../data/test-data.json"
-import {useState,useEffect} from "react"
+import useCollection from "../hooks/useCollection";
 
-
+import {useState} from "react"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
-    const [collection] = useState(data) 
+    //const [collection, setCollection] = useState(data) 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
       return numbers.reduce(reducer) / numbers.length;
     })
+
+    const collection = useCollection();
 
     // maybe want to useEffect here?
 
@@ -48,38 +51,46 @@ export default function MainPage() {
           if (course.profs[i].prof_name.toLowerCase().includes(newInput)) {
             return course;
           }
-        }
-        });
+        }});
     }
 
+    /*
     const deptSet = new Set();
     const sortedDepts = collection.map(course => course.dept).sort();
     sortedDepts.forEach(e => deptSet.add(e));
     const departments = Array.from(deptSet);
+    */
 
+    const deptSet = new Set();
+    collection.forEach((course) => deptSet.add(course.dept));
+    const departments = Array.from(deptSet).sort();
+
+    const profSet = new Set();
+    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name.trim())));
+    let professors = Array.from(profSet).sort((prof1, prof2) => {
+      const prof1Last = prof1.substr(prof1.indexOf("."));
+      const prof2Last = prof2.substr(prof2.indexOf("."));
+      return prof1Last === prof2Last ? 0 : prof1Last < prof2Last ? -1 : 1;
+    });
+    if (!professors[0]){
+      professors = professors.slice(1);
+    }
+
+    //  It looks like this way of getting professors was only getting the first prof in each class
+    /*
     const profSet = new Set();
     const sortedProfs = collection.map((course) => {
       for (let i = 0; i < course.profs.length; i++) {
-        const str = course.profs[i].prof_name;
-        if (str.includes("Fall 2021")) {
-          const ind = str.indexOf(":") + 2;
-          const lInd = str.indexOf(";");
-          return str.substring(ind,lInd);
-        }
-        if (str.includes("Spring 2022")) {
-          const lInd = str.indexOf(";");
-          const ind2 = str.indexOf(":", lInd) + 2;
-          return str.substring(ind2);
-        }
-        if (str !== "") {
-          return str;
-        }
+        return course.profs[i].prof_name;
       }}).sort();
     sortedProfs.forEach((e) => {
       if (!(profSet.has(e))) {
-        profSet.add(e)
+        if (e) {
+          profSet.add(e)
+        }
       }});
     const professors = Array.from(profSet);
+    */
 
     if (filterBy){
       courses = collection.filter((course) => {

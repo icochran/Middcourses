@@ -75,18 +75,20 @@ export default function Review({ course, changeState}) {
                 <Button variant={time === 3 ? "primary" : "secondary"} onClick={() => setTime(3)}>3</Button>
                 <Button variant={time === 4 ? "primary" : "secondary"} onClick={() => setTime(4)}>4</Button>
                 <Button variant={time === 5 ? "primary" : "secondary"} onClick={() => setTime(5)}>5</Button>
-                <Button variant={time === 6 ? "primary" : "secondary"} onClick={() => setTime(3)}>6</Button>
-                <Button variant={time === 7 ? "primary" : "secondary"} onClick={() => setTime(4)}>7</Button>
+                <Button variant={time === 6 ? "primary" : "secondary"} onClick={() => setTime(6)}>6</Button>
+                <Button variant={time === 7 ? "primary" : "secondary"} onClick={() => setTime(7)}>7</Button>
             </ButtonGroup>
         </div>
 
       </div>
-      <button className="back" onClick= {changeState} >Back</button>
-      <button 
+      <button id="back" onClick= {changeState} className={styles.backBtn}>←Back</button>
+      <Button 
         disabled={!difficulty || !interest || !satisfaction || !time} 
-        className="submit"
+        id="submit"
+        variant="success"
+        className={styles.submitBtn}
         onClick={changeState}
-      >Submit</button>
+      >Submit</Button>
     </div>
   );
 }

@@ -64,7 +64,7 @@ if ((courseDescription.lastIndexOf(")"))!=-1 && courseDescription.length-courseD
             <p>{prereqs}</p>
       </div>
 
-      <button className="back" onClick= {seeDetails} >Back</button>
+      <button id="back" className = {styles.backBtn} onClick= {seeDetails}>←Back</button>
 
     </div>
   );

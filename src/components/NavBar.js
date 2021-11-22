@@ -4,7 +4,6 @@ import NavbarBrand from "react-bootstrap/NavbarBrand";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import SearchBar from "./SearchBar";
-import styles from "../styles/Filter.module.css";
 
 
 

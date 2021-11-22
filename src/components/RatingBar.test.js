@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import RatingBar from "./RatingBar.js";
 
 describe("CourseCard: CourseCard tests", () => {
+  /*
   let course;
 
   //creates a common courses before each test is run
@@ -23,6 +24,7 @@ describe("CourseCard: CourseCard tests", () => {
               "course_desc":"Class where you learn Software Development",
               "id": 0
             }});
+    */
 
     test("RatingBar: displays bar name", () => {
         render(<RatingBar aspect="Difficulty" percentage={50} numHours={1} />);

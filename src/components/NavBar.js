@@ -9,8 +9,8 @@ import SearchBar from "./SearchBar";
 
 export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
 
-    const depts = departments.map(dept => <NavDropdown.Item onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
-    const profs = prof.map(professor => <NavDropdown.Item onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
+    const depts = departments.map(dept => <NavDropdown.Item key={dept} onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
+    const profs = prof.map(professor => <NavDropdown.Item key={prof} onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
 
     return (
         <Container fluid>

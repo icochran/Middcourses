@@ -2,12 +2,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import CardGrid from "../components/CardGrid"
-import SearchBar from "../components/SearchBar"
-import Filter from "../components/Filter"
 import NavBar from "../components/NavBar"
-import 'bootstrap/dist/css/bootstrap.min.css';
-import data from "../../data/seed.json"
-//import data from "../../data/test-data.json"
+import "bootstrap/dist/css/bootstrap.min.css";
 import useCollection from "../hooks/useCollection";
 
 import {useState} from "react"
@@ -17,7 +13,6 @@ export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
-    //const [collection, setCollection] = useState(data) 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
       return numbers.reduce(reducer) / numbers.length;
@@ -54,13 +49,6 @@ export default function MainPage() {
         }});
     }
 
-    /*
-    const deptSet = new Set();
-    const sortedDepts = collection.map(course => course.dept).sort();
-    sortedDepts.forEach(e => deptSet.add(e));
-    const departments = Array.from(deptSet);
-    */
-
     const deptSet = new Set();
     collection.forEach((course) => deptSet.add(course.dept));
     const departments = Array.from(deptSet).sort();
@@ -75,22 +63,6 @@ export default function MainPage() {
     if (!professors[0]){
       professors = professors.slice(1);
     }
-
-    //  It looks like this way of getting professors was only getting the first prof in each class
-    /*
-    const profSet = new Set();
-    const sortedProfs = collection.map((course) => {
-      for (let i = 0; i < course.profs.length; i++) {
-        return course.profs[i].prof_name;
-      }}).sort();
-    sortedProfs.forEach((e) => {
-      if (!(profSet.has(e))) {
-        if (e) {
-          profSet.add(e)
-        }
-      }});
-    const professors = Array.from(profSet);
-    */
 
     if (filterBy){
       courses = collection.filter((course) => {

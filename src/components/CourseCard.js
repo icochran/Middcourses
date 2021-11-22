@@ -94,8 +94,8 @@ export default function CourseCard({ course, changeState, seeDetails }) {
             <RatingBar aspect="Interesting" percentage={courseInteresting100} numHours={undefined}/>
             <RatingBar aspect="Time Commitment" percentage={courseTimeCommitment100} numHours={courseTimeCommitmentHours}/>
       </div>
-      <button className="review" className = {styles.reviewBorderBtn} onClick= {changeState} >+ Add Review</button>
-      <button className="detailed" className = {styles.detailBtn} onClick = {seeDetails}>Details</button>
+      <button id="review" className = {styles.reviewBorderBtn} onClick= {changeState} >+ Add Review</button>
+      <button id="detailed" className = {styles.detailBtn} onClick = {seeDetails}>Details</button>
     </div>
   );
 }

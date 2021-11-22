@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import React from "react";
@@ -15,7 +17,6 @@ export default function Review({ course, changeState}) {
 
   const courseName = course.class_name;
 
-  
   const classBoxStyle = {
     borderColor: `rgb(${0.5}, ${0.5}, ${0.5})`,
   };   

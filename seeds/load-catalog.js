@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 
-exports.seed = function (knex) {
+exports.seed = async function (knex) {
     const contents = fs.readFileSync("./data/seed.json");
     const data = JSON.parse(contents);
 

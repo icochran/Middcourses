@@ -81,12 +81,14 @@ export default function Review({ course, changeState}) {
         </div>
 
       </div>
-      <button className="back" onClick= {changeState} >Back</button>
-      <button 
+      <button name="back" onClick= {changeState} className={styles.backBtn}>←Back</button>
+      <Button 
         disabled={!difficulty || !interest || !satisfaction || !time} 
-        className="submit"
+        name="submit"
+        variant="success"
+        className={styles.submitBtn}
         onClick={changeState}
-      >Submit</button>
+      >Submit</Button>
     </div>
   );
 }

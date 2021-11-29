@@ -184,13 +184,14 @@ export default function Review({ course, changeState }) {
                 7
               </Button>
             </ButtonGroup>
+
           </div>
         </Card.Body>
         <button id="back" onClick={changeState} className={styles.backBtn}>
           ←Back
         </button>
         <Button
-          disabled={!difficulty || !interest || !satisfaction || !time}
+          disabled={!difficulty || !interest || !satisfaction || !time || prof === "Aggregate"}
           id="submit"
           variant="success"
           className={styles.submitBtn}
@@ -199,6 +200,7 @@ export default function Review({ course, changeState }) {
           Submit
         </Button>
       </Card>
+
     </div>
   );
 }

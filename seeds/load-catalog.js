@@ -29,7 +29,6 @@ exports.seed = async function (knex) {
       // eslint-disable-next-line prefer-destructuring
       const prof_name = current_prof.prof_name;
       const prof_id = prof_id_count;
-      prof_id_count += 1;
       const new_prof = {"prof_name": prof_name, "id": prof_id};
       for(let j=0; j<prof_data.length; j++) {
         if(new_prof.prof_name === prof_data[j].prof_name) {
@@ -38,6 +37,7 @@ exports.seed = async function (knex) {
       }
       if(!repeat_professor_flag){
         prof_data.push(new_prof);
+        prof_id_count += 1;
       }
     }
   });
@@ -50,11 +50,10 @@ exports.seed = async function (knex) {
           courseProf_map.push({
             course_id: course.id,
             prof_id: prof_data[i].id,
-            satisfaction: 0,
-            interest: 0,
-            time_commitment: 0,
-            difficulty: 0,
-            num_reviews: 0
+            satisfaction: [],
+            interest: [],
+            time_commitment: [],
+            difficulty: []
           });
           break;
         }
@@ -72,6 +71,6 @@ exports.seed = async function (knex) {
 
   await knex("CourseProfessor")
     .del()
-    .then(() => knex.batchInsert("CourseProfessor", courseProf_map, 100));
+    .then(() => knex.batchInsert("Course_Professor", courseProf_map, 100));
 
   };

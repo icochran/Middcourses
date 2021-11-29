@@ -9,14 +9,13 @@ exports.up = function(knex) {
     }).createTable("Professors", table => {
         table.string("prof_name").notNullable();
         table.integer("id").unique().notNullable();
-    }).createTable("CourseProfessor", table => {
+    }).createTable("Course_Professor", table => {
         table.integer("course_id");
         table.integer("prof_id");
-        table.float("satisfaction").notNullable();
-        table.float("interest").notNullable();
-        table.float("time_commitment").notNullable();
-        table.float("difficulty").notNullable();
-        table.float("num_reviews").notNullable();
+        table.string("satisfaction").notNullable();
+        table.string("interest").notNullable();
+        table.string("time_commitment").notNullable();
+        table.string("difficulty").notNullable();
         table.foreign("course_id").references("Courses.id").onDelete("CASCADE");
         table.foreign("prof_id").references("Professors.id").onDelete("CASCADE");
     });

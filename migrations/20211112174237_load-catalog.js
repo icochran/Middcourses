@@ -7,7 +7,7 @@ exports.up = function(knex) {
         table.text("course_desc");
         table.integer("id");
     }).createTable("Professors", table => {
-        table.string("prof_name").notNullable();
+        table.string("prof_name").unique().notNullable();
         table.integer("id").unique().notNullable();
     }).createTable("Course_Professor", table => {
         table.integer("course_id");
@@ -22,5 +22,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists("Courses").dropTableIfExists("Professors").dropTableIfExists("CourseProfessors");
+    return knex.schema.dropTableIfExists("Courses").dropTableIfExists("Professors").dropTableIfExists("Course_Professor");
 };

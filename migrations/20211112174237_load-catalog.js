@@ -9,7 +9,7 @@ exports.up = function(knex) {
         table.integer("id");
     }).createTable("Professors", table => {
         table.string("prof_name").unique().notNullable();
-        table.integer("id");
+        table.integer("id").unique().notNullable();
     }).createTable("CourseProfessor", table => {
         table.integer("course_id");
         table.integer("prof_id");

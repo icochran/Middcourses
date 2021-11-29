@@ -24,13 +24,21 @@ exports.seed = async function (knex) {
     ******************************************/
     const professors = item.profs;
     for (let i=0; i<professors.length; i++){
+      let repeat_professor_flag = false;
       const current_prof = professors[i]
       // eslint-disable-next-line prefer-destructuring
       const prof_name = current_prof.prof_name;
-      const prof_id = prof_id_count
-      prof_id_count += 1
-      const new_prof = {"prof_name": prof_name, "id": prof_id}
-      prof_data.push(new_prof)
+      const prof_id = prof_id_count;
+      prof_id_count += 1;
+      const new_prof = {"prof_name": prof_name, "id": prof_id};
+      for(let j=0; j<prof_data.length; j++) {
+        if(new_prof.prof_name === prof_data[j].prof_name) {
+          repeat_professor_flag = true;
+        }
+      }
+      if(!repeat_professor_flag){
+        prof_data.push(new_prof);
+      }
     }
   });
   
@@ -42,10 +50,11 @@ exports.seed = async function (knex) {
           courseProf_map.push({
             course_id: course.id,
             prof_id: prof_data[i].id,
-            satisfaction: [],
-            interest: [],
-            time_commitment: [],
-            difficulty: []
+            satisfaction: 0,
+            interest: 0,
+            time_commitment: 0,
+            difficulty: 0,
+            num_reviews: 0
           });
           break;
         }

@@ -5,18 +5,18 @@ exports.up = function(knex) {
         table.string("dept");
         table.string("class_num")
         table.text("course_desc");
-        //table.string("profs"); 
         table.integer("id");
     }).createTable("Professors", table => {
-        table.string("prof_name").unique().notNullable();
+        table.string("prof_name").notNullable();
         table.integer("id").unique().notNullable();
     }).createTable("CourseProfessor", table => {
         table.integer("course_id");
         table.integer("prof_id");
-        table.string("satisfaction")
-        table.string("interest")
-        table.string("time_commitment")
-        table.string("difficulty")
+        table.float("satisfaction").notNullable();
+        table.float("interest").notNullable();
+        table.float("time_commitment").notNullable();
+        table.float("difficulty").notNullable();
+        table.float("num_reviews").notNullable();
         table.foreign("course_id").references("Courses.id").onDelete("CASCADE");
         table.foreign("prof_id").references("Professors.id").onDelete("CASCADE");
     });

@@ -3,19 +3,23 @@ import PropTypes from "prop-types";
 import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import RatingBar from "./RatingBar.js";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Stack from "react-bootstrap/Stack";
+import Card from "react-bootstrap/Card";
 
 export default function CourseCard({ course, changeState, seeDetails }) {
   let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
   //const profName = course.profs[0].prof_name;
-  
-  const courseDetails = {...course}
+
+  const courseDetails = { ...course };
   let prof;
   if (profName !== "Aggregate") {
     prof = course.profs.find((a) => a.prof_name === profName);
     if (!prof) {
-      prof.prof_name = "No specific Professor"
+      prof.prof_name = "No specific Professor";
     }
   } else {
     //cumulative value
@@ -47,13 +51,12 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const timeCommitmentArray = prof.time_commitment;
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
- 
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
     (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
   const courseInteresting100 =
-    (interestingArray.reduce(reducer) / interestingArray.length) *10;
+    (interestingArray.reduce(reducer) / interestingArray.length) * 10;
   const courseTimeCommitment100 =
     (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
   const courseTimeCommitmentHours =
@@ -63,13 +66,11 @@ export default function CourseCard({ course, changeState, seeDetails }) {
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {
-    backgroundColor = "#d8ffc7"
-  }
-  else if (courseSatisfactionAverage >= 2) {
+    backgroundColor = "#d8ffc7";
+  } else if (courseSatisfactionAverage >= 2) {
     backgroundColor = "#fffeb3";
-  }
-  else {
-    backgroundColor = "#ffbaba"
+  } else {
+    backgroundColor = "#ffbaba";
   }
 
   //sets the color of the boxes
@@ -78,27 +79,90 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   };
 
   return (
-    <div className={styles.classBox} style={classBoxStyle} role="gridcell">
+    <div styles ={classBoxStyle} className={styles.classBox}>
+      <Card
+        // border="primary"
+        style={{ height:"32rem" }}
+      >
+        <Card.Body className={styles.classHeader}>
+          <Card.Title className={styles.courseTitle}>{courseName}</Card.Title>
+          <ProfDropDown profs={course.profs} setProfName={setProfName} />
+        </Card.Body>
+        <Card.Body >
+          
+            <RatingBar
+              aspect="Difficulty"
+              percentage={courseDifficulty100}
+              numHours={undefined}
+            />
+            <RatingBar
+              aspect="Interesting"
+              percentage={courseInteresting100}
+              numHours={undefined}
+            />
+            <RatingBar
+              aspect="Time Commitment"
+              percentage={courseTimeCommitment100}
+              numHours={courseTimeCommitmentHours}
+            />
+      
+        </Card.Body>
+        <Card.Body >
+          <Stack direction="horizontal"  gap={4} >
+            <Button id="review" onClick={changeState} variant="secondary" >
+              + Add Review
+            </Button>
+            <Button id="detailed" onClick={seeDetails} variant="secondary">
+              Details
+            </Button>
+          </Stack>
+        </Card.Body>
+      </Card>
+    </div>
+      
 
+  );
+}
+
+CourseCard.propTypes = {
+  course: PropTypes.object.isRequired,
+};
+
+{
+  /* <div className={styles.classBox} style={classBoxStyle} role="gridcell">
       <div className={styles.classHeader}>
-        <span data-testid = "courseName" className={styles.className}>{courseName}</span>
+        <span data-testid="courseName" className={styles.className}>
+          {courseName}
+        </span>
         <div className={styles.profBar}>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </div>
       </div>
 
       <div className={styles.courseBody}>
-            <RatingBar aspect="Difficulty" percentage={courseDifficulty100} numHours={undefined}/>
-            <RatingBar aspect="Interesting" percentage={courseInteresting100} numHours={undefined}/>
-            <RatingBar aspect="Time Commitment" percentage={courseTimeCommitment100} numHours={courseTimeCommitmentHours}/>
+        <RatingBar
+          aspect="Difficulty"
+          percentage={courseDifficulty100}
+          numHours={undefined}
+        />
+        <RatingBar
+          aspect="Interesting"
+          percentage={courseInteresting100}
+          numHours={undefined}
+        />
+        <RatingBar
+          aspect="Time Commitment"
+          percentage={courseTimeCommitment100}
+          numHours={courseTimeCommitmentHours}
+        />
       </div>
-      <button id="review" className = {styles.reviewBorderBtn} onClick= {changeState} >+ Add Review</button>
-      <button id="detailed" className = {styles.detailBtn} onClick = {seeDetails}>Details</button>
-    </div>
-  );
+      <Stack direction="horizontal" gap={3}>
+        <Button id="review" onClick={changeState} variant="secondary">
+          + Add Review
+        </Button>
+        <Button id="detailed" onClick={seeDetails} variant="secondary">
+          Details
+        </Button>
+      </Stack>
+    </div> */
 }
-
-
-CourseCard.propTypes = {
-  course: PropTypes.object.isRequired,
-};

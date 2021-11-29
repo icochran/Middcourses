@@ -19,12 +19,12 @@ export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavDropdown title="Department" id="basic-nav-dropdown">
+                        <NavDropdown data-testid = "dept" title="Department" id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => setFilterBy("")}>None</NavDropdown.Item>
-                            <NavDropdown.Divider />
+                            <NavDropdown.Divider data-testid = "dept2"/>
                             {depts}
                         </NavDropdown>
-                        <NavDropdown title="Professor" id="basic-nav-dropdown">
+                        <NavDropdown data-testid = "profs" title="Professor" id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => setFilterBy("")}>None</NavDropdown.Item>
                             <NavDropdown.Divider />
                             {profs}

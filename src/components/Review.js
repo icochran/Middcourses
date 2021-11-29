@@ -84,7 +84,7 @@ export default function Review({ course, changeState}) {
       </div>
       <button id="back" onClick= {changeState} className={styles.backBtn}>←Back</button>
       <Button 
-        disabled={!difficulty || !interest || !satisfaction || !time} 
+        disabled={!difficulty || !interest || !satisfaction || !time || prof === "Aggregate"} 
         id="submit"
         variant="success"
         className={styles.submitBtn}

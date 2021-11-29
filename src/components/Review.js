@@ -30,7 +30,7 @@ export default function Review({ course, changeState }) {
           <Card.Title >{courseName}</Card.Title>
           <ProfDropDown profs={course.profs} setProfName={setProf} />
         </Card.Body>
-        <Card.Body >
+        <Card.Body>
             <p>Difficulty</p>
             <ButtonGroup aria-label="difficultyButtons" size="sm">
               <Button

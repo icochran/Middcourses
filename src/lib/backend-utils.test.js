@@ -14,13 +14,13 @@ describe("Tests of the database utility functions", () => {
         // we need to construct a course of the correct form from the seed data
         // pick an arbitrary course from the collection
         sample_course = data[Math.floor(data.length/2)];
-        sample_course.prof = {
+        sample_course.profs = [{
             prof_name: "C. Andrews",
             satisfaction: [1,1,1],
             interest: [1,1,1],
             time_commitment: [1,1,1],
             difficulty: [1,1,1]
-        }
+        }]
     });
 
     beforeEach(async () => {
@@ -63,7 +63,7 @@ describe("Tests of the database utility functions", () => {
     });
 
     test("reviewCourse: updates the rating for a single professor", async ()=>{
-        const newCourse = { ...sample_course, profs: {...profs, satisfaction: [1,1,1,2], interest: [1,1,1,2], time_commitment: [1,1,1,2], difficulty: [1,1,1,2]} };
+        const newCourse = { ...sample_course, profs: [{...profs, satisfaction: [1,1,1,2], interest: [1,1,1,2], time_commitment: [1,1,1,2], difficulty: [1,1,1,2]}] };
 
         const updated = await reviewCourse(sample_course.id, "C. Andrews", 2, 2, 2, 2);
 

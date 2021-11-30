@@ -2,10 +2,10 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import CardGrid from "../components/CardGrid"
-import SearchBar from "../components/SearchBar"
-import Filter from "../components/Filter"
-// import data from "../../data/seed.json"
-import data from "../../data/test-data.json"
+import NavBar from "../components/NavBar"
+import "bootstrap/dist/css/bootstrap.min.css";
+import useCollection from "../hooks/useCollection";
+
 import {useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,11 +13,12 @@ export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
-    const [collection] = useState(data) 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
       return numbers.reduce(reducer) / numbers.length;
     })
+
+    const collection = useCollection();
 
     // maybe want to useEffect here?
 
@@ -45,38 +46,23 @@ export default function MainPage() {
           if (course.profs[i].prof_name.toLowerCase().includes(newInput)) {
             return course;
           }
-        }
-        });
+        }});
     }
 
     const deptSet = new Set();
-    const sortedDepts = collection.map(course => course.dept).sort();
-    sortedDepts.forEach(e => deptSet.add(e));
-    const departments = Array.from(deptSet);
+    collection.forEach((course) => deptSet.add(course.dept));
+    const departments = Array.from(deptSet).sort();
 
     const profSet = new Set();
-    const sortedProfs = collection.map((course) => {
-      for (let i = 0; i < course.profs.length; i++) {
-        const str = course.profs[i].prof_name;
-        if (str.includes("Fall 2021")) {
-          const ind = str.indexOf(":") + 2;
-          const lInd = str.indexOf(";");
-          return str.substring(ind,lInd);
-        }
-        if (str.includes("Spring 2022")) {
-          const lInd = str.indexOf(";");
-          const ind2 = str.indexOf(":", lInd) + 2;
-          return str.substring(ind2);
-        }
-        if (str !== "") {
-          return str;
-        }
-      }}).sort();
-    sortedProfs.forEach((e) => {
-      if (!(profSet.has(e))) {
-        profSet.add(e)
-      }});
-    const professors = Array.from(profSet);
+    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name.trim())));
+    let professors = Array.from(profSet).sort((prof1, prof2) => {
+      const prof1Last = prof1.substr(prof1.indexOf("."));
+      const prof2Last = prof2.substr(prof2.indexOf("."));
+      return prof1Last === prof2Last ? 0 : prof1Last < prof2Last ? -1 : 1;
+    });
+    if (!professors[0]){
+      professors = professors.slice(1);
+    }
 
     if (filterBy){
       courses = collection.filter((course) => {
@@ -104,6 +90,9 @@ export default function MainPage() {
       }
     }
 
+   // <SearchBar searchByCallback={setSearchBarInput}/>
+   //<Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
+
   return (
     <div className={styles.container}>
       <Head>
@@ -112,7 +101,11 @@ export default function MainPage() {
 
       <main>
         <h1 className="title">Midd Courses</h1>
-        <SearchBar searchByCallback={setSearchBarInput}/>
+        <NavBar 
+        setSearchBar = {setSearchBarInput}
+        departments={departments} 
+        prof={professors}
+        setFilterBy={setFilterBy}/>
         <div className={styles.wrapper}>
           <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
         </div>
@@ -120,10 +113,6 @@ export default function MainPage() {
           <div>
             <CardGrid courses={courses}/>
           </div>
-          <div>
-            <Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
-          </div>
-          
         </div>
       </main>
     </div>

@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import CardGrid from "./CardGrid";
-import CourseCard from "./CourseCard"
 
 describe("CardGrid: CardGrid tests", () => {
   let courses;

@@ -1,10 +1,10 @@
-import CourseCard from "../components/CourseCard"
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
+import Container from "../components/Container";
 
 export default function CardGrid({courses}) {
 
-    const courseList = courses.map(course => (<CourseCard key={course.id} course={course}/>)) ;
+     const courseList = courses.map(course => (<Container key={course.id} course={course}/>)) ;
 
     return(
         <div className={styles.listView} role="grid">

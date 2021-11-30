@@ -2,11 +2,22 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button"
 import PropTypes from "prop-types";
 
-export default function ProfDropDown({ profs, setProfName }) {
-
+export default function ProfDropDown({profs, setProfName}) {
+  const profSet = new Set();
+  const sortedProfs = []
+   
+  for (let i = 0; i < profs.length; i++) {
+    sortedProfs[i] = profs[i].prof_name;
+  }
+  sortedProfs.sort();
+  sortedProfs.forEach((e) => {
+  if (!(profSet.has(e))) {
+    profSet.add(e)
+  }});
+  const professors = Array.from(profSet);
   
-  let profList = profs.map((prof) => (
-    <Dropdown.Item key={prof.prof_name} onClick={() => setProfName(prof.prof_name)}>{prof.prof_name}</Dropdown.Item>
+  let profList = professors.map((prof) => (
+    <Dropdown.Item key={prof} onClick={() => setProfName(prof)}>{prof}</Dropdown.Item>
   ));
 
   if (profs.length > 1) {

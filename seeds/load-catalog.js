@@ -27,17 +27,61 @@ exports.seed = async function (knex) {
       let repeat_professor_flag = false;
       const current_prof = professors[i]
       // eslint-disable-next-line prefer-destructuring
-      const prof_name = current_prof.prof_name;
-      const prof_id = prof_id_count;
-      const new_prof = {"prof_name": prof_name, "id": prof_id};
-      for(let j=0; j<prof_data.length; j++) {
-        if(new_prof.prof_name === prof_data[j].prof_name) {
-          repeat_professor_flag = true;
+      let prof_name = current_prof.prof_name;
+      prof_name = prof_name.trim()
+      const new_prof = {"prof_name": prof_name, "id": prof_id_count};
+
+      //just one prof
+      if (!(prof_name.includes(":"))){
+        for(let j=0; j<prof_data.length; j++) {
+            if(new_prof.prof_name === prof_data[j].prof_name) {
+              repeat_professor_flag = true;
+            }
+        }        
+        if(!repeat_professor_flag){
+            prof_data.push(new_prof);
+            prof_id_count += 1;
         }
       }
-      if(!repeat_professor_flag){
-        prof_data.push(new_prof);
-        prof_id_count += 1;
+
+      else{
+        //pushing the fall professor for the class
+        if (prof_name.includes("Fall 2021")) {
+            const ind = prof_name.indexOf(":") + 2;
+            const lInd = prof_name.indexOf(";");
+            let fall_prof_name = prof_name.substring(ind, lInd)
+            fall_prof_name = fall_prof_name.trim()
+            const fall_prof = {"prof_name": fall_prof_name, "id": prof_id_count}
+            //pushing to DB
+            for(let j=0; j<prof_data.length; j++) {
+                if(fall_prof.prof_name === prof_data[j].prof_name) {
+                repeat_professor_flag = true;
+                }
+            }        
+            if(!repeat_professor_flag){
+                prof_data.push(fall_prof);
+                prof_id_count += 1;
+            }
+        }
+        
+        //pushing the spring professor for the class
+        if (prof_name.includes("Spring 2022")) {
+            const lInd = prof_name.indexOf(";");
+            const ind2 = prof_name.indexOf(":", lInd) + 2;
+            let spring_prof_name = prof_name.substring(ind2)
+            spring_prof_name = spring_prof_name.trim()
+            const spring_prof = {"prof_name": spring_prof_name, "id": prof_id_count}
+            //pushing to DB
+            for(let j=0; j<prof_data.length; j++) {
+                if(spring_prof.prof_name === prof_data[j].prof_name) {
+                repeat_professor_flag = true;
+                }
+            }        
+            if(!repeat_professor_flag){
+                prof_data.push(spring_prof);
+                prof_id_count += 1;
+            }
+        }
       }
     }
   });
@@ -69,7 +113,7 @@ exports.seed = async function (knex) {
     .del()
     .then(() => knex.batchInsert("Professors", prof_data, 100));
 
-  await knex("CourseProfessor")
+  await knex("Course_Professor")
     .del()
     .then(() => knex.batchInsert("Course_Professor", courseProf_map, 100));
 

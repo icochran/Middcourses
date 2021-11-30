@@ -3,17 +3,19 @@ import data from "../../data/seed.json";
 import {
   knex,
   getCourse,
+  getAllCourses,
+  reviewCourse
 } from "./backend-utils";
 
 describe("Tests of the database utility functions", () => {
-    let sampleClass;
+    let sample_course;
 
     beforeAll(async ()=>{
-        // we need to construct a class of the correct form from the seed data
-        // pick an arbitrary class from the collection
-        sampleClass = data[Math.floor(data.length/2)];
-        sampleClass.prof = {
-            ...sampleClass.prof,
+        // we need to construct a course of the correct form from the seed data
+        // pick an arbitrary course from the collection
+        sample_course = data[Math.floor(data.length/2)];
+        sample_course.prof = {
+            prof_name: "C. Andrews",
             satisfaction: [1,1,1],
             interest: [1,1,1],
             time_commitment: [1,1,1],
@@ -27,70 +29,67 @@ describe("Tests of the database utility functions", () => {
       await knex.seed.run();
     });
 
-    test("getCourse: fetches the correct class", async ()=>{
-        const class = await getCourse(sampleClass.id);
-        expect(class.class_name).toBe(sampleClass.class_name);
-        expect(class.course_desc).toBe(sampleClass.course_desc);
-        expect(class.dept).toBe(sampleClass.dept);
-        expect(class.class_num).toBe(sampleClass.class_num);
+    test("getCourse: fetches the correct course", async ()=>{
+        const course = await getCourse(sample_course.id);
+        expect(course.class_name).toBe(sample_course.class_name);
+        expect(course.course_desc).toBe(sample_course.course_desc);
+        expect(course.dept).toBe(sample_course.dept);
+        expect(course.class_num).toBe(sample_course.class_num);
     });
 
-    test("getCourse: fetches film with the correct professors", async()=>{
-        const class = await getCourse(sampleClass.id);
+    test.skip("getCourse: fetches film with the correct professors", async()=>{
+        const course = await getCourse(sample_course.id);
 
-        expect(class.profs.length).toBe(sampleClass.profs.length);
-        expect(class.profs).toEqual(expect.arrayContaining(sampleClass.profs));
-
-    });
-
-    test("getCourse: returns null on bad id", async ()=>{
-        const class = await getCourse(-1);
-
-        expect(class).toBeNull();
-    });
-
-
-    /*
-    test("getAllFilms: fetches all films", async()=>{
-
-        const fetchedFilms = await getAllFilms();
-
-        expect(fetchedFilms).toHaveLength(films.length);
-        const testFilm = fetchedFilms.find((film)=>film.id === sampleFilm.id);
-        expect(testFilm).toEqual(sampleFilm);
-        const properties = ["id", "title", "overview", "poster_path", "vote_average", "release_date", "rating", "genres"];
-        properties.forEach((prop)=>{expect(fetchedFilms[0]).toHaveProperty(prop)});
-    });
-
-    test("getAllFilms: loads the correct genres", async()=>{
-        const fetchedFilms = await getAllFilms();
-        const testFilm = fetchedFilms.find((film)=>film.id === sampleFilm.id);
-
-        expect(testFilm.genres.length).toBe(sampleFilm.genres.length);
-        expect(testFilm.genres).toEqual(expect.arrayContaining(sampleFilm.genres));
+        expect(course.profs.length).toBe(sample_course.profs.length);
+        expect(course.profs).toEqual(expect.arrayContaining(sample_course.profs));
 
     });
 
+    test.skip("getCourse: returns null on bad id", async ()=>{
+        const course = await getCourse(-1);
 
-    test("updateFilmRating: updates the film", async ()=>{
-        const newFilm = { ...sampleFilm, rating: 4 };
+        expect(course).toBeNull();
+    });
 
-        const updated = await updateFilmRating(newFilm.id, newFilm.rating);
+    test.skip("getAllCourses: fetches all courses", async()=>{
+
+        const fetchedCourses = await getAllCourses();
+
+        expect(fetchedCourses).toHaveLength(data.length);
+        const testCourse = fetchedCourses.find((course)=>course.id === sample_course.id);
+        expect(testCourse).toEqual(sample_course);
+        const properties = ["id", "profs", "class_name", "course_desc", "dept", "class_num"];
+        properties.forEach((prop)=>{expect(fetchedCourses[0]).toHaveProperty(prop)});
+    });
+
+    test("reviewCourse: updates the rating for a single professor", async ()=>{
+        const newCourse = { ...sample_course, profs: {...profs, satisfaction: [1,1,1,2], interest: [1,1,1,2], time_commitment: [1,1,1,2], difficulty: [1,1,1,2]} };
+
+        const updated = await reviewCourse(sample_course.id, "C. Andrews", 2, 2, 2, 2);
 
         expect(updated).toBeTruthy();
-        const updatedFilm = await getFilm(newFilm.id);
+        const updatedCourse = await getCourse(newCourse.id);
 
-        expect(updatedFilm).toEqual(newFilm);
+        expect(updatedCourse).toEqual(newCourse);
 
     });
 
+    /*test("reviewCourse: correctly averages the ratings", async ()=>{
+        
+    });
+
+
+    test("reviewCourse: updates the rating for a the correct professor", async ()=>{
+
+    });
+
+
     test("updateFilmRating: returns false on bad id", async ()=>{
-        const newFilm = { ...sampleFilm, rating: 4 };
+        const newCourse = { ...sample_course, rating: 4 };
 
         const updated = await updateFilmRating(-1, newFilm.rating);
 
         expect(updated).toBeFalsy();
-    });
-    */
+    });*/
 
 });

@@ -11,7 +11,7 @@ beforeEach(async () => {
     await knex.seed.run();
   });
 
-export async function getCourses() {
+export async function getAllCourses() {
     const rows = await knex("Courses").select();
     return rows;
 }

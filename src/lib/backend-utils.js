@@ -79,7 +79,7 @@ export async function reviewCourse(course_id, professor, satisfaction, interest,
     interest: updated_interest,
     time_commitment: updated_time_commitment,
     difficulty: updated_difficulty
-  });
+  }/*, [satisfaction, interest, time_commitment, difficulty]*/);
 
-  return count === 1;
+  return (count===1);
 }

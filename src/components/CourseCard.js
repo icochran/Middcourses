@@ -4,7 +4,7 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
+//import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
@@ -81,7 +81,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   };
 
   return (
-    <div styles ={classBoxStyle} className={styles.classBox}>
+    <div style ={classBoxStyle} className={styles.classBox}>
       <Card
         // border="primary"
         style={{ height:"32rem" }}

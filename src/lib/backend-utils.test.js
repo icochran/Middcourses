@@ -13,7 +13,7 @@ describe("Tests of the database utility functions", () => {
     beforeAll(async ()=>{
         // we need to construct a course of the correct form from the seed data
         // pick an arbitrary course from the collection
-        sample_course = data[Math.floor(data.length/2)];
+        sample_course = data[230];
     });
 
     beforeEach(async () => {
@@ -32,8 +32,6 @@ describe("Tests of the database utility functions", () => {
 
     test.only("getCourse: fetches film with the correct professors", async()=>{
         const course = await getCourse(sample_course.id);
-
-        console.log(course);
 
         expect(course.profs.length).toBe(sample_course.profs.length);
         for(let i=0; i<sample_course.profs.length; i++){

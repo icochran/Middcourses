@@ -35,6 +35,9 @@ export async function getCourse(id) {
     //get the professors and review data
     let reviews_array = await knex("Course_Professor").select().where({course_id:course_obj.id});
 
+    console.log("below is reviews array");
+    console.log(reviews_array);
+
     //append the professors to the reviews and convert the reviews to arrays
     for(let i=0; i<reviews_array.length; i++){
       const prof_id = reviews_array[i].prof_id;

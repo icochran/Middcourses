@@ -13,14 +13,7 @@ describe("Tests of the database utility functions", () => {
     beforeAll(async ()=>{
         // we need to construct a course of the correct form from the seed data
         // pick an arbitrary course from the collection
-        sample_course = data[Math.floor(data.length/2)];
-        sample_course.profs = [{
-            prof_name: "C. Andrews",
-            satisfaction: [1,1,1],
-            interest: [1,1,1],
-            time_commitment: [1,1,1],
-            difficulty: [1,1,1]
-        }]
+        sample_course = data[230];
     });
 
     beforeEach(async () => {
@@ -29,7 +22,7 @@ describe("Tests of the database utility functions", () => {
       await knex.seed.run();
     });
 
-    test("getCourse: fetches the correct course", async ()=>{
+    test("getCourse: fetches the correct course data", async ()=>{
         const course = await getCourse(sample_course.id);
         expect(course.class_name).toBe(sample_course.class_name);
         expect(course.course_desc).toBe(sample_course.course_desc);
@@ -40,10 +33,14 @@ describe("Tests of the database utility functions", () => {
     test("getCourse: fetches film with the correct professors", async()=>{
         const course = await getCourse(sample_course.id);
 
-        console.log(course);
-
         expect(course.profs.length).toBe(sample_course.profs.length);
-        expect(course.profs).toEqual(expect.arrayContaining(sample_course.profs));
+        for(let i=0; i<sample_course.profs.length; i++){
+            expect(course.profs[i].difficulty).toEqual(sample_course.profs[i].difficulty);
+            expect(course.profs[i].interest).toEqual(sample_course.profs[i].interest);
+            expect(course.profs[i].prof_name).toEqual(sample_course.profs[i].prof_name);
+            expect(course.profs[i].satisfaction).toEqual(sample_course.profs[i].satisfaction);
+            expect(course.profs[i].time_commitment).toEqual(sample_course.profs[i].time_commitment);
+        }
 
     });
 

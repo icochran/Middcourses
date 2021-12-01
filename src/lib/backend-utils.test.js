@@ -37,21 +37,23 @@ describe("Tests of the database utility functions", () => {
         expect(course.class_num).toBe(sample_course.class_num);
     });
 
-    test.skip("getCourse: fetches film with the correct professors", async()=>{
+    test.only("getCourse: fetches film with the correct professors", async()=>{
         const course = await getCourse(sample_course.id);
+
+        console.log(course);
 
         expect(course.profs.length).toBe(sample_course.profs.length);
         expect(course.profs).toEqual(expect.arrayContaining(sample_course.profs));
 
     });
 
-    test.skip("getCourse: returns null on bad id", async ()=>{
+    test("getCourse: returns null on bad id", async ()=>{
         const course = await getCourse(-1);
 
         expect(course).toBeNull();
     });
 
-    test.skip("getAllCourses: fetches all courses", async()=>{
+    test("getAllCourses: fetches all courses", async()=>{
 
         const fetchedCourses = await getAllCourses();
 
@@ -63,7 +65,7 @@ describe("Tests of the database utility functions", () => {
     });
 
     test("reviewCourse: updates the rating for a single professor", async ()=>{
-        const newCourse = { ...sample_course, profs: [{...profs, satisfaction: [1,1,1,2], interest: [1,1,1,2], time_commitment: [1,1,1,2], difficulty: [1,1,1,2]}] };
+        const newCourse = { ...sample_course, profs: [{ prof_name: "C. Andrews", satisfaction: [1,1,1,2], interest: [1,1,1,2], time_commitment: [1,1,1,2], difficulty: [1,1,1,2]}] };
 
         const updated = await reviewCourse(sample_course.id, "C. Andrews", 2, 2, 2, 2);
 

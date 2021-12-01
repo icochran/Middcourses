@@ -19,9 +19,6 @@ exports.seed = async function (knex) {
   const prof_data = [];
   let prof_id_count = 0;
   data.forEach((item) => {
-    /*****************************************
-    * changed from item[profs] to items.profs??
-    ******************************************/
     const professors = item.profs;
     for (let i=0; i<professors.length; i++){
       let repeat_professor_flag = false;

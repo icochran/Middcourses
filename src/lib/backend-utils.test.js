@@ -73,8 +73,6 @@ describe("Tests of the database utility functions", () => {
     });
 
     test("reviewCourse: updates the rating for a single professor", async ()=>{
-        //const newCourse = { ...sample_course, profs: [{ prof_name: "P. Monod", satisfaction: "1112", interest: "1112", time_commitment: "1112", difficulty: "1112"}] };
-
         const updated = await reviewCourse(sample_course.id, "C. Craven", 2, 2, 2, 2);
 
         expect(updated).toBeTruthy();

@@ -16,12 +16,27 @@ export async function getAllCourses() {
     return rows;
 }
 
-export async function getCourse(id) {
+export async function getCourse(id, prof_name) {
     const course = await knex("Courses").select().where("id", id);
     if (course[0]===undefined){
         return null
     }
-    return course[0];
+    const course_obj = course[0];
+
+    //get the professors and review data
+    let reviews_array = await knex("Course_Professor").select().where({course_id:course_obj.id});
+
+    //append the professors to the reviews
+    for(let i=0; i<reviews_array.length; i++){
+      const prof_id = reviews_array[i].prof_id;
+      const prof_object_array = await knex("Professors").select().where({id:prof_id});
+      const prof_name = prof_object_array[0].prof_name;
+      reviews_array[i].prof_name = prof_name;
+    }
+
+    course_obj.profs = reviews_array; 
+
+    return course_obj;
 }
 
 export async function reviewCourse(course_id, professor, satisfaction, interest, time_commitment, difficulty) {

@@ -1,4 +1,3 @@
-
 const fs = require("fs");
 
 exports.seed = async function (knex) {
@@ -19,6 +18,9 @@ exports.seed = async function (knex) {
   const prof_data = [];
   let prof_id_count = 0;
   data.forEach((item) => {
+    /*****************************************
+    * changed from item[profs] to items.profs??
+    ******************************************/
     const professors = item.profs;
     for (let i=0; i<professors.length; i++){
       let repeat_professor_flag = false;
@@ -83,12 +85,12 @@ exports.seed = async function (knex) {
     }
   });
   
-  const course_prof_map = [];
+  const courseProf_map = [];
   data.forEach((course) => { //go through each course
-    course.profs.forEach((prof_object) => { //go through each professor in that course
+    course.profs.forEach((profObject) => { //go through each professor in that course
       for(let i=0; i<prof_data.length;i++){ //find each professor's id by iterating through the prof_data
-        if(prof_data[i].prof_name===prof_object.prof_name){
-          course_prof_map.push({
+        if(prof_data[i].prof_name===profObject.prof_name){
+          courseProf_map.push({
             course_id: course.id,
             prof_id: prof_data[i].id,
             satisfaction: [],
@@ -102,7 +104,6 @@ exports.seed = async function (knex) {
     });
   });
 
-
   await knex("Courses")
     .del()
     .then(() => knex.batchInsert("Courses", course_data, 100));
@@ -113,6 +114,6 @@ exports.seed = async function (knex) {
 
   await knex("Course_Professor")
     .del()
-    .then(() => knex.batchInsert("Course_Professor", course_prof_map, 100));
+    .then(() => knex.batchInsert("Course_Professor", courseProf_map, 100));
 
   };

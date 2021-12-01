@@ -11,18 +11,32 @@ beforeEach(async () => {
     await knex.seed.run();
   });
 
-export async function getAllCourses() {
-    const rows = await knex("Courses").select();
-    return rows;
-}
-
 function convert_review(string) {
   if(string.length===0) {
-    return [0]; //change this to [] when the seed is updated
+    return []; //change this to [] when the seed is updated
   } else {
     const attribute_array = string.split("");
     return attribute_array;
   }
+}
+
+export async function getAllCourses() {
+  const rows = await knex("Courses").select();
+
+  for(let i=0; i<rows.length; i++){
+    const course_id = rows[i].id;
+    const course_reviews = await knex("Course_Professor").select().join("Professors", "Professors.id", "Course_Professor.prof_id").where({course_id:course_id});
+    course_reviews.forEach((review) => {
+      delete review.id;
+      review.satisfaction = convert_review(review.satisfaction);
+      review.interest = convert_review(review.interest);
+      review.time_commitment = convert_review(review.time_commitment);
+      review.difficulty = convert_review(review.difficulty);
+    });
+    rows[i].profs = course_reviews
+  } 
+
+  return rows;
 }
 
 export async function getCourse(id) {
@@ -33,18 +47,9 @@ export async function getCourse(id) {
     const course_obj = course[0];
 
     //get the professors and review data
-    let reviews_array = await knex("Course_Professor").select().where({course_id:course_obj.id});
-
-    console.log("below is reviews array");
-    console.log(reviews_array);
-
-    //append the professors to the reviews and convert the reviews to arrays
+    const reviews_array = await knex("Course_Professor").select().join("Professors", "Professors.id", "Course_Professor.prof_id").where({course_id:course_obj.id});
     for(let i=0; i<reviews_array.length; i++){
-      const prof_id = reviews_array[i].prof_id;
-      const prof_object_array = await knex("Professors").select().where({id:prof_id});
-      const prof_name = prof_object_array[0].prof_name;
-      reviews_array[i].prof_name = prof_name;
-
+      delete reviews_array[i].id
       reviews_array[i].satisfaction = convert_review(reviews_array[i].satisfaction);
       reviews_array[i].interest = convert_review(reviews_array[i].interest);
       reviews_array[i].time_commitment = convert_review(reviews_array[i].time_commitment);
@@ -60,8 +65,6 @@ export async function reviewCourse(course_id, professor, satisfaction, interest,
   const prof_id = await knex("Professors").select().where({prof_name:professor}).pluck("id");
 
   const CPObject = await knex("Course_Professor").select().where({course_id:course_id,prof_id:prof_id[0]});
-
-  //console.log (CPObject)
 
   const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction + satisfaction : satisfaction
     

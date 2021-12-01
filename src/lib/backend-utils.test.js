@@ -53,15 +53,26 @@ describe("Tests of the database utility functions", () => {
     test("getAllCourses: fetches all courses", async()=>{
 
         const fetchedCourses = await getAllCourses();
-
         expect(fetchedCourses).toHaveLength(data.length);
-        const testCourse = fetchedCourses.find((course)=>course.id === sample_course.id);
-        expect(testCourse).toEqual(sample_course);
-        const properties = ["id", "profs", "class_name", "course_desc", "dept", "class_num"];
-        properties.forEach((prop)=>{expect(fetchedCourses[0]).toHaveProperty(prop)});
+
+        const test_course = fetchedCourses.find((course)=>course.id === sample_course.id);
+        expect(test_course.course_desc).toEqual(sample_course.course_desc);
+        expect(test_course.dept).toEqual(sample_course.dept);
+        expect(test_course.id).toEqual(sample_course.id);
+        for(let i=0; i<test_course.length; i++){
+            /********************************************
+            * HOW DO I GET THIS TO WORK WHEN THE DATABASE STARTS TO GET REVIEWS SO THE SAMPLE COURSE WONT NECESARRILY HAVE THE SAME REVIEWS AS THE RECIEVED COURSE
+            *********************************************/
+            expect(test_course.profs[i].prof_id).toEqual(sample_course.profs[i].prof_id);
+            expect(test_course.profs[i].prof_name).toEqual(sample_course.profs[i].prof_name);
+            expect(test_course.profs[i].interest).toEqual(sample_course.profs[i].interest);
+            expect(test_course.profs[i].difficulty).toEqual(sample_course.profs[i].difficulty);
+            expect(test_course.profs[i].time_commitment).toEqual(sample_course.profs[i].time_commitment);
+            expect(test_course.profs[i].satisfaction).toEqual(sample_course.profs[i].satisfaction);
+        }
     });
 
-    test.only("reviewCourse: updates the rating for a single professor", async ()=>{
+    test("reviewCourse: updates the rating for a single professor", async ()=>{
         //const newCourse = { ...sample_course, profs: [{ prof_name: "P. Monod", satisfaction: "1112", interest: "1112", time_commitment: "1112", difficulty: "1112"}] };
 
         const updated = await reviewCourse(sample_course.id, "P. Monod", 2, 2, 2, 2);

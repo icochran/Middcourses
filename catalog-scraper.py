@@ -52,10 +52,10 @@ for course in courses:
     profs = []
 
     for prof_name in prof_names:
-        profs.append({"prof_name":prof_name, "satisfaction": [0],
-        "difficulty": [0],
-        "interest": [0],
-        "time_commitment": [0]})
+        profs.append({"prof_name":prof_name, "satisfaction": [],
+        "difficulty": [],
+        "interest": [],
+        "time_commitment": []})
 
     course_desc = course.find(attrs = {"class":"course_description"}).text
 

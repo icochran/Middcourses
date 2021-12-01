@@ -16,7 +16,16 @@ export async function getAllCourses() {
     return rows;
 }
 
-export async function getCourse(id, prof_name) {
+function convert_review(string) {
+  if(string.length===0) {
+    return [0]; //change this to [] when the seed is updated
+  } else {
+    const attribute_array = string.split("");
+    return attribute_array;
+  }
+}
+
+export async function getCourse(id) {
     const course = await knex("Courses").select().where("id", id);
     if (course[0]===undefined){
         return null
@@ -26,12 +35,17 @@ export async function getCourse(id, prof_name) {
     //get the professors and review data
     let reviews_array = await knex("Course_Professor").select().where({course_id:course_obj.id});
 
-    //append the professors to the reviews
+    //append the professors to the reviews and convert the reviews to arrays
     for(let i=0; i<reviews_array.length; i++){
       const prof_id = reviews_array[i].prof_id;
       const prof_object_array = await knex("Professors").select().where({id:prof_id});
       const prof_name = prof_object_array[0].prof_name;
       reviews_array[i].prof_name = prof_name;
+
+      reviews_array[i].satisfaction = convert_review(reviews_array[i].satisfaction);
+      reviews_array[i].interest = convert_review(reviews_array[i].interest);
+      reviews_array[i].time_commitment = convert_review(reviews_array[i].time_commitment);
+      reviews_array[i].difficulty = convert_review(reviews_array[i].difficulty);
     }
 
     course_obj.profs = reviews_array; 

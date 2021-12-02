@@ -9,6 +9,9 @@ import useCollection from "../hooks/useCollection";
 import {useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import LoginWidget from "../components/LoginWidget.js"
+import SecureItem from "../components/SecureItem.js"
+
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
@@ -19,16 +22,6 @@ export default function MainPage() {
     })
 
     const collection = useCollection();
-
-    // maybe want to useEffect here?
-
-    /*useEffect(() => {
-      if (currentArticle) {
-        selectCurrentSection(currentArticle.title.charAt(0));
-        select(currentArticle);
-      }
-    }, [currentArticle]);  */
-
 
     let courses = collection.filter((course) => {
       if (average(course.profs[0].satisfaction) >= 4) {
@@ -92,7 +85,7 @@ export default function MainPage() {
 
    // <SearchBar searchByCallback={setSearchBarInput}/>
    //<Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
-
+ 
   return (
     <div className={styles.container}>
       <Head>
@@ -101,7 +94,25 @@ export default function MainPage() {
 
       <main>
         <h1 className="title">Midd Courses</h1>
-        <NavBar 
+        <div className={styles.card}>
+          <SecureItem > 
+            <NavBar 
+        setSearchBar = {setSearchBarInput}
+        departments={departments} 
+        prof={professors}
+        setFilterBy={setFilterBy}/>
+       <div className={styles.wrapper}>
+          <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
+        </div>
+        <div className={styles.wrapper}>
+          <div>
+            <CardGrid courses={courses}/>
+          </div>
+        </div> 
+        </SecureItem>
+        </div>
+        <LoginWidget />
+        {/* <NavBar 
         setSearchBar = {setSearchBarInput}
         departments={departments} 
         prof={professors}
@@ -113,7 +124,7 @@ export default function MainPage() {
           <div>
             <CardGrid courses={courses}/>
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   );

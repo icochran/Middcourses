@@ -1,7 +1,5 @@
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 //import ProfDropDown from "./ProfDropDown";
 //import { useState } from "react";
 //import RatingBar from "./RatingBar.js";
@@ -55,7 +53,8 @@ if ((courseDescription.lastIndexOf(")"))!==-1 && courseDescription.length-course
   };
 
   return (
-    <Card  style={classBoxStyle} role="gridcell">
+    <div className={styles.detailedClassBox} style={classBoxStyle} role="gridcell">
+
       <div className={styles.detailedClassHeader}>
         <span className={styles.className}>{courseName}</span>
       </div>
@@ -64,8 +63,10 @@ if ((courseDescription.lastIndexOf(")"))!==-1 && courseDescription.length-course
             <p>{courseDescription}</p>
             <p>{prereqs}</p>
       </div>
-      <Button size="sm" variant="outline-secondary" onClick= {seeDetails}>←Back</Button>
-    </Card>
+
+      <button id="back" className = {styles.backBtn} onClick= {seeDetails}>←Back</button>
+
+    </div>
   );
 }
 

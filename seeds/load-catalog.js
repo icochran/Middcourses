@@ -90,10 +90,10 @@ exports.seed = async function (knex) {
           course_prof_map.push({
             course_id: course.id,
             prof_id: prof_data[i].id,
-            satisfaction: [],
-            interest: [],
-            time_commitment: [],
-            difficulty: []
+            satisfaction: "",
+            interest: "",
+            time_commitment: "",
+            difficulty: ""
           });
           break;
         }

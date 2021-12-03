@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import React from "react";
@@ -15,7 +17,6 @@ export default function Review({ course, changeState}) {
 
   const courseName = course.class_name;
 
-  
   const classBoxStyle = {
     borderColor: `rgb(${0.5}, ${0.5}, ${0.5})`,
   };   
@@ -83,7 +84,7 @@ export default function Review({ course, changeState}) {
       </div>
       <button id="back" onClick= {changeState} className={styles.backBtn}>←Back</button>
       <Button 
-        disabled={!difficulty || !interest || !satisfaction || !time} 
+        disabled={!difficulty || !interest || !satisfaction || !time || prof === "Aggregate"} 
         id="submit"
         variant="success"
         className={styles.submitBtn}

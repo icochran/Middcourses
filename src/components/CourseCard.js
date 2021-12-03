@@ -8,14 +8,13 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
-
-  // console.log("below is course");
-  // console.log(course);
   
   const courseDetails = {...course}
   let prof;
   if (profName !== "Aggregate") {
-    prof = course.profs.find((a) => a.prof_name === profName);
+    console.log(profName);
+    prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
+    console.log(prof);
     if (!prof) {
       prof.prof_name = "No specific Professor"
     }

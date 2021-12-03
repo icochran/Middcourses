@@ -65,22 +65,24 @@ describe("MainPage: Integration Tests", () => {
         expect(courses).toEqual(["Intro to Data Science"]);
     });
 
-    test("Filter by dept: only courses with dept that match filter are displayed", () => {
+    test("Filter by dept: only courses with dept that match filter are displayed", async () => {
         useCollection.mockReturnValue(testData);
         render(<MainPage/>);
         const deptText = screen.getByText("Department");
         fireEvent.click(deptText);
-
+        const CSbutton = await screen.getByText("CSCI");
+        fireEvent.click(CSbutton);
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
         expect(courses).toEqual(["Software Development", "Computer Systems", "Computer Engineering", "Computer Architecture"]);
     });
 
-    test("Filter by prof: only courses with profs that match filter are displayed", () => {
+    test.only("Filter by prof: only courses with profs that match filter are displayed", async () => {
         useCollection.mockReturnValue(testData);
         render(<MainPage/>);
-        const profText = screen.getByText("M. Linderman");
+        const profb = screen.getByText("Professor");
+        fireEvent.click(profb);
+        const profText = await screen.getByText("M. Linderman");
         fireEvent.click(profText);
-
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
         expect(courses).toEqual(["Software Development"]);
     });

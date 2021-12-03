@@ -40,13 +40,14 @@ describe("Filter tests", () => {
 
   })
 
-  test("Clicking a dept sets the filter to that dept and displays on screen", () => {
+  test.only("Clicking a dept sets the filter to that dept and displays on screen", () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
-    const deptText = screen.getByText("CSCI");
-    fireEvent.click(deptText);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: CSCI");
+    expect.stringMatching("Filtering");
+    const departmentb = screen.getByTestId("dept");
+    fireEvent.click(departmentb);
+    fireEvent.click(screen.getByText("CSCI"));
+    expect(screen.getByText("Filtering by: CSCI"));
   })
 
   test("Clicking a prof sets the filter to that prof and displays on screen", () => {

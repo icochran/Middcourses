@@ -9,8 +9,8 @@ import SearchBar from "./SearchBar";
 
 export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
 
-    const depts = departments.map(dept => <NavDropdown.Item onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
-    const profs = prof.map(professor => <NavDropdown.Item onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
+    const depts = departments.map(dept => <NavDropdown.Item key={dept} data-testid = "dept2" onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
+    const profs = prof.map(professor => <NavDropdown.Item key={professor} onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
 
     return (
         <Container fluid>
@@ -21,7 +21,7 @@ export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
                     <Nav className="me-auto">
                         <NavDropdown data-testid = "dept" title="Department" id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => setFilterBy("")}>None</NavDropdown.Item>
-                            <NavDropdown.Divider data-testid = "dept2"/>
+                            <NavDropdown.Divider />
                             {depts}
                         </NavDropdown>
                         <NavDropdown data-testid = "profs" title="Professor" id="basic-nav-dropdown">

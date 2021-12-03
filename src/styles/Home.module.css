@@ -25,8 +25,12 @@
 /* Defines the box with the title and professors drop down */
 .classHeader{
   text-align: center;
-  margin: 10px 10px 30px;
+  margin: 10px 0px 10px 0px;
   height: 100px;
+}
+.courseTitle{
+  text-align: center;
+  margin: 0px 0px 20px 0px;
 }
 .detailedClassHeader{
   text-align: center;
@@ -47,7 +51,7 @@
 
 /* Defines the box with the progress bars in the course card */
 .courseBody{
-  margin: 0px 10px 30px;
+  margin: 00px 0px 10px 00px;
 }
 
 /* The box containing the grid of course cards */
@@ -61,7 +65,7 @@
 .classBox{
   width: 300px;
   border-radius: 20px;
-  border-width: 15px;
+  border-width: 10px;
   float: left;
   position: left;
   margin: 10px;

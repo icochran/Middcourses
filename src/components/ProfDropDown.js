@@ -49,7 +49,7 @@ export default function ProfDropDown({profs, setProfName}) {
     );
   } else {
     return (
-      <Button variant="success">{profs[0].prof_name}</Button>
+      <Button variant="success" className="text-center">{profs[0].prof_name}</Button>
       // <Dropdown>
       //   <Dropdown.Toggle variant="success" id="dropdown-basic">
       //     {profs[0].prof_name}

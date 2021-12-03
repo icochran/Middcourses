@@ -73,7 +73,7 @@ describe("Tests of the database utility functions", () => {
     });
 
     test("reviewCourse: updates the rating for a single professor", async ()=>{
-        const updated = await reviewCourse(sample_course.id, "C. Craven", 2, 2, 2, 2);
+        const updated = await reviewCourse(sample_course.id, "S. Pecsok", 2, 2, 2, 2);
 
         expect(updated).toBeTruthy();
     });

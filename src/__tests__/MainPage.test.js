@@ -68,7 +68,7 @@ describe("MainPage: Integration Tests", () => {
     test("Filter by dept: only courses with dept that match filter are displayed", () => {
         useCollection.mockReturnValue(testData);
         render(<MainPage/>);
-        const deptText = screen.getByText("CSCI");
+        const deptText = screen.getByText("Department");
         fireEvent.click(deptText);
 
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);

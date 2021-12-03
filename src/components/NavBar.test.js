@@ -1,4 +1,4 @@
-import { screen, fireEvent, render } from "@testing-library/react";
+import { screen, fireEvent, render, wait } from "@testing-library/react";
 import MainPage from "../pages/index.js";
 import testData from "../../data/test-data.json";
 import useCollection from "../hooks/useCollection";
@@ -14,20 +14,22 @@ describe("Filter tests", () => {
       handler.mockReset();
     });
 
-    test("Each department is shown as filter option", () => {
+    test("Each department is shown as filter option", async () => {
       useCollection.mockReturnValue(testData);
       render(<MainPage/>);
-      const departmentbutton = screen.getByTestId("dept");
+      const departmentbutton = screen.getByText("Department");
       fireEvent.click(departmentbutton);
-      const depts = screen.queryAllByTestId("dept2").map((dept) => dept.textContent);
+      const depts = await screen.getAllByTestId("depts").map((dep) => dep.textContent);
       expect(depts).toEqual(["None", "CSCI", "MATH"]);
 
     })
 
-    test("Each professor is shown as filter option", () => {
+    test("Each professor is shown as filter option", async () => {
       useCollection.mockReturnValue(testData);
       render(<MainPage/>);
-      const profs = screen.queryAllByTestId("prof").map((prof) => prof.textContent);
+      const professorbutton = screen.getByText("Professor");
+      fireEvent.click(professorbutton);
+      const profs = await screen.queryAllByTestId("profs").map((prof) => prof.textContent);
       expect(profs).toEqual(
         [
           "None",
@@ -40,49 +42,55 @@ describe("Filter tests", () => {
 
   })
 
-  test.only("Clicking a dept sets the filter to that dept and displays on screen", () => {
+  test("Clicking a dept sets the filter to that dept and displays on screen", async () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
-    expect.stringMatching("Filtering");
-    const departmentb = screen.getByTestId("dept");
+    expect.stringMatching("Filtering by: None");
+    const departmentb = screen.getByText("Department");
     fireEvent.click(departmentb);
-    fireEvent.click(screen.getByText("CSCI"));
-    expect(screen.getByText("Filtering by: CSCI"));
+    const CSbutton = await screen.getByText("CSCI");
+    fireEvent.click(CSbutton);
+    expect.stringMatching("Filtering by: CSCI");
+    
   })
 
-  test("Clicking a prof sets the filter to that prof and displays on screen", () => {
+  test("Clicking a prof sets the filter to that prof and displays on screen", async () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
-    const profText = screen.getByText("A. Lyford");
-    fireEvent.click(profText);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: A. Lyford");
+    expect.stringMatching("Filtering by: None");
+    const profb = screen.getByText("Professor");
+    fireEvent.click(profb);
+    const Profbutton = await screen.getByText("A. Lyford");
+    fireEvent.click(Profbutton);
+    expect.stringMatching("Filtering by: A. Lyford");
   })
 
-  test("Clicking none sets the dept filter to none", () => {
+  test("Clicking none sets the dept filter to none", async () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
-    const deptText = screen.getByText("CSCI");
-    fireEvent.click(deptText);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: CSCI");
-
+    expect.stringMatching("Filtering by: None");
+    const departmentb = screen.getByText("Department");
+    fireEvent.click(departmentb);
+    const depb = await screen.getByText("CSCI");
+    fireEvent.click(depb);
+    expect.stringMatching("Filtering by: CSCI");
     const none = screen.getAllByText("None")[0];
     fireEvent.click(none);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
+    expect.stringMatching("Filtering by: None");
   })
 
-  test("Clicking none sets the prof filter to none", () => {
+  test("Clicking none sets the prof filter to none", async () => {
     useCollection.mockReturnValue(testData);
     render(<MainPage/>);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
-    const profText = screen.getByText("A. Lyford");
-    fireEvent.click(profText);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: A. Lyford");
-
-    const none = screen.getAllByText("None")[1];
+    expect.stringMatching("Filtering by: None");
+    const professorb = screen.getByText("Professor");
+    fireEvent.click(professorb);
+    const profb = await screen.getByText("A. Lyford");
+    fireEvent.click(profb);
+    expect.stringMatching("Filtering by: A. Lyford");
+    const none = screen.getAllByText("None")[0];
     fireEvent.click(none);
-    expect(screen.getByTestId("filterBy").textContent).toEqual("Filtering by: None");
+    expect.stringMatching("Filtering by: None");
   })
 
 

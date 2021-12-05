@@ -84,9 +84,6 @@ export default function MainPage() {
       }
     }
 
-   // <SearchBar searchByCallback={setSearchBarInput}/>
-   //<Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
-
   return (
     <div className={styles.container}>
       <Head>
@@ -96,10 +93,11 @@ export default function MainPage() {
       <main>
         <h1 className="title">Midd Courses</h1>
         <NavBar 
-        setSearchBar = {setSearchBarInput}
-        departments={departments} 
-        prof={professors}
-        setFilterBy={setFilterBy}/>
+          setSearchBar = {setSearchBarInput}
+          departments={departments} 
+          prof={professors}
+          setFilterBy={setFilterBy}
+        />
         <div className={styles.wrapper}>
           <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
         </div>

@@ -82,13 +82,13 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   };
 
   return (
-    <div style ={classBoxStyle} className={styles.classBox}>
+    <div style ={classBoxStyle} className={styles.classBox} role="gridcell">
       <Card
         // border="primary"
         style={{ height:"32rem" }}
       >
         <Card.Body className={styles.classHeader}>
-          <Card.Title className={styles.courseTitle}>{courseName}</Card.Title>
+          <Card.Title data-testid="courseName" className={styles.courseTitle}>{courseName}</Card.Title>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </Card.Body>
         <Card.Body >

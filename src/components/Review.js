@@ -32,7 +32,7 @@ export default function Review({ course, changeState }) {
         </Card.Body>
         <Card.Body >
             <p>Difficulty</p>
-            <ButtonGroup aria-label="difficultyButtons" size="sm">
+            <ButtonGroup aria-label="difficultyButtons" size="sm" data-testid="Difficulty">
               <Button
                 variant={difficulty === 1 ? "primary" : "secondary"}
                 onClick={() => setDifficulty(1)}
@@ -68,7 +68,7 @@ export default function Review({ course, changeState }) {
 
           <div className="interesting">
             <p>Interest</p>
-            <ButtonGroup aria-label="interestingButtons" size="sm">
+            <ButtonGroup aria-label="interestingButtons" size="sm" data-testid="Interest">
               <Button
                 variant={interest === 1 ? "primary" : "secondary"}
                 onClick={() => setInterest(1)}
@@ -104,7 +104,7 @@ export default function Review({ course, changeState }) {
 
           <div className="satisfaction">
             <p>Overall Satisfaction</p>
-            <ButtonGroup aria-label="satisfactionButtons" size="sm">
+            <ButtonGroup aria-label="satisfactionButtons" size="sm" data-testid="Satisfaction">
               <Button
                 variant={satisfaction === 1 ? "primary" : "secondary"}
                 onClick={() => setSatisfaction(1)}
@@ -140,7 +140,7 @@ export default function Review({ course, changeState }) {
 
           <div className="time commitment">
             <p>Time Commitment</p>
-            <ButtonGroup aria-label="timeButtons" size="sm">
+            <ButtonGroup aria-label="timeButtons" size="sm" data-testid="Time">
               <Button
                 variant={time === 1 ? "primary" : "secondary"}
                 onClick={() => setTime(1)}

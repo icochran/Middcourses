@@ -33,10 +33,25 @@ describe("Review: Review tests", () => {
         expect(screen.getByText(course.class_name)).toBeVisible();
     });
 
-    // test("Review: displays 3 different rating bars (not necessarily the right level)", () => {
-    //     render(<CourseCard course={course} />);
-    //     expect(screen.queryAllByTestId('Bar').length === 3).toBeTruthy();
-    // });
+    test("Review: displays Difficulty buttons", () => {
+      render(<Review course={course} />);
+      expect(screen.getByTestId("Difficulty")).toBeVisible();
+    });
+
+    test("Review: displays Interesting buttons", () => {
+        render(<Review course={course} />);
+        expect(screen.getByTestId("Interest")).toBeVisible();
+    });
+
+    test("Review: displays Satisfaction buttons", () => {
+      render(<Review course={course} />);
+      expect(screen.getByTestId("Satisfaction")).toBeVisible();
+    });
+
+    test("Review: displays Time buttons", () => {
+      render(<Review course={course} />);
+      expect(screen.getByTestId("Time")).toBeVisible();
+    });
 
     // test("Review: displays course time commitment in hours", () => {
     //     const { getByText } = render(<CourseCard course={course} />);

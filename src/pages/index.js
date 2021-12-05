@@ -15,7 +15,7 @@ export default function MainPage() {
     const [searchBarInput, setSearchBarInput] = useState()
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
-      return numbers.reduce(reducer) / numbers.length;
+      return numbers.reduce(reducer, 0) / numbers.length;
     })
 
     const collection = useCollection();

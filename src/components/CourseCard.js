@@ -54,21 +54,23 @@ export default function CourseCard({ course, changeState, seeDetails }) {
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
-    (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
+    (difficultyArray.reduce(reducer, 0) / difficultyArray.length) * 10;
   const courseInteresting100 =
-    (interestingArray.reduce(reducer) / interestingArray.length) * 10;
+    (interestingArray.reduce(reducer, 0) / interestingArray.length) * 10;
   const courseTimeCommitment100 =
-    (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
+    (timeCommitmentArray.reduce(reducer, 0) / timeCommitmentArray.length) * 10;
   const courseTimeCommitmentHours =
     Math.round((courseTimeCommitment100 / 10) * 100) / 100;
   const courseSatisfactionAverage =
-    satisfactionArray.reduce(reducer) / satisfactionArray.length;
+    satisfactionArray.reduce(reducer, 0) / satisfactionArray.length;
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {
     backgroundColor = "#d8ffc7";
   } else if (courseSatisfactionAverage >= 2) {
     backgroundColor = "#fffeb3";
+  } else if (satisfactionArray.length === 0) {
+      backgroundColor = "#c6e4ff";
   } else {
     backgroundColor = "#ffbaba";
   }
@@ -103,7 +105,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
             <RatingBar
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
-              numHours={courseTimeCommitmentHours}
+              numHours={courseTimeCommitmentHours ? courseTimeCommitmentHours : undefined}
             />
       
         </Card.Body>

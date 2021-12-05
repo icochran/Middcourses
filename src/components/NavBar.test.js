@@ -1,12 +1,11 @@
-import { screen, fireEvent, render, wait } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import MainPage from "../pages/index.js";
 import testData from "../../data/test-data.json";
 import useCollection from "../hooks/useCollection";
-import NavBar from "./NavBar";
 
 jest.mock("../hooks/useCollection");
 
-describe("Filter tests", () => {
+describe("NavBar tests", () => {
 
     const handler = jest.fn();
 

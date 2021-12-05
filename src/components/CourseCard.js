@@ -12,14 +12,11 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
-  
   const courseDetails = {...course}
 
   let prof;
   if (profName !== "Aggregate") {
-    console.log(profName);
     prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
-    console.log(prof);
     if (!prof) {
       prof.prof_name = "No specific Professor";
     }
@@ -54,17 +51,21 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
+  function arrayToAverage(array) {
+    if(array.length>0) {
+      return (array.reduce(reducer, 0) / array.length) * 10;
+    } else {
+      return 0;
+    }
+  }
+
   //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 =
-    (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
-  const courseInteresting100 =
-    (interestingArray.reduce(reducer) / interestingArray.length) * 10;
-  const courseTimeCommitment100 =
-    (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
+  const courseDifficulty100 = arrayToAverage(difficultyArray);
+  const courseInteresting100 = arrayToAverage(interestingArray);
+  const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray);
   const courseTimeCommitmentHours =
     Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage =
-    satisfactionArray.reduce(reducer) / satisfactionArray.length;
+  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {

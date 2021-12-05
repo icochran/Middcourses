@@ -76,7 +76,7 @@ describe("MainPage: Integration Tests", () => {
         expect(courses).toEqual(["Software Development", "Computer Systems", "Computer Engineering", "Computer Architecture"]);
     });
 
-    test.only("Filter by prof: only courses with profs that match filter are displayed", async () => {
+    test("Filter by prof: only courses with profs that match filter are displayed", async () => {
         useCollection.mockReturnValue(testData);
         render(<MainPage/>);
         const profb = screen.getByText("Professor");

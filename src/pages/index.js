@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import useCollection from "../hooks/useCollection"
 
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import LoginWidget from "../components/LoginWidget.js"
@@ -13,6 +13,7 @@ import SecureItem from "../components/SecureItem.js"
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
+    const [sortBy, setSortBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
@@ -24,6 +25,29 @@ export default function MainPage() {
     })
 
     const collection = useCollection();
+
+    useEffect(() => {
+        if (sortBy === "Ascending"){
+            collection.sort((courseA, courseB) => {
+                if(courseA.difficulty > courseB.difficulty){
+                    return 1;
+                }
+                else{
+                    return -1;
+                }
+            })
+        }
+        else if (sortBy === "Descending"){
+            collection.sort((courseA, courseB) => {
+                if(courseA.difficulty > courseB.difficulty){
+                    return 1;
+                }
+                else{
+                    return -1;
+                }
+            })
+        } 
+    }, [sortBy]);
 
     let courses = collection.filter((course) => {
       if (average(course.profs[0].satisfaction) >= 4) {
@@ -95,7 +119,7 @@ export default function MainPage() {
         <h1 className="title">Midd Courses</h1>
         <LoginWidget />
         <div className={styles.card}>
-          <SecureItem setSearchBarInput ={setSearchBarInput} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} /> 
+          <SecureItem setSearchBarInput ={setSearchBarInput} departments={departments} professors={professors} setSortBy = {setSortBy} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} /> 
         </div>
       </main>
     </div>

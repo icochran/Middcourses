@@ -15,20 +15,14 @@ export default function MainPage() {
     const [searchBarInput, setSearchBarInput] = useState()
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
-      return numbers.reduce(reducer, 0) / numbers.length;
+      if (numbers.length>0) {
+        return numbers.reduce(reducer) / numbers.length;
+      } else {
+        return 0
+      }
     })
 
     const collection = useCollection();
-
-    // maybe want to useEffect here?
-
-    /*useEffect(() => {
-      if (currentArticle) {
-        selectCurrentSection(currentArticle.title.charAt(0));
-        select(currentArticle);
-      }
-    }, [currentArticle]);  */
-
 
     let courses = collection.filter((course) => {
       if (average(course.profs[0].satisfaction) >= 4) {

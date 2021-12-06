@@ -5,11 +5,13 @@ export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
 );
 
-beforeEach(async () => {
+/*
+  beforeEach(async () => {
     await knex.migrate.rollback();
     await knex.migrate.latest();
     await knex.seed.run();
   });
+  */
 
 function convert_review(string) {
   if(string.length===0) {

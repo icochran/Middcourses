@@ -4,7 +4,6 @@ import ProfDropDown from "./ProfDropDown";
 import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 import Button from "react-bootstrap/Button";
-//import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
@@ -13,13 +12,11 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
-  
   const courseDetails = {...course}
+
   let prof;
   if (profName !== "Aggregate") {
-    console.log(profName);
     prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
-    console.log(prof);
     if (!prof) {
       prof.prof_name = "No specific Professor";
     }
@@ -54,17 +51,20 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
+  function arrayToAverage(array) {
+    if(array.length>0) {
+      return (array.reduce(reducer, 0) / array.length) * 10;
+    } else {
+      return 0;
+    }
+  }
+
   //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 =
-    (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
-  const courseInteresting100 =
-    (interestingArray.reduce(reducer) / interestingArray.length) * 10;
-  const courseTimeCommitment100 =
-    (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
-  const courseTimeCommitmentHours =
-    Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage =
-    satisfactionArray.reduce(reducer) / satisfactionArray.length;
+  const courseDifficulty100 = arrayToAverage(difficultyArray);
+  const courseInteresting100 = arrayToAverage(interestingArray);
+  const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray);
+  const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
+  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {
@@ -81,13 +81,13 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   };
 
   return (
-    <div style ={classBoxStyle} className={styles.classBox}>
+    <div style ={classBoxStyle} className={styles.classBox} role="gridcell">
       <Card
         // border="primary"
         style={{ height:"32rem" }}
       >
         <Card.Body className={styles.classHeader}>
-          <Card.Title className={styles.courseTitle}>{courseName}</Card.Title>
+          <Card.Title data-testid="courseName" className={styles.courseTitle}>{courseName}</Card.Title>
           <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </Card.Body>
         <Card.Body >

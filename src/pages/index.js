@@ -1,8 +1,6 @@
 
 import Head from "next/head"
 import styles from "../styles/Home.module.css"
-import CardGrid from "../components/CardGrid"
-import NavBar from "../components/NavBar"
 import "bootstrap/dist/css/bootstrap.min.css"
 import useCollection from "../hooks/useCollection"
 
@@ -82,9 +80,6 @@ export default function MainPage() {
           });
       }
     } 
-
-   // <SearchBar searchByCallback={setSearchBarInput}/>
-   //<Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
  
   return (
     <div className={styles.container}>

@@ -54,15 +54,15 @@ export default function CourseCard({ course, changeState, seeDetails }) {
 
   //get the averages of the arrays as a number between 1 and 100
   const courseDifficulty100 =
-    (difficultyArray.reduce(reducer, 0) / difficultyArray.length) * 10;
+    difficultyArray.length===0 ? 0 : (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
   const courseInteresting100 =
-    (interestingArray.reduce(reducer, 0) / interestingArray.length) * 10;
+    interestingArray.length===0 ? 0 : (interestingArray.reduce(reducer) / interestingArray.length) * 10;
   const courseTimeCommitment100 =
-    (timeCommitmentArray.reduce(reducer, 0) / timeCommitmentArray.length) * 10;
+    timeCommitmentArray.length===0 ? 0 : (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
   const courseTimeCommitmentHours =
     Math.round((courseTimeCommitment100 / 10) * 100) / 100;
   const courseSatisfactionAverage =
-    satisfactionArray.reduce(reducer, 0) / satisfactionArray.length;
+    satisfactionArray.length===0 ? 0 : satisfactionArray.reduce(reducer) / satisfactionArray.length;
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {

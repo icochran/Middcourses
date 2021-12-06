@@ -1,13 +1,13 @@
 
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
 import CardGrid from "../components/CardGrid"
 import NavBar from "../components/NavBar"
-import "bootstrap/dist/css/bootstrap.min.css";
-import useCollection from "../hooks/useCollection";
+import "bootstrap/dist/css/bootstrap.min.css"
+import useCollection from "../hooks/useCollection"
 
 import {useState} from "react"
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"
 
 import LoginWidget from "../components/LoginWidget.js"
 import SecureItem from "../components/SecureItem.js"
@@ -81,7 +81,7 @@ export default function MainPage() {
           }
           });
       }
-    }
+    } 
 
    // <SearchBar searchByCallback={setSearchBarInput}/>
    //<Filter setFilterBy={setFilterBy} departments={departments} prof={professors}/>
@@ -94,37 +94,10 @@ export default function MainPage() {
 
       <main>
         <h1 className="title">Midd Courses</h1>
-        <div className={styles.card}>
-          <SecureItem > 
-            <NavBar 
-        setSearchBar = {setSearchBarInput}
-        departments={departments} 
-        prof={professors}
-        setFilterBy={setFilterBy}/>
-       <div className={styles.wrapper}>
-          <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
-        </div>
-        <div className={styles.wrapper}>
-          <div>
-            <CardGrid courses={courses}/>
-          </div>
-        </div> 
-        </SecureItem>
-        </div>
         <LoginWidget />
-        {/* <NavBar 
-        setSearchBar = {setSearchBarInput}
-        departments={departments} 
-        prof={professors}
-        setFilterBy={setFilterBy}/>
-        <div className={styles.wrapper}>
-          <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
+        <div className={styles.card}>
+          <SecureItem setSearchBarInput ={setSearchBarInput} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} /> 
         </div>
-        <div className={styles.wrapper}>
-          <div>
-            <CardGrid courses={courses}/>
-          </div>
-        </div> */}
       </main>
     </div>
   );

@@ -63,18 +63,18 @@ export async function getCourse(id) {
     return course_obj;
 }
 
-export async function reviewCourse(course_id, professor, satisfaction, interest, time_commitment, difficulty) {
-  const prof_id = await knex("Professors").select().where({prof_name:professor}).pluck("id");
+export async function reviewCourse(course_id, professor_review) {
+  const prof_id = await knex("Professors").select().where({prof_name:professor_review.prof_name}).pluck("id");
 
   const CPObject = await knex("Course_Professor").select().where({course_id:course_id,prof_id:prof_id[0]});
 
-  const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction + satisfaction : satisfaction
-    
-  const updated_interest = CPObject.interest ? CPObject.interest + interest : interest
+  const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction + professor_review.satisfaction : professor_review.satisfaction
 
-  const updated_time_commitment = CPObject.time_commitment ? CPObject.time_commitment + time_commitment : time_commitment
+  const updated_interest = CPObject.interest ? CPObject.interest + professor_review.interest : professor_review.interest
 
-  const updated_difficulty = CPObject.difficulty ? CPObject.difficulty + difficulty : difficulty
+  const updated_time_commitment = CPObject.time_commitment ? CPObject.time_commitment + professor_review.time_commitment : professor_review.time_commitment
+
+  const updated_difficulty = CPObject.difficulty ? CPObject.difficulty + professor_review.difficulty : professor_review.difficulty
 
   const count = await knex("Course_Professor").where({course_id:course_id,prof_id:prof_id}).update({
     satisfaction: updated_satisfaction, 

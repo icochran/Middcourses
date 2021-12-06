@@ -7,6 +7,13 @@ const handler = nc()
     const courses = await getAllCourses();
     res.status(200).json(courses);
   });
-  //maybe just put the put here? then get rid of the id part???
 
 export default handler;
+
+
+
+/*
+
+
+
+*/

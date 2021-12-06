@@ -40,7 +40,7 @@ export default function MainPage() {
   
       //Prof anddrews passes the whole updated course object through but I think that I only need to pass the specific rating
       const response = await fetch(
-        `/api/films/${courseid}`,
+        `/api/courses/${courseid}`,
         {
           method: "PUT",
           body: JSON.stringify(newRating),
@@ -53,9 +53,6 @@ export default function MainPage() {
       }
     };
   
-
-
-
     let courses = collection.filter((course) => {
       if (average(course.profs[0].satisfaction) >= 4) {
         return course

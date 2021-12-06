@@ -8,7 +8,6 @@ function Container({course, setRating}) {
   const [reviewing, setReviewing] = useState(false);
   const [detailed, setDetailed] = useState(false);
   let View = CourseCard;
-  //= reviewing ? Review : CourseCard;
   if(detailed) {
     View = DetailedCourseCard;
   }

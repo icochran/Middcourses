@@ -1,3 +1,4 @@
+/*
 import { useState, useEffect } from "react";
 
 export default function useCollection() {
@@ -23,3 +24,14 @@ export default function useCollection() {
 
     return data;
 }
+*/
+
+import { useState } from "react";
+//import data from "../../data/seed.json"
+import testData from "../../data/test-data.json"
+
+export default function useCollection() {
+    const [collection] = useState(testData);
+
+    return collection;
+} 

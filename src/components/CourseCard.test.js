@@ -102,21 +102,25 @@ describe("CourseCard: CourseCard tests", () => {
 
     test("CourseCard: courses with no reviews are blue", () => {
       render(<CourseCard course={course2} />);
-      expect(screen.getByRole("style").borderColor).toEqual("#c6e4ff");
+      const card = screen.getByTestId("courseCard");
+      expect(card).toHaveClass("classBoxNoReview");
     });
 
     test("CourseCard: courses with satisfaction >= 4 are green", () => {
       render(<CourseCard course={course3} />);
-      expect(screen.getByRole("style").borderColor).toEqual();
+      const card = screen.getByTestId("courseCard");
+      expect(card).toHaveClass("classBoxHigh");
     });
 
     test("CourseCard: courses with 2 <= satisfaction < 4 are yellow", () => {
       render(<CourseCard course={course4} />);
-      expect(screen.getByRole("style").borderColor).toEqual();
+      const card = screen.getByTestId("courseCard");
+      expect(card).toHaveClass("classBoxMedium");
     });
          
     test("CourseCard: courses with satisfaction < 2 are red", () => {
       render(<CourseCard course={course1} />);
-      expect(screen.getByRole("style").borderColor).toEqual();
+      const card = screen.getByTestId("courseCard");
+      expect(card).toHaveClass("classBoxLow");
     });
 });

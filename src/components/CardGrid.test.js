@@ -63,7 +63,7 @@ describe("CardGrid: CardGrid tests", () => {
 
   test("CardGrid: displays all cards given", () => {
     render(<CardGrid courses={courses} />);
-    expect(screen.queryAllByRole("gridcell").length === 3).toBeTruthy();
+    expect(screen.queryAllByTestId("courseCard").length === 3).toBeTruthy();
   });
 
 });

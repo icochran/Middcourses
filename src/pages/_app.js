@@ -1,13 +1,17 @@
-/* eslint-disable */
-import "../styles/globals.css";
+import { Provider } from "next-auth/client";
 import SSRProvider from "react-bootstrap/SSRProvider";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <SSRProvider>
-      <Component {...pageProps} />
+      <Provider session={pageProps.session}>
+        <Component {...pageProps} />
+      </Provider>
     </SSRProvider>
   );
 }
+  
+
 
 export default MyApp;

@@ -1,13 +1,14 @@
 
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import CardGrid from "../components/CardGrid"
-import NavBar from "../components/NavBar"
-import "bootstrap/dist/css/bootstrap.min.css";
-import useCollection from "../hooks/useCollection";
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+import useCollection from "../hooks/useCollection"
 
 import {useState} from "react"
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import LoginWidget from "../components/LoginWidget.js"
+import SecureItem from "../components/SecureItem.js"
 
 export default function MainPage() {
 
@@ -92,19 +93,9 @@ export default function MainPage() {
 
       <main>
         <h1 className="title">Midd Courses</h1>
-        <NavBar 
-          setSearchBar = {setSearchBarInput}
-          departments={departments} 
-          prof={professors}
-          setFilterBy={setFilterBy}
-        />
-        <div className={styles.wrapper}>
-          <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
-        </div>
-        <div className={styles.wrapper}>
-          <div>
-            <CardGrid courses={courses}/>
-          </div>
+        <LoginWidget />
+        <div className={styles.card}>
+          <SecureItem setSearchBarInput ={setSearchBarInput} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} /> 
         </div>
       </main>
     </div>

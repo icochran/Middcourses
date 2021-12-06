@@ -24,6 +24,38 @@ export default function MainPage() {
 
     const collection = useCollection();
 
+    //I think that I can just put the setRating in here because when 
+    //I call it I can just call useCollection at the end which would rerender with the new data??
+    //I also dont need to do anything with altered films because it doesnt return it it just counts on the rerender from useCollection
+    //now how do I get useCollection to run when 
+    const setRating = async (courseid, prof_name, satisfaction, interest, time_commitment, difficulty) => {
+      const newRating = {
+        course_id: courseid, 
+        prof_name: prof_name, 
+        satisfaction: satisfaction, 
+        interest: interest, 
+        time_commitment: time_commitment, 
+        difficulty: difficulty
+      }
+  
+      //Prof anddrews passes the whole updated course object through but I think that I only need to pass the specific rating
+      const response = await fetch(
+        `/api/films/${courseid}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(newRating),
+          headers: new Headers({ "Content-type": "application/json" }),
+        }
+      );
+  
+      if(!response.ok) {
+        throw new Error(response.statusText);
+      }
+    };
+  
+
+
+
     let courses = collection.filter((course) => {
       if (average(course.profs[0].satisfaction) >= 4) {
         return course
@@ -103,7 +135,7 @@ export default function MainPage() {
         </div>
         <div className={styles.wrapper}>
           <div>
-            <CardGrid courses={courses}/>
+            <CardGrid courses={courses} setRating={setRating}/>
           </div>
         </div>
       </main>

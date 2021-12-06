@@ -2,9 +2,9 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import Container from "../components/Container";
 
-export default function CardGrid({courses}) {
+export default function CardGrid({courses, setRating}) {
 
-     const courseList = courses.map(course => (<Container key={course.id} course={course}/>)) ;
+     const courseList = courses.map(course => (<Container key={course.id} course={course} setRating={setRating}/>)) ;
 
     return(
         <div className={styles.listView} role="grid">
@@ -14,5 +14,6 @@ export default function CardGrid({courses}) {
 }
 
 CardGrid.propTypes = {
-    courses: PropTypes.arrayOf(PropTypes.object)
+    courses: PropTypes.arrayOf(PropTypes.object),
+    setRating: PropTypes.func,
 }

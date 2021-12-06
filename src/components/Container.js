@@ -4,7 +4,7 @@ import CourseCard from "../components/CourseCard";
 import Review from "../components/Review"
 import DetailedCourseCard from "../components/DetailedCourseCard"
 
-function Container({course}) {
+function Container({course, setRating}) {
   const [reviewing, setReviewing] = useState(false);
   const [detailed, setDetailed] = useState(false);
   let View = CourseCard;
@@ -28,6 +28,7 @@ function Container({course}) {
       seeDetails = {() => {
         setDetailed(!detailed);
       }}
+      setRating={setRating}
     />
   );
 }

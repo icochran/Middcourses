@@ -9,7 +9,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-export default function Review({ course, changeState }) {
+export default function Review({ course, changeState, setRating }) {
   const [prof, setProf] = useState(course.profs[0]);
   const [difficulty, setDifficulty] = useState();
   const [interest, setInterest] = useState();
@@ -21,6 +21,11 @@ export default function Review({ course, changeState }) {
   const classBoxStyle = {
     borderColor: `rgb(${0.5}, ${0.5}, ${0.5})`,
   };
+
+  function double_function(courseid, prof, satisfaction, interest, time, difficulty){
+    changeState();
+    setRating(courseid, prof, satisfaction, interest, time, difficulty);
+  }
 
   // should dry out this code eventually
   return (
@@ -194,7 +199,7 @@ export default function Review({ course, changeState }) {
           id="submit"
           variant="success"
           className={styles.submitBtn}
-          onClick={changeState}
+          onClick={double_function(course.id, prof, satisfaction, interest, time, difficulty)}
         >
           Submit
         </Button>
@@ -207,4 +212,5 @@ export default function Review({ course, changeState }) {
 Review.propTypes = {
   course: PropTypes.object.isRequired,
   changeState: PropTypes.func,
+  setRating: PropTypes.func,
 };

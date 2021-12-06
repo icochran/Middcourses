@@ -70,7 +70,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   } else if (courseSatisfactionAverage >= 2) {
     backgroundColor = "#fffeb3";
   } else if (satisfactionArray.length === 0) {
-      backgroundColor = "#c6e4ff";
+    backgroundColor = "#c6e4ff";
   } else {
     backgroundColor = "#ffbaba";
   }

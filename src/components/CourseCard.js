@@ -63,8 +63,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const courseDifficulty100 = arrayToAverage(difficultyArray);
   const courseInteresting100 = arrayToAverage(interestingArray);
   const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray);
-  const courseTimeCommitmentHours =
-    Math.round((courseTimeCommitment100 / 10) * 100) / 100;
+  const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
   const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
 
   //using the courseSatisfactionAverage set the color to red green or yellow

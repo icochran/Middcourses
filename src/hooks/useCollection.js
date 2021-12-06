@@ -1,11 +1,25 @@
-import { useState } from "react";
-//import { getAllCourses } from "../lib/backend-utils.js";
-import data from "../../data/seed.json"
-//import testData from "../../data/test-data.json"
+import { useState, useEffect } from "react";
 
 export default function useCollection() {
-    //const data = getAllCourses();
-    const [collection] = useState(data);
+    const [data, setData] = useState([]);
 
-    return collection;
+    useEffect(() => {
+        const getData = async () => {
+          const response = await fetch(
+            "/api/courses"
+          );
+    
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+    
+          const courses = await response.json();
+    
+          setData(courses);
+        };
+    
+        getData();
+      }, []);
+
+    return data;
 }

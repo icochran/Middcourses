@@ -5,12 +5,10 @@ import CardGrid from "../components/CardGrid"
 import NavBar from "../components/NavBar"
 import "bootstrap/dist/css/bootstrap.min.css";
 import useCollection from "../hooks/useCollection";
-
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function MainPage() {
-
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
@@ -22,12 +20,10 @@ export default function MainPage() {
       }
     })
 
-    const collection = useCollection();
+    let collection = useCollection();
 
-    //I think that I can just put the setRating in here because when 
-    //I call it I can just call useCollection at the end which would rerender with the new data??
-    //I also dont need to do anything with altered films because it doesnt return it it just counts on the rerender from useCollection
-    //now how do I get useCollection to run when 
+    //in his example he just changes the film data he uses to an altered film set then loads that film set in.
+    //however I think in our example it might be better to just call use collection again?
     const setRating = async (courseid, prof_name, satisfaction, interest, time_commitment, difficulty) => {
       const newRating = {
         course_id: courseid, 
@@ -47,10 +43,22 @@ export default function MainPage() {
           headers: new Headers({ "Content-type": "application/json" }),
         }
       );
-  
+
       if(!response.ok) {
         throw new Error(response.statusText);
       }
+
+      const updated_course = await response.json();
+
+      const updated_collection = collection.map((course) => {
+        if(course.id===courseid){
+          return updated_course;
+        }
+        return course
+      });
+
+      collection = updated_collection;
+      console.log(collection);
     };
   
     let courses = collection.filter((course) => {

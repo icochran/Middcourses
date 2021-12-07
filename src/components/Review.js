@@ -4,12 +4,13 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 import ProfDropDown from "./ProfDropDown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 export default function Review({ course, changeState, setRating }) {
+  //when setting the rating, you can still set the rating for aggregate
   const [prof, setProf] = useState(course.profs[0]);
   const [difficulty, setDifficulty] = useState();
   const [interest, setInterest] = useState();
@@ -21,11 +22,6 @@ export default function Review({ course, changeState, setRating }) {
   const classBoxStyle = {
     borderColor: `rgb(${0.5}, ${0.5}, ${0.5})`,
   };
-
-  function double_function(courseid, prof, satisfaction, interest, time, difficulty){
-    changeState();
-    setRating(courseid, prof, satisfaction, interest, time, difficulty);
-  }
 
   // should dry out this code eventually
   return (
@@ -199,7 +195,10 @@ export default function Review({ course, changeState, setRating }) {
           id="submit"
           variant="success"
           className={styles.submitBtn}
-          onClick={double_function(course.id, prof, satisfaction, interest, time, difficulty)}
+          onClick={ () => {
+            setRating(course.id, prof, satisfaction, interest, time, difficulty);
+            changeState();
+          }}
         >
           Submit
         </Button>

@@ -34,6 +34,7 @@ describe("Tests of the database utility functions", () => {
         const course = await getCourse(sample_course.id);
 
         expect(course.profs.length).toBe(sample_course.profs.length);
+
         for(let i=0; i<sample_course.profs.length; i++){
             expect(course.profs[i].difficulty).toEqual(sample_course.profs[i].difficulty);
             expect(course.profs[i].interest).toEqual(sample_course.profs[i].interest);

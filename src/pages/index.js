@@ -27,9 +27,9 @@ export default function MainPage() {
     const collection = useCollection();
 
     useEffect(() => {
-        if (sortBy === "Ascending"){
+        if (sortBy === "Difficulty"){
             collection.sort((courseA, courseB) => {
-                if(courseA.difficulty > courseB.difficulty){
+                if(courseA.difficulty < courseB.difficulty){
                     return 1;
                 }
                 else{
@@ -37,9 +37,9 @@ export default function MainPage() {
                 }
             })
         }
-        else if (sortBy === "Descending"){
+        else if (sortBy === "Time Commitment"){
             collection.sort((courseA, courseB) => {
-                if(courseA.difficulty > courseB.difficulty){
+                if(courseA.time_commitment < courseB.time_commitment){
                     return 1;
                 }
                 else{
@@ -47,6 +47,26 @@ export default function MainPage() {
                 }
             })
         } 
+        else if (sortBy === "Interest"){
+            collection.sort((courseA, courseB) => {
+                if(courseA.interest < courseB.interest){
+                    return 1;
+                }
+                else{
+                    return -1;
+                }
+            })
+        } 
+        else if (sortBy === "Satisfaction"){
+            collection.sort((courseA, courseB) => {
+                if(courseA.satisfaction < courseB.satisfaction){
+                    return 1;
+                }
+                else{
+                    return -1;
+                }
+            })
+        }
     }, [sortBy]);
 
     let courses = collection.filter((course) => {

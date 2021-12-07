@@ -12,7 +12,7 @@ export default function NavBar({setSearchBar, setFilterBy, setSortBy, department
 
     const depts = departments.map(dept => <NavDropdown.Item data-testid = "depts" key={dept} onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
     const profs = prof.map(professor => <NavDropdown.Item data-testid = "profs" key={professor} onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
-    const orders = ["Ascending", "Descending"].map(order => <NavDropdown.Item data-testid = "diffs" key={order} onClick={() => setSortBy(order)}>{order}</NavDropdown.Item>);
+    const orders = ["Satisfaction", "Time Commitment", "Difficulty", "Interest"].map(order => <NavDropdown.Item data-testid = "diffs" key={order} onClick={() => setSortBy(order)}>{order}</NavDropdown.Item>);
 
     return (
         <Container fluid>
@@ -31,8 +31,8 @@ export default function NavBar({setSearchBar, setFilterBy, setSortBy, department
                             <NavDropdown.Divider />
                             {profs}
                         </NavDropdown>
-                        <NavDropdown title="Sort By Difficulty" id="basic-nav-dropdown">
-                            <NavDropdown.Item data-testid = "diffs" onClick={() => sortBy("")}>None</NavDropdown.Item>
+                        <NavDropdown title="Sort By" id="basic-nav-dropdown">
+                            <NavDropdown.Item data-testid = "diffs" onClick={() => setSortBy("Satisfaction")}>None</NavDropdown.Item>
                             <NavDropdown.Divider />
                             {orders}
                         </NavDropdown>

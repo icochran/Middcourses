@@ -184,6 +184,24 @@ export default function Review({ course, changeState, setRating }) {
               >
                 7
               </Button>
+              <Button
+                variant={time === 8 ? "primary" : "secondary"}
+                onClick={() => setTime(8)}
+              >
+                8
+              </Button>
+              <Button
+                variant={time === 9 ? "primary" : "secondary"}
+                onClick={() => setTime(9)}
+              >
+                9
+              </Button>
+              <Button
+                variant={time === 10 ? "primary" : "secondary"}
+                onClick={() => setTime(10)}
+              >
+                10
+              </Button>
             </ButtonGroup>
           </div>
         </Card.Body>

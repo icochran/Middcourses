@@ -50,28 +50,10 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
-<<<<<<< HEAD
   function arrayToAverage(array, time_commitment_indicator) {
     if(array.length>0 && !time_commitment_indicator) {
       return (array.reduce(reducer, 0) / array.length) * 20;
     } else if (array.length>0 && time_commitment_indicator) {
-=======
-  //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 =
-    difficultyArray.length===0 ? 0 : (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
-  const courseInteresting100 =
-    interestingArray.length===0 ? 0 : (interestingArray.reduce(reducer) / interestingArray.length) * 10;
-  const courseTimeCommitment100 =
-    timeCommitmentArray.length===0 ? 0 : (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
-  const courseTimeCommitmentHours =
-    Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage =
-    satisfactionArray.length===0 ? 0 : satisfactionArray.reduce(reducer) / satisfactionArray.length;
-
-  /* This following code is not working for some reason, the card colors are wrong sometimes, not sure why
-  function arrayToAverage(array) {
-    if(array.length>0) {
->>>>>>> main
       return (array.reduce(reducer, 0) / array.length) * 10;
     }
     return 0;
@@ -82,12 +64,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const courseInteresting100 = arrayToAverage(interestingArray, false);
   const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray, true);
   const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-<<<<<<< HEAD
   const courseSatisfactionAverage = arrayToAverage(satisfactionArray, false);
-=======
-  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
-  */
->>>>>>> main
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;

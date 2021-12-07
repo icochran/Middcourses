@@ -62,7 +62,7 @@
 }
 
 /* Defines the actual box of the class card */
-.classBox{
+.classBoxNoReview{
   width: 300px;
   border-radius: 20px;
   border-width: 10px;
@@ -71,6 +71,43 @@
   margin: 10px;
   border-style: solid;
   background: #cecece;
+  border-color: #c6e4ff;
+}
+
+.classBoxHigh{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #d8ffc7;
+}
+
+.classBoxMedium{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #fffeb3;
+}
+
+.classBoxLow{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #ffbaba;
 }
 
 .detailedClassBox{

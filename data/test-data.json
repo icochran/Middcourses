@@ -84,10 +84,10 @@
     "profs": [
       {
         "prof_name": "C. Andrews",
-        "satisfaction": [9,9,9,9,9],
-        "difficulty": [5, 5, 5, 5, 5, 5, 5],
-        "interest": [5, 4, 3, 2, 1, 3, 4],
-        "time_commitment": [5, 4, 3, 4, 3, 2, 1]
+        "satisfaction": [],
+        "difficulty": [],
+        "interest": [],
+        "time_commitment": []
       }
     ],
     "course_desc":"In this course students will learn about agroecology as a set of practices, a philosophy, and a social movement, with an emphasis on the first two perspectives. Agroecology takes advantage of natural processes to the greatest extent possible, using biological inputs rather than purchased pesticides and fertilizers. In addition to having major benefits for poor farmers in developing countries, it is attracting increased attention as an alternative to industrialized agriculture in wealthy countries.  The course will include field trips to farms, lab exercises, and discussion of readings. (formerly INTD 0310) 3 hrs. lect./disc.",

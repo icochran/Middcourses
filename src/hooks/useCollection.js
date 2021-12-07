@@ -21,5 +21,23 @@ export default function useCollection() {
       getData();
     }, []);
 
+<<<<<<< HEAD
     return {data, setData};
 }
+=======
+    return data;
+}
+
+
+/*
+import { useState } from "react";
+//import data from "../../data/seed.json"
+import testData from "../../data/test-data.json"
+
+export default function useCollection() {
+    const [collection] = useState(testData);
+
+    return collection;
+} 
+*/
+>>>>>>> main

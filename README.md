@@ -15,7 +15,13 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 ## Getting Started
 
-First, run the development server:
+In the repository, create a file called .env.development.local and copy and paste the following:
+NEXTAUTH_SECRET= "a long, randomly-generated string stored in env"
+GOOGLE_CLIENT_ID= "933419971748-v35k2b7c3e6d4koe16d4jraucjqugm5v.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET= "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"
+
+
+Then, run the development server:
 
 ```bash
 npm run dev

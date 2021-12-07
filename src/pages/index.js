@@ -3,12 +3,13 @@ import Head from "next/head"
 import styles from "../styles/Home.module.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import useCollection from "../hooks/useCollection"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 import LoginWidget from "../components/LoginWidget.js"
 import SecureItem from "../components/SecureItem.js"
 
 export default function MainPage() {
+    const {data: collection, setData: setCollection} = useCollection();
     const [filterBy, setFilterBy] = useState("")
     const [searchBarInput, setSearchBarInput] = useState()
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
@@ -20,11 +21,7 @@ export default function MainPage() {
       }
     })
 
-    let collection = useCollection();
-
-    //in his example he just changes the film data he uses to an altered film set then loads that film set in.
-    //however I think in our example it might be better to just call use collection again?
-    const setRating = async (courseid, prof_name, satisfaction, interest, time_commitment, difficulty) => {
+    const setRating = async (courseid, prof_name, satisfaction, interest, time_commitment, difficulty) => {      
       const newRating = {
         course_id: courseid, 
         prof_name: prof_name, 
@@ -34,7 +31,6 @@ export default function MainPage() {
         difficulty: difficulty
       }
 
-      //Prof anddrews passes the whole updated course object through but I think that I only need to pass the specific rating
       const response = await fetch(
         `/api/courses/${courseid}`,
         {
@@ -42,13 +38,12 @@ export default function MainPage() {
           body: JSON.stringify(newRating),
           headers: new Headers({ "Content-type": "application/json" }),
         }
-      );
+      )
 
       if(!response.ok) {
         throw new Error(response.statusText);
       }
-
-      //Can I get this to just use the useCollection rather than actually going through and updating the collection?
+          
       const updated_course = await response.json();
 
       const updated_collection = collection.map((course) => {
@@ -58,7 +53,7 @@ export default function MainPage() {
         return course
       });
 
-      collection = updated_collection;
+      setCollection(updated_collection);
     };
   
     let courses = collection.filter((course) => {

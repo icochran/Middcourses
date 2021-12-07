@@ -16,14 +16,15 @@ const handler = nc()
     }
     
   })
-  .put((req, res) => {
+  .put(async(req, res) => {
     // update a film
     const { id } = req.query;
     const {prof_name, satisfaction, interest, time_commitment, difficulty} = req.body;
 
-    const success = reviewCourse(+id, prof_name, +satisfaction, +interest, +time_commitment, +difficulty);
+    const success = await reviewCourse(+id, prof_name, +satisfaction, +interest, +time_commitment, +difficulty);
+
     if (success){
-      res.status(200).json(req.body);
+      res.status(200).json(success);
     }else{
       res.status(400); // bad request
     }

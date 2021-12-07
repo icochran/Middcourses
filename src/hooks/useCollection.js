@@ -21,5 +21,5 @@ export default function useCollection() {
       getData();
     }, []);
 
-    return data;
+    return {data, setData};
 }

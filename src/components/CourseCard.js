@@ -51,20 +51,21 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
-  function arrayToAverage(array) {
-    if(array.length>0) {
+  function arrayToAverage(array, time_commitment_indicator) {
+    if(array.length>0 && !time_commitment_indicator) {
+      return (array.reduce(reducer, 0) / array.length) * 20;
+    } else if (array.length>0 && time_commitment_indicator) {
       return (array.reduce(reducer, 0) / array.length) * 10;
-    } else {
-      return 0;
     }
+    return 0;
   }
 
   //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 = arrayToAverage(difficultyArray);
-  const courseInteresting100 = arrayToAverage(interestingArray);
-  const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray);
+  const courseDifficulty100 = arrayToAverage(difficultyArray, false);
+  const courseInteresting100 = arrayToAverage(interestingArray, false);
+  const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray, true);
   const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
+  const courseSatisfactionAverage = arrayToAverage(satisfactionArray, false);
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   if (courseSatisfactionAverage >= 4) {
@@ -130,41 +131,3 @@ CourseCard.propTypes = {
   course: PropTypes.object.isRequired,
 };
 
-{
-  /* <div className={styles.classBox} style={classBoxStyle} role="gridcell">
-      <div className={styles.classHeader}>
-        <span data-testid="courseName" className={styles.className}>
-          {courseName}
-        </span>
-        <div className={styles.profBar}>
-          <ProfDropDown profs={course.profs} setProfName={setProfName} />
-        </div>
-      </div>
-
-      <div className={styles.courseBody}>
-        <RatingBar
-          aspect="Difficulty"
-          percentage={courseDifficulty100}
-          numHours={undefined}
-        />
-        <RatingBar
-          aspect="Interesting"
-          percentage={courseInteresting100}
-          numHours={undefined}
-        />
-        <RatingBar
-          aspect="Time Commitment"
-          percentage={courseTimeCommitment100}
-          numHours={courseTimeCommitmentHours}
-        />
-      </div>
-      <Stack direction="horizontal" gap={3}>
-        <Button id="review" onClick={changeState} variant="secondary">
-          + Add Review
-        </Button>
-        <Button id="detailed" onClick={seeDetails} variant="secondary">
-          Details
-        </Button>
-      </Stack>
-    </div> */
-}

@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar"
 import CardGrid from "../components/CardGrid"
 import styles from "../styles/Home.module.css"
 
-export default function SecureItem({setSearchBarInput, departments, professors, setFilterBy, filterBy, courses}){
+export default function SecureItem({setSearchBarInput, departments, professors, setFilterBy, filterBy, courses, setRating}){
   const [session] = useSession();
     return (
         <div>
@@ -17,7 +17,7 @@ export default function SecureItem({setSearchBarInput, departments, professors, 
   </div>
   <div className={styles.wrapper}>
     <div>
-      <CardGrid courses={courses}/>
+      <CardGrid courses={courses} setRating={setRating}/>
     </div>
   </div> </div>: "You are not logged in"}
         </div>

@@ -8,7 +8,7 @@ export default function RatingBar({ aspect, percentage, numHours}) {
     background: "#47b5ff",
   }
 
-  const hour_s = numHours===1 ? "hour" : "hours";
+  const hour_s = numHours===1 ? "hour" : numHours===undefined ? "" : "hours";
   const timeHours = aspect==="Time Commitment" ? <p data-testid="timecommitmentBarNumber" className={styles.timecommitmentBarNumber}>{numHours} {hour_s}</p> : undefined;
 
   return (

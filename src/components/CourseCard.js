@@ -8,7 +8,6 @@ import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
 export default function CourseCard({ course, changeState, seeDetails, setAddReview }) {
-  let backgroundColor;
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -51,6 +50,19 @@ export default function CourseCard({ course, changeState, seeDetails, setAddRevi
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
+  //get the averages of the arrays as a number between 1 and 100
+  const courseDifficulty100 =
+    difficultyArray.length===0 ? 0 : (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
+  const courseInteresting100 =
+    interestingArray.length===0 ? 0 : (interestingArray.reduce(reducer) / interestingArray.length) * 10;
+  const courseTimeCommitment100 =
+    timeCommitmentArray.length===0 ? 0 : (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
+  const courseTimeCommitmentHours =
+    Math.round((courseTimeCommitment100 / 10) * 100) / 100;
+  const courseSatisfactionAverage =
+    satisfactionArray.length===0 ? 0 : satisfactionArray.reduce(reducer) / satisfactionArray.length;
+
+  /* This following code is not working for some reason, the card colors are wrong sometimes, not sure why
   function arrayToAverage(array) {
     if(array.length>0) {
       return (array.reduce(reducer, 0) / array.length) * 10;
@@ -65,23 +77,21 @@ export default function CourseCard({ course, changeState, seeDetails, setAddRevi
   const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray);
   const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
   const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
+  */
 
   //using the courseSatisfactionAverage set the color to red green or yellow
+  let style = styles.classBoxNoReview;
+
   if (courseSatisfactionAverage >= 4) {
-    backgroundColor = "#d8ffc7";
+    style = styles.classBoxHigh;
   } else if (courseSatisfactionAverage >= 2) {
-    backgroundColor = "#fffeb3";
-  } else {
-    backgroundColor = "#ffbaba";
+    style = styles.classBoxMedium;
+  } else if (courseSatisfactionAverage > 0) {
+    style = styles.classBoxLow;
   }
 
-  //sets the color of the boxes
-  const classBoxStyle = {
-    borderColor: backgroundColor,
-  };
-
   return (
-    <div style ={classBoxStyle} className={styles.classBox} role="gridcell">
+    <div className={style} data-testid="courseCard">
       <Card
         // border="primary"
         style={{ height:"32rem" }}
@@ -109,7 +119,7 @@ export default function CourseCard({ course, changeState, seeDetails, setAddRevi
             <RatingBar
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
-              numHours={courseTimeCommitmentHours}
+              numHours={courseTimeCommitmentHours ? courseTimeCommitmentHours : undefined}
             />
       
         </Card.Body>

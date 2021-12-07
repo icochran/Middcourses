@@ -129,7 +129,7 @@ export default function MainPage() {
             courseB.profs.forEach(prof => SatisfactionB += average(prof.satisfaction))
             SatisfactionA = SatisfactionA/courseA.profs.length
             SatisfactionB = SatisfactionB/courseB.profs.length
-            return SatisfactionA - SatisfactionB
+            return SatisfactionB - SatisfactionA
         })
     }
 

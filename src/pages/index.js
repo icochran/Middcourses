@@ -94,6 +94,8 @@ export default function MainPage() {
             let DifficultyB = 0
             courseA.profs.forEach(prof => DifficultyA += average(prof.difficulty))
             courseB.profs.forEach(prof => DifficultyB += average(prof.difficulty))
+            DifficultyA = DifficultyA/courseA.profs.length
+            DifficultyB = DifficultyB/courseA.profs.length
             return DifficultyA - DifficultyB
         })
     }
@@ -103,6 +105,8 @@ export default function MainPage() {
             let TCB = 0
             courseA.profs.forEach(prof => TCA += average(prof.time_commitment))
             courseB.profs.forEach(prof => TCB += average(prof.time_commitment))
+            TCA = TCA/courseA.profs.length
+            TCB = TCB/courseA.profs.length
             return TCA - TCB
         })
     }
@@ -112,6 +116,8 @@ export default function MainPage() {
             let InterestB = 0
             courseA.profs.forEach(prof => InterestA += average(prof.interest))
             courseB.profs.forEach(prof => InterestB += average(prof.interest))
+            InterestA = InterestA/courseA.profs.length
+            InterestB = InterestB/courseA.profs.length
             return InterestA - InterestB
         })
     }
@@ -121,6 +127,8 @@ export default function MainPage() {
             let SatisfactionB = 0
             courseA.profs.forEach(prof => SatisfactionA += average(prof.satisfaction))
             courseB.profs.forEach(prof => SatisfactionB += average(prof.satisfaction))
+            SatisfactionA = SatisfactionA/courseA.profs.length
+            SatisfactionB = SatisfactionB/courseB.profs.length
             return SatisfactionA - SatisfactionB
         })
     }

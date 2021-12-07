@@ -14,8 +14,9 @@ export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
     const profs = prof.map(professor => <NavDropdown.Item data-testid = "profs" key={professor} onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
 
     return (
-        <Container fluid>
-        <Navbar bg="light">
+        
+        <Navbar bg="light" fixed="top">
+            <Container fluid>
                 <NavbarBrand>MiddCourses</NavbarBrand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -35,7 +36,7 @@ export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
                         <SearchBar searchByCallback = {setSearchBar}/>
                     </Nav>
                 </Navbar.Collapse>
+            </Container>
         </Navbar>
-        </Container>
     );
 }

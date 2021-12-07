@@ -25,33 +25,59 @@
 /* Defines the box with the title and professors drop down */
 .classHeader{
   text-align: center;
-  margin: 10px 0px 10px 0px;
+  margin: 10px 10px 30px;
   height: 100px;
+  margin: 10px 10px 10px;
+  height: 70px;
 }
 .courseTitle{
   text-align: center;
   margin: 0px 0px 20px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
+}
+
+.reviewCourseTitle{
+  text-align: center;
+  margin: 0px 0px 20px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 1; 
+  -webkit-box-orient: vertical;
 }
 .detailedClassHeader{
   text-align: center;
-  margin: 10px 10px 30px;
+  margin: 5px 5px 20px;
+  height: 70px;
 }
 
 
 /* Defines the name of the course in the course card */
 .className{
-  font-size: 25px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* number of lines to show */
-          line-clamp: 3; 
-  -webkit-box-orient: vertical;
+  font-size: 20px;
 }
 
 /* Defines the box with the progress bars in the course card */
 .courseBody{
-  margin: 00px 0px 10px 00px;
+  margin: 0px 5px 9px;
+  height: 395px;
+  overflow-y: auto;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+.backCourseBody{
+  margin: 0px 5px 9px;
+  height: 395px;
+  overflow-y: hidden;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
 }
 
 /* The box containing the grid of course cards */
@@ -74,14 +100,12 @@
 }
 
 .detailedClassBox{
-  width: 900px;
-  border-radius: 20px;
-  border-width: 15px;
+  width: 300px;
   float: left;
   position: left;
   margin: 10px;
-  border-style: solid;
-  background: #cecece;
+  backface-visibility: inherit !important;
+  -webkit-backface-visibility: inherit !important;
 }
 
 
@@ -90,7 +114,7 @@
   display: block;
   height: 4px;
   border-radius: 6px;
-  }
+}
 
 /* The black bar behind the progress bars */
 .BarBackground{
@@ -99,7 +123,8 @@
   border-radius: 6px;
   width: 100%;
   border-radius: 6px;
-  background-color: #000000;  
+  background-color: #000000;
+  margin-bottom: 20px;
 }
 
 /* The number showing the time commitment at the bottom of each card */
@@ -186,4 +211,34 @@
 
 .submitBtn {
   float: right;
+}
+
+.profBar {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.flippyBox{
+  width: 300px;
+  height: 530px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  padding: 10px;
+  box-sizing: unset;
+}
+
+.center {
+  align-self: center !important;
+  box-shadow: none !important;
+}
+
+.aspectSpacing {
+  margin: 0;
+}
+
+.btnGroupSpacing{
+  margin-bottom: 15px;
 }

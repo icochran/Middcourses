@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 //import { useState } from "react";
 //import RatingBar from "./RatingBar.js";
 
-export default function DetailedCourseCard({ course, seeDetails }) {
+export default function DetailedCourseCard({ course, seeDetails, setBack }) {
   
 //const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -55,16 +55,16 @@ if ((courseDescription.lastIndexOf(")"))!==-1 && courseDescription.length-course
   };
 
   return (
-    <Card  style={classBoxStyle} role="gridcell">
+    <Card  style={classBoxStyle} className={styles.detailedClassBox} role="gridcell">
       <div className={styles.detailedClassHeader}>
         <span className={styles.className}>{courseName}</span>
       </div>
 
       <div className={styles.courseBody}>
-            <p>{courseDescription}</p>
-            <p>{prereqs}</p>
+        <p>{courseDescription}</p>
+        <p>{prereqs}</p>
       </div>
-      <Button size="sm" variant="outline-secondary" onClick= {seeDetails}>←Back</Button>
+      <Button size="sm" variant="outline-secondary" onClick={()=>setBack()}>←Back</Button>
     </Card>
   );
 }

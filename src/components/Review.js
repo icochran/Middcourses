@@ -196,7 +196,7 @@ export default function Review({ course, changeState, setRating }) {
           variant="success"
           className={styles.submitBtn}
           onClick={ () => {
-            setRating(course.id, prof, satisfaction, interest, time, difficulty);
+            setRating(course.id, prof.prof_name, satisfaction, interest, time, difficulty);
             changeState();
           }}
         >

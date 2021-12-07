@@ -18,9 +18,10 @@ const handler = nc()
   })
   .put((req, res) => {
     // update a film
-    const { id, prof_name, satisfaction, interest, time_commitment, difficulty } = req.query;
+    const { id } = req.query;
+    const {prof_name, satisfaction, interest, time_commitment, difficulty} = req.body;
 
-    const success = reviewCourse(+id, prof_name, satisfaction, interest, time_commitment, difficulty);
+    const success = reviewCourse(+id, prof_name, +satisfaction, +interest, +time_commitment, +difficulty);
     if (success){
       res.status(200).json(req.body);
     }else{

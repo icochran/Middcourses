@@ -5,7 +5,7 @@ import CardGrid from "../components/CardGrid"
 import NavBar from "../components/NavBar"
 import "bootstrap/dist/css/bootstrap.min.css";
 import useCollection from "../hooks/useCollection";
-import {useEffect, useState} from "react"
+import {useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function MainPage() {
@@ -33,7 +33,7 @@ export default function MainPage() {
         time_commitment: time_commitment, 
         difficulty: difficulty
       }
-  
+
       //Prof anddrews passes the whole updated course object through but I think that I only need to pass the specific rating
       const response = await fetch(
         `/api/courses/${courseid}`,
@@ -48,6 +48,7 @@ export default function MainPage() {
         throw new Error(response.statusText);
       }
 
+      //Can I get this to just use the useCollection rather than actually going through and updating the collection?
       const updated_course = await response.json();
 
       const updated_collection = collection.map((course) => {
@@ -58,7 +59,6 @@ export default function MainPage() {
       });
 
       collection = updated_collection;
-      console.log(collection);
     };
   
     let courses = collection.filter((course) => {

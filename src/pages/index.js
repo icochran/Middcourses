@@ -26,49 +26,6 @@ export default function MainPage() {
 
     const collection = useCollection();
 
-    useEffect(() => {
-        if (sortBy === "Difficulty"){
-            collection.sort((courseA, courseB) => {
-                if(courseA.difficulty < courseB.difficulty){
-                    return 1;
-                }
-                else{
-                    return -1;
-                }
-            })
-        }
-        else if (sortBy === "Time Commitment"){
-            collection.sort((courseA, courseB) => {
-                if(courseA.time_commitment < courseB.time_commitment){
-                    return 1;
-                }
-                else{
-                    return -1;
-                }
-            })
-        } 
-        else if (sortBy === "Interest"){
-            collection.sort((courseA, courseB) => {
-                if(courseA.interest < courseB.interest){
-                    return 1;
-                }
-                else{
-                    return -1;
-                }
-            })
-        } 
-        else if (sortBy === "Satisfaction"){
-            collection.sort((courseA, courseB) => {
-                if(courseA.satisfaction < courseB.satisfaction){
-                    return 1;
-                }
-                else{
-                    return -1;
-                }
-            })
-        }
-    }, [sortBy]);
-
     let courses = collection.filter((course) => {
       if (average(course.profs[0].satisfaction) >= 4) {
         return course
@@ -128,6 +85,47 @@ export default function MainPage() {
           });
       }
     }
+
+    useEffect(() => {
+        console.log (courses)
+        if (sortBy === "Difficulty"){
+            courses.sort((courseA, courseB) => {
+                let DifficultyA = 0
+                let DifficultyB = 0
+                courseA.profs.forEach(prof => DifficultyA += average(prof.difficulty))
+                courseB.profs.forEach(prof => DifficultyB += average(prof.difficulty))
+                return DifficultyA-DifficultyB
+            })
+        }
+        else if (sortBy === "Time Commitment"){
+            courses.sort((courseA, courseB) => {
+                let TCA = 0
+                let TCB = 0
+                courseA.profs.forEach(prof => TCA += average(prof.time_commitment))
+                courseB.profs.forEach(prof => TCB += average(prof.time_commitment))
+                return TCA-TCB
+            })
+        } 
+        else if (sortBy === "Interest"){
+            courses.sort((courseA, courseB) => {
+                let InterestA = 0
+                let InterestB = 0
+                courseA.profs.forEach(prof => InterestA += average(prof.interest))
+                courseB.profs.forEach(prof => InterestB += average(prof.interest))
+                return InterestA-InterestB
+            })
+        } 
+        else if (sortBy === "Satisfaction"){
+            courses.sort((courseA, courseB) => {
+                let SatisfactionA = 0
+                let SatisfactionB = 0
+                courseA.profs.forEach(prof => SatisfactionA += average(prof.satisfaction))
+                courseB.profs.forEach(prof => SatisfactionB += average(prof.satisfaction))
+                return SatisfactionA-SatisfactionB
+            })
+        }
+        console.log (courses)
+    }, [sortBy, courses]);
 
   return (
     <div className={styles.container}>

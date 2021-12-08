@@ -25,8 +25,12 @@
 /* Defines the box with the title and professors drop down */
 .classHeader{
   text-align: center;
-  margin: 10px 10px 30px;
+  margin: 10px 0px 10px 0px;
   height: 100px;
+}
+.courseTitle{
+  text-align: center;
+  margin: 0px 0px 20px 0px;
 }
 .detailedClassHeader{
   text-align: center;
@@ -47,7 +51,7 @@
 
 /* Defines the box with the progress bars in the course card */
 .courseBody{
-  margin: 0px 10px 30px;
+  margin: 00px 0px 10px 00px;
 }
 
 /* The box containing the grid of course cards */
@@ -58,15 +62,52 @@
 }
 
 /* Defines the actual box of the class card */
-.classBox{
+.classBoxNoReview{
   width: 300px;
   border-radius: 20px;
-  border-width: 15px;
+  border-width: 10px;
   float: left;
   position: left;
   margin: 10px;
   border-style: solid;
   background: #cecece;
+  border-color: #c6e4ff;
+}
+
+.classBoxHigh{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #d8ffc7;
+}
+
+.classBoxMedium{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #fffeb3;
+}
+
+.classBoxLow{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #ffbaba;
 }
 
 .detailedClassBox{
@@ -148,3 +189,38 @@
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+/* Styling for Add review buttons */
+
+.reviewBorderBtn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    outline: none;
+    border-radius: 7.5px;
+    border-style: solid;
+}
+
+.backBtn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  border-radius: 7.5px;
+  border-style: none;
+}
+
+.detailBtn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  border-radius: 7.5px;
+  float: right;
+  border-style: solid;
+}
+
+.submitBtn {
+  float: right;
+}

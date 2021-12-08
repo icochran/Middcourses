@@ -42,7 +42,7 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
       time_commitment: p_time,
     };
   }
-
+  const numReviews = prof.difficulty.length
   //for now we are just using the array of the first professor, though there are multiple
   const difficultyArray = prof.difficulty;
   const interestingArray = prof.interest;
@@ -121,7 +121,7 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
               percentage={courseTimeCommitment100}
               numHours={courseTimeCommitmentHours ? courseTimeCommitmentHours : undefined}
             />
-      
+            <p className={styles.nReviews}>{`${numReviews} Reviews`} </p>
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >

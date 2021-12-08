@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import useCollection from "../hooks/useCollection"
 
 import {useState} from "react"
-import "bootstrap/dist/css/bootstrap.min.css"
 
 import LoginWidget from "../components/LoginWidget.js"
 import SecureItem from "../components/SecureItem.js"
@@ -95,7 +94,7 @@ export default function MainPage() {
         <h1 className="title">Midd Courses</h1>
         <LoginWidget />
         <div className={styles.card}>
-          <SecureItem setSearchBarInput ={setSearchBarInput} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} /> 
+          <SecureItem setSearchBarInput = {setSearchBarInput} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} /> 
         </div>
       </main>
     </div>

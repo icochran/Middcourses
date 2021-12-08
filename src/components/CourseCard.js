@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
-export default function CourseCard({ course, changeState, seeDetails }) {
+export default function CourseCard({ course, seeDetails, setAddReview }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -96,10 +96,14 @@ export default function CourseCard({ course, changeState, seeDetails }) {
         // border="primary"
         style={{ height:"32rem" }}
       >
+        <div>
         <Card.Body className={styles.classHeader}>
           <Card.Title data-testid="courseName" className={styles.courseTitle}>{courseName}</Card.Title>
-          <ProfDropDown profs={course.profs} setProfName={setProfName} />
         </Card.Body>
+        <div className = {styles.profBar}>
+        <ProfDropDown profs={course.profs} setProfName={setProfName} />
+        </div>
+        </div>
         <Card.Body >
           
             <RatingBar
@@ -121,7 +125,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >
-            <Button id="review" onClick={changeState} variant="secondary" >
+            <Button id="review" onClick={()=>setAddReview()} variant="secondary" >
               + Add Review
             </Button>
             <Button id="detailed" onClick={seeDetails} variant="secondary">

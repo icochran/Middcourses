@@ -47,6 +47,10 @@ export default function ProfDropDown({profs, setProfName}) {
         </Dropdown.Menu>
       </Dropdown>
     );
+  } else if (profs[0].prof_name === "") {
+    return(
+    <Button variant="success">No Professor Listed</Button>
+    );
   } else {
     return (
       <Button variant="success" className="text-center">{profs[0].prof_name}</Button>

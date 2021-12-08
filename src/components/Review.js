@@ -25,15 +25,15 @@ export default function Review({ course, changeState, setRating }) {
 
   // should dry out this code eventually
   return (
-    <div styles={classBoxStyle} className={styles.classBox}>
+    <div styles={classBoxStyle} className={styles.classBoxReview}>
       <Card style={{height:"32rem"}}>
         <Card.Body className="text-center"  className={styles.classHeader}>
-          <Card.Title >{courseName}</Card.Title>
+          <Card.Title className={styles.reviewCourseTitle}>{courseName}</Card.Title>
           <ProfDropDown profs={course.profs} setProfName={setProf} />
         </Card.Body>
         <Card.Body >
-            <p>Difficulty</p>
-            <ButtonGroup aria-label="difficultyButtons" size="sm" data-testid="Difficulty">
+            <p className={styles.aspectSpacing}>Difficulty</p>
+            <ButtonGroup className={styles.btnGroupSpacing} aria-label="difficultyButtons" size="sm" data-testid="Difficulty">
               <Button
                 variant={difficulty === 1 ? "primary" : "secondary"}
                 onClick={() => setDifficulty(1)}
@@ -68,8 +68,8 @@ export default function Review({ course, changeState, setRating }) {
   
 
           <div className="interesting">
-            <p>Interest</p>
-            <ButtonGroup aria-label="interestingButtons" size="sm" data-testid="Interest">
+            <p className={styles.aspectSpacing}>Interest</p>
+            <ButtonGroup className={styles.btnGroupSpacing} aria-label="interestingButtons" size="sm" data-testid="Interest">
               <Button
                 variant={interest === 1 ? "primary" : "secondary"}
                 onClick={() => setInterest(1)}
@@ -104,8 +104,8 @@ export default function Review({ course, changeState, setRating }) {
           </div>
 
           <div className="satisfaction">
-            <p>Overall Satisfaction</p>
-            <ButtonGroup aria-label="satisfactionButtons" size="sm" data-testid="Satisfaction">
+            <p className={styles.aspectSpacing}>Overall Satisfaction</p>
+            <ButtonGroup className={styles.btnGroupSpacing} aria-label="satisfactionButtons" size="sm" data-testid="Satisfaction">
               <Button
                 variant={satisfaction === 1 ? "primary" : "secondary"}
                 onClick={() => setSatisfaction(1)}
@@ -140,8 +140,8 @@ export default function Review({ course, changeState, setRating }) {
           </div>
 
           <div className="time commitment">
-            <p>Time Commitment</p>
-            <ButtonGroup aria-label="timeButtons" size="sm" data-testid="Time">
+            <p className={styles.aspectSpacing}>Time Commitment</p>
+            <ButtonGroup className={styles.btnGroupSpacing} aria-label="timeButtons" size="sm" data-testid="Time">
               <Button
                 variant={time === 1 ? "primary" : "secondary"}
                 onClick={() => setTime(1)}
@@ -218,7 +218,7 @@ export default function Review({ course, changeState, setRating }) {
 
     </div>
   );
-}
+  }
 
 Review.propTypes = {
   course: PropTypes.object.isRequired,

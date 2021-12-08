@@ -68,22 +68,13 @@ export async function reviewCourse(course_id, prof_name, satisfaction, interest,
 
   const CPObject = await knex("Course_Professor").select().where({course_id:course_id,prof_id:prof_id[0]});
 
-  console.log("this is CPObject");
-  console.log(CPObject);
+  const updated_satisfaction = CPObject[0].satisfaction ? CPObject[0].satisfaction.concat(satisfaction.toString()) : satisfaction
 
-  console.log("This is what is should be")
-  console.log(CPObject.satisfaction.concat(satisfaction.toString()));
+  const updated_interest = CPObject[0].interest ? CPObject[0].interest.concat(interest.toString()) : interest
 
-  const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction.concat(satisfaction.toString()) : satisfaction
+  const updated_time_commitment = CPObject[0].time_commitment ? CPObject[0].time_commitment.concat(time_commitment.toString()) : time_commitment
 
-  console.log("This is updated satisfaction");
-  console.log(updated_satisfaction);
-
-  const updated_interest = CPObject.interest ? CPObject.interest.concat(interest.toString()) : interest
-
-  const updated_time_commitment = CPObject.time_commitment ? CPObject.time_commitment.concat(time_commitment.toString()) : time_commitment
-
-  const updated_difficulty = CPObject.difficulty ? CPObject.difficulty.concat(difficulty.toString()) : difficulty
+  const updated_difficulty = CPObject[0].difficulty ? CPObject[0].difficulty.concat(difficulty.toString()) : difficulty
 
   const count = await knex("Course_Professor").where({course_id:course_id,prof_id:prof_id}).update({
     satisfaction: updated_satisfaction, 

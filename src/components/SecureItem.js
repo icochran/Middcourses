@@ -24,9 +24,3 @@ export default function SecureItem({setSearchBarInput, departments, professors, 
         </div>
     )
 }
-
-SecureItem.propTypes = {
-  course: PropTypes.object.isRequired,
-  setSearchBarInput: PropTypes.func.isRequired,
-};
-

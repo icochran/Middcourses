@@ -9,7 +9,6 @@ import Card from "react-bootstrap/Card";
 
 export default function CourseCard({ course, changeState, seeDetails }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
-  const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
   const courseDetails = {...course}
 
@@ -50,21 +49,29 @@ export default function CourseCard({ course, changeState, seeDetails }) {
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
-  function arrayToAverage(array, time_commitment_indicator) {
-    if(array.length>0 && !time_commitment_indicator) {
-      return (array.reduce(reducer, 0) / array.length) * 20;
-    } else if (array.length>0 && time_commitment_indicator) {
-      return (array.reduce(reducer, 0) / array.length) * 20;
+  function arrayToPercentage(array) {
+    if(array.length>0) {
+      let total=0;
+      array.forEach((e) => total+=parseInt(e));
+      return (total/array.length*20)
+    }
+    return 0;
+  }
+
+  function arrayToAverage(array) {
+    if(array.length>0) {
+      let total=0;
+      array.forEach((e) => total+=parseInt(e));
+      return total/array.length;
     }
     return 0;
   }
 
   //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 = arrayToAverage(difficultyArray, false);
-  const courseInteresting100 = arrayToAverage(interestingArray, false);
-  const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray, true);
-  const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage = arrayToAverage(satisfactionArray, false);
+  const courseDifficulty100 = arrayToPercentage(difficultyArray);
+  const courseInteresting100 = arrayToPercentage(interestingArray);
+  const courseTimeCommitment100 = arrayToPercentage(timeCommitmentArray);
+  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;
@@ -92,17 +99,14 @@ export default function CourseCard({ course, changeState, seeDetails }) {
             <RatingBar
               aspect="Difficulty"
               percentage={courseDifficulty100}
-              numHours={undefined}
             />
             <RatingBar
               aspect="Interesting"
               percentage={courseInteresting100}
-              numHours={undefined}
             />
             <RatingBar
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
-              numHours={courseTimeCommitmentHours ? courseTimeCommitmentHours : undefined}
             />
       
         </Card.Body>

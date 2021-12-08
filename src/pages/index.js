@@ -31,6 +31,8 @@ export default function MainPage() {
         difficulty: difficulty
       }
 
+      console.log(newRating);
+
       const response = await fetch(
         `/api/courses/${courseid}`,
         {

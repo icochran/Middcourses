@@ -1,7 +1,6 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button"
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 export default function ProfDropDown({profs, profName, setProfName}) {
   //const [prof, setProf] = useState("Professor");

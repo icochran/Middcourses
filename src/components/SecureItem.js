@@ -7,12 +7,12 @@ export default function SecureItem({setSearchBarInput, departments, professors, 
   const [session] = useSession();
     return (
         <div>
-            {(session) ? <div> <NavBar
+            {(session) ? <div><div className={styles.navBarTop}><NavBar
   setSearchBar = {setSearchBarInput}
   departments={departments} 
   setSortBy = {setSortBy}
   prof={professors}
-  setFilterBy={setFilterBy}/>
+  setFilterBy={setFilterBy}/> </div>
  <div className={styles.wrapper}>
     <h2>Filtering by: {filterBy === "" ? "None" : filterBy} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sorting by: {sortBy}</h2>
   </div>

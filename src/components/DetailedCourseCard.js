@@ -2,8 +2,7 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-
-export default function DetailedCourseCard({ course, seeDetails }) {
+export default function DetailedCourseCard({ course, setBack }) {
 
 const courseName = course.class_name;
 let courseDescription = course.course_desc;
@@ -26,16 +25,16 @@ if ((courseDescription.lastIndexOf(")"))!==-1 && courseDescription.length-course
   };
 
   return (
-    <Card  style={classBoxStyle} role="gridcell">
+    <Card  style={classBoxStyle} className={styles.detailedClassBox} role="gridcell">
       <div className={styles.detailedClassHeader}>
         <span className={styles.className}>{courseName}</span>
       </div>
 
       <div className={styles.courseBody}>
-            <p>{courseDescription}</p>
-            <p>{prereqs}</p>
+        <p>{courseDescription}</p>
+        <p>{prereqs}</p>
       </div>
-      <Button size="sm" variant="outline-secondary" onClick= {seeDetails}>←Back</Button>
+      <Button size="sm" variant="outline-secondary" onClick={()=>setBack()}>←Back</Button>
     </Card>
   );
 }

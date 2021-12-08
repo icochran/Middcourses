@@ -9,35 +9,29 @@ import Stack from "react-bootstrap/Stack";
 
 export default function SearchBar({ searchByCallback }) {
     const [searchBarText, setSearchBarText] = useState("");
-
+    // handles pressing enter to search/clear
+    function submit(event) {
+        event.preventDefault()
+        searchByCallback(searchBarText);
+      }
     return (
         <div>
-            <Form className="d-flex">
+            <Form className="d-flex" onSubmit={submit}>
                 <FormControl
+                    type = "search"
                     placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
                     value={searchBarText}
                     id="searchBar"
-                    placeholder="Search"
                     onChange={(e) => {
                         setSearchBarText(e.target.value);
-                    }}
-                    onKeyPress={(e) => {
-                        if (e.key === "Enter" && searchBarText) {
-                            searchByCallback(searchBarText);
-                        }
-                        else if (e.key === "Enter") {
-                            searchByCallback();
-                        }
                     }}
                 />
                 <Stack direction="horizontal"  gap={1}>
                 <Button
                     style={{width: "90px"}}
                     variant="outline-primary"
-                    disabled={(searchBarText === "" ? true : false)}
-                    onClick={() => searchByCallback(searchBarText)}
+                    disabled = {(searchBarText === "" ? true : false)}
+                    onClick = {() => searchByCallback(searchBarText)}
                 >Search</Button>
                 <Button
                     className={styles.clearButton}

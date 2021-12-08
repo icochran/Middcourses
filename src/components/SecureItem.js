@@ -2,7 +2,6 @@ import {useSession} from "next-auth/client"
 import NavBar from "../components/NavBar"
 import CardGrid from "../components/CardGrid"
 import styles from "../styles/Home.module.css"
-import { style } from "dom-helpers";
 
 export default function SecureItem({setSearchBarInput, departments, professors, setFilterBy, filterBy, courses}){
   const [session] = useSession();

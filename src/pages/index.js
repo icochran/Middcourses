@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import useCollection from "../hooks/useCollection"
 
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import LoginWidget from "../components/LoginWidget.js"
@@ -13,7 +13,7 @@ import SecureItem from "../components/SecureItem.js"
 export default function MainPage() {
 
     const [filterBy, setFilterBy] = useState("")
-    const [sortBy, setSortBy] = useState("")
+    const [sortBy, setSortBy] = useState("Satisfaction")
     const [searchBarInput, setSearchBarInput] = useState()
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const average = ((numbers) => {
@@ -95,7 +95,7 @@ export default function MainPage() {
             courseA.profs.forEach(prof => DifficultyA += average(prof.difficulty))
             courseB.profs.forEach(prof => DifficultyB += average(prof.difficulty))
             DifficultyA = DifficultyA/courseA.profs.length
-            DifficultyB = DifficultyB/courseA.profs.length
+            DifficultyB = DifficultyB/courseB.profs.length
             return DifficultyA - DifficultyB
         })
     }
@@ -106,7 +106,7 @@ export default function MainPage() {
             courseA.profs.forEach(prof => TCA += average(prof.time_commitment))
             courseB.profs.forEach(prof => TCB += average(prof.time_commitment))
             TCA = TCA/courseA.profs.length
-            TCB = TCB/courseA.profs.length
+            TCB = TCB/courseB.profs.length
             return TCA - TCB
         })
     }
@@ -117,8 +117,8 @@ export default function MainPage() {
             courseA.profs.forEach(prof => InterestA += average(prof.interest))
             courseB.profs.forEach(prof => InterestB += average(prof.interest))
             InterestA = InterestA/courseA.profs.length
-            InterestB = InterestB/courseA.profs.length
-            return InterestA - InterestB
+            InterestB = InterestB/courseB.profs.length
+            return InterestB - InterestA
         })
     }
     else if (sortBy === "Satisfaction") {
@@ -144,7 +144,7 @@ export default function MainPage() {
                 <h1 className="title">Midd Courses</h1>
                 <LoginWidget />
                 <div className={styles.card}>
-                    <SecureItem setSearchBarInput={setSearchBarInput} departments={departments} professors={professors} setSortBy={setSortBy} setFilterBy={setFilterBy} filterBy={filterBy} courses={courses} />
+                    <SecureItem setSearchBarInput={setSearchBarInput} departments={departments} professors={professors} setSortBy={setSortBy} sortBy = {sortBy} setFilterBy={setFilterBy} filterBy={filterBy} courses={courses} />
                 </div>
             </main>
         </div>

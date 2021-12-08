@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar"
 import CardGrid from "../components/CardGrid"
 import styles from "../styles/Home.module.css"
 
-export default function SecureItem({setSearchBarInput, departments, professors, setFilterBy, setSortBy, filterBy, courses}){
+export default function SecureItem({setSearchBarInput, departments, professors, setFilterBy, setSortBy, sortBy, filterBy, courses}){
   const [session] = useSession();
     return (
         <div>
@@ -14,7 +14,7 @@ export default function SecureItem({setSearchBarInput, departments, professors, 
   prof={professors}
   setFilterBy={setFilterBy}/>
  <div className={styles.wrapper}>
-    <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
+    <h2>Filtering by: {filterBy === "" ? "None" : filterBy} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sorting by: {sortBy}</h2>
   </div>
   <div className={styles.wrapper}>
     <div>

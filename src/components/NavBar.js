@@ -5,9 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import SearchBar from "./SearchBar";
 
-
-
-
 export default function NavBar({setSearchBar, setFilterBy, setSortBy, departments, prof}) {
 
     const depts = departments.map(dept => <NavDropdown.Item data-testid = "depts" key={dept} onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
@@ -32,7 +29,7 @@ export default function NavBar({setSearchBar, setFilterBy, setSortBy, department
                             {profs}
                         </NavDropdown>
                         <NavDropdown title="Sort By" id="basic-nav-dropdown">
-                            <NavDropdown.Item data-testid = "diffs" onClick={() => setSortBy("Satisfaction")}>None</NavDropdown.Item>
+                        <NavDropdown.Item data-testid = "sort">For the aggregate</NavDropdown.Item>
                             <NavDropdown.Divider />
                             {orders}
                         </NavDropdown>

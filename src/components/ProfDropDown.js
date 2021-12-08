@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button"
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function ProfDropDown({profs, setProfName}) {
-  const [prof, setProf] = useState("Professor");
+export default function ProfDropDown({profs, profName, setProfName}) {
+  //const [prof, setProf] = useState("Professor");
 
   const profSet = new Set();
   profs.forEach((professor) => profSet.add(professor.prof_name.trim()));
@@ -21,7 +21,6 @@ export default function ProfDropDown({profs, setProfName}) {
     <Dropdown.Item 
       key={professor} 
       onClick={() => {
-        setProf(professor);
         setProfName(professor);
       }}
       >{professor}</Dropdown.Item>
@@ -32,7 +31,6 @@ export default function ProfDropDown({profs, setProfName}) {
       <Dropdown.Item 
         key={"agg"} 
         onClick={() => {
-          setProf("Aggregate");
           setProfName("Aggregate");
         }}
       >Aggregate</Dropdown.Item>,profList
@@ -40,7 +38,7 @@ export default function ProfDropDown({profs, setProfName}) {
     return (
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          {prof}
+          {profName}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {profList}

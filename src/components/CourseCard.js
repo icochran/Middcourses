@@ -7,18 +7,25 @@ import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
-export default function CourseCard({ course, seeDetails, setAddReview }) {
-  const [profName, setProfName] = useState(course.profs[0].prof_name);
+export default function CourseCard({ course, seeDetails, setAddReview, profName, setProfName }) {
+  /*const [profName, setProfName] = useState((()=> {
+    if (course.profs.length===1){
+      return course.profs[0].prof_name
+    } else if (course.profs.length>1){
+      return "Aggregate"
+    } 
+    return undefined
+  }));*/
+
+  console.log("IM RESTARTING");
+  console.log(profName);
 
   const courseDetails = {...course}
 
   let prof;
   if (profName !== "Aggregate") {
     prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
-    if (!prof) {
-      prof.prof_name = "No specific Professor";
-    }
-  } else {
+  } else if(profName==="Aggregate"){
     //cumulative value
     const p_in = courseDetails.profs.reduce((previous, current) => {
       return previous.concat(current.interest);
@@ -40,6 +47,8 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
       interest: p_in,
       time_commitment: p_time,
     };
+  } else {
+    prof.prof_name = "No specific Professor";
   }
 
   //for now we are just using the array of the first professor, though there are multiple
@@ -95,7 +104,7 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
           <Card.Title data-testid="courseName" className={styles.courseTitle}>{courseName}</Card.Title>
         </Card.Body>
         <div className = {styles.profBar}>
-        <ProfDropDown profs={course.profs} setProfName={setProfName} />
+        <ProfDropDown profs={course.profs} profName={profName} setProfName={setProfName} />
         </div>
         </div>
         <Card.Body >

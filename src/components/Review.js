@@ -9,9 +9,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-export default function Review({ course, changeState, setRating }) {
+export default function Review({ course, changeState, setRating, profName, setProfName }) {
   //when setting the rating, you can still set the rating for aggregate
-  const [prof, setProf] = useState(course.profs[0]);
   const [difficulty, setDifficulty] = useState();
   const [interest, setInterest] = useState();
   const [satisfaction, setSatisfaction] = useState();
@@ -29,7 +28,7 @@ export default function Review({ course, changeState, setRating }) {
       <Card style={{height:"32rem"}}>
         <Card.Body className="text-center"  className={styles.classHeader}>
           <Card.Title className={styles.reviewCourseTitle}>{courseName}</Card.Title>
-          <ProfDropDown profs={course.profs} setProfName={setProf} />
+          <ProfDropDown profs={course.profs} profName={profName} setProfName={setProfName} />
         </Card.Body>
         <Card.Body >
             <p className={styles.aspectSpacing}>Difficulty</p>
@@ -203,12 +202,12 @@ export default function Review({ course, changeState, setRating }) {
           ←Back
         </button>
         <Button
-          disabled={!difficulty || !interest || !satisfaction || !time}
+          disabled={!difficulty || !interest || !satisfaction || !time || profName==="Aggregate"}
           id="submit"
           variant="success"
           className={styles.submitBtn}
           onClick={ () => {
-            setRating(course.id, prof.prof_name, satisfaction, interest, time, difficulty);
+            setRating(course.id, profName, satisfaction, interest, time, difficulty);
             changeState();
           }}
         >

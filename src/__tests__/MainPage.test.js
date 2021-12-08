@@ -2,9 +2,12 @@ import { screen, fireEvent, render } from "@testing-library/react";
 import MainPage from "../pages/index.js";
 import testData from "../../data/test-data.json";
 import useCollection from "../hooks/useCollection";
+import { useSession } from "next-auth/client";
 
 
 jest.mock("../hooks/useCollection");
+jest.mock("next-auth/client");
+
 
 describe("MainPage: Integration Tests", () => {
     const handler = jest.fn();
@@ -15,6 +18,7 @@ describe("MainPage: Integration Tests", () => {
 
     test("Search by title (lowercase): only courses with titles that match search are displayed", () => {
         useCollection.mockReturnValue(testData);
+        useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
         fireEvent.change(searchInput, {target: {value: "computer"}});
@@ -28,6 +32,7 @@ describe("MainPage: Integration Tests", () => {
 
     test("Search by title (uppercase): only courses with titles that match search are displayed", () => {
         useCollection.mockReturnValue(testData);
+        useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
         fireEvent.change(searchInput, {target: {value: "SoftWAre"}});
@@ -41,6 +46,7 @@ describe("MainPage: Integration Tests", () => {
 
     test("Search by prof (lowercase): only courses with profs that match search are displayed", () => {
         useCollection.mockReturnValue(testData);
+        useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
         fireEvent.change(searchInput, {target: {value: "andrews"}});
@@ -54,6 +60,7 @@ describe("MainPage: Integration Tests", () => {
 
     test("Search by prof (uppercase): only courses with profs that match search are displayed", () => {
         useCollection.mockReturnValue(testData);
+        useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
         fireEvent.change(searchInput, {target: {value: "KarpMAN"}});
@@ -67,6 +74,7 @@ describe("MainPage: Integration Tests", () => {
 
     test("Filter by dept: only courses with dept that match filter are displayed", async () => {
         useCollection.mockReturnValue(testData);
+        useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const deptText = screen.getByText("Department");
         fireEvent.click(deptText);
@@ -78,6 +86,7 @@ describe("MainPage: Integration Tests", () => {
 
     test("Filter by prof: only courses with profs that match filter are displayed", async () => {
         useCollection.mockReturnValue(testData);
+        useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const profb = screen.getByText("Professor");
         fireEvent.click(profb);

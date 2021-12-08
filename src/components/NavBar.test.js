@@ -2,8 +2,10 @@ import { screen, fireEvent, render } from "@testing-library/react";
 import MainPage from "../pages/index.js";
 import testData from "../../data/test-data.json";
 import useCollection from "../hooks/useCollection";
+import { useSession } from "next-auth/client";
 
 jest.mock("../hooks/useCollection");
+jest.mock("next-auth/client");
 
 describe("NavBar tests", () => {
 
@@ -15,6 +17,7 @@ describe("NavBar tests", () => {
 
     test("Each department is shown as filter option", async () => {
       useCollection.mockReturnValue(testData);
+      useSession.mockReturnValue([{user: {name:"someone"}}, false]);
       render(<MainPage/>);
       const departmentbutton = screen.getByText("Department");
       fireEvent.click(departmentbutton);
@@ -25,6 +28,7 @@ describe("NavBar tests", () => {
 
     test("Each professor is shown as filter option", async () => {
       useCollection.mockReturnValue(testData);
+      useSession.mockReturnValue([{user: {name:"someone"}}, false]);
       render(<MainPage/>);
       const professorbutton = screen.getByText("Professor");
       fireEvent.click(professorbutton);
@@ -43,6 +47,7 @@ describe("NavBar tests", () => {
 
   test("Clicking a dept sets the filter to that dept and displays on screen", async () => {
     useCollection.mockReturnValue(testData);
+    useSession.mockReturnValue([{user: {name:"someone"}}, false]);
     render(<MainPage/>);
     expect.stringMatching("Filtering by: None");
     const departmentb = screen.getByText("Department");
@@ -55,6 +60,7 @@ describe("NavBar tests", () => {
 
   test("Clicking a prof sets the filter to that prof and displays on screen", async () => {
     useCollection.mockReturnValue(testData);
+    useSession.mockReturnValue([{user: {name:"someone"}}, false]);
     render(<MainPage/>);
     expect.stringMatching("Filtering by: None");
     const profb = screen.getByText("Professor");
@@ -66,6 +72,7 @@ describe("NavBar tests", () => {
 
   test("Clicking none sets the dept filter to none", async () => {
     useCollection.mockReturnValue(testData);
+    useSession.mockReturnValue([{user: {name:"someone"}}, false]);
     render(<MainPage/>);
     expect.stringMatching("Filtering by: None");
     const departmentb = screen.getByText("Department");
@@ -80,6 +87,7 @@ describe("NavBar tests", () => {
 
   test("Clicking none sets the prof filter to none", async () => {
     useCollection.mockReturnValue(testData);
+    useSession.mockReturnValue([{user: {name:"someone"}}, false]);
     render(<MainPage/>);
     expect.stringMatching("Filtering by: None");
     const professorb = screen.getByText("Professor");

@@ -136,6 +136,18 @@
   border-color: #ffbaba;
 }
 
+.classBoxReview{
+  width: 300px;
+  border-radius: 20px;
+  border-width: 10px;
+  float: left;
+  position: left;
+  margin: 10px;
+  border-style: solid;
+  background: #cecece;
+  border-color: #000000;
+}
+
 .detailedClassBox{
   width: 300px;
   float: left;

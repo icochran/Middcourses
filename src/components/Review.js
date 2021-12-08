@@ -24,7 +24,7 @@ export default function Review({ course, changeState }) {
 
   // should dry out this code eventually
   return (
-    <div styles={classBoxStyle} className={styles.classBox}>
+    <div styles={classBoxStyle} className={styles.classBoxReview}>
       <Card style={{height:"32rem"}}>
         <Card.Body className="text-center"  className={styles.classHeader}>
           <Card.Title className={styles.reviewCourseTitle}>{courseName}</Card.Title>

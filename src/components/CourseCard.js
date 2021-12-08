@@ -6,20 +6,17 @@ import RatingBar from "./RatingBar.js";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
-
 export default function CourseCard({ course, seeDetails, setAddReview }) {
-  const [profName, setProfName] = useState(course.profs[0].prof_name);
+  const [profName, setProfName] = useState("Aggregate");
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
-
+  
   const courseDetails = {...course}
 
   let prof;
   if (profName !== "Aggregate") {
     prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
-    if (!prof) {
-      prof.prof_name = "No specific Professor";
-    }
-  } else {
+  } 
+  else { // aggregate
     //cumulative value
     const p_in = courseDetails.profs.reduce((previous, current) => {
       return previous.concat(current.interest);
@@ -42,7 +39,7 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
       time_commitment: p_time,
     };
   }
-
+  const numReviews = prof.difficulty.length
   //for now we are just using the array of the first professor, though there are multiple
   const difficultyArray = prof.difficulty;
   const interestingArray = prof.interest;
@@ -61,23 +58,6 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
     Math.round((courseTimeCommitment100 / 10) * 100) / 100;
   const courseSatisfactionAverage =
     satisfactionArray.length===0 ? 0 : satisfactionArray.reduce(reducer) / satisfactionArray.length;
-
-  /* This following code is not working for some reason, the card colors are wrong sometimes, not sure why
-  function arrayToAverage(array) {
-    if(array.length>0) {
-      return (array.reduce(reducer, 0) / array.length) * 10;
-    } else {
-      return 0;
-    }
-  }
-
-  //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 = arrayToAverage(difficultyArray);
-  const courseInteresting100 = arrayToAverage(interestingArray);
-  const courseTimeCommitment100 = arrayToAverage(timeCommitmentArray);
-  const courseTimeCommitmentHours = Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
-  */
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;
@@ -121,7 +101,7 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
               percentage={courseTimeCommitment100}
               numHours={courseTimeCommitmentHours ? courseTimeCommitmentHours : undefined}
             />
-      
+            <p className={styles.nReviews}>{`${numReviews} Reviews`} </p>
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >

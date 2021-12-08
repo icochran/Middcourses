@@ -54,7 +54,7 @@ export default function CourseCard({ course, changeState, seeDetails }) {
     if(array.length>0 && !time_commitment_indicator) {
       return (array.reduce(reducer, 0) / array.length) * 20;
     } else if (array.length>0 && time_commitment_indicator) {
-      return (array.reduce(reducer, 0) / array.length) * 10;
+      return (array.reduce(reducer, 0) / array.length) * 20;
     }
     return 0;
   }

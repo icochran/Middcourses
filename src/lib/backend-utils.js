@@ -68,13 +68,22 @@ export async function reviewCourse(course_id, prof_name, satisfaction, interest,
 
   const CPObject = await knex("Course_Professor").select().where({course_id:course_id,prof_id:prof_id[0]});
 
-  const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction + satisfaction : satisfaction
+  console.log("this is CPObject");
+  console.log(CPObject);
 
-  const updated_interest = CPObject.interest ? CPObject.interest + interest : interest
+  console.log("This is what is should be")
+  console.log(CPObject.satisfaction.concat(satisfaction.toString()));
 
-  const updated_time_commitment = CPObject.time_commitment ? CPObject.time_commitment + time_commitment : time_commitment
+  const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction.concat(satisfaction.toString()) : satisfaction
 
-  const updated_difficulty = CPObject.difficulty ? CPObject.difficulty + difficulty : difficulty
+  console.log("This is updated satisfaction");
+  console.log(updated_satisfaction);
+
+  const updated_interest = CPObject.interest ? CPObject.interest.concat(interest.toString()) : interest
+
+  const updated_time_commitment = CPObject.time_commitment ? CPObject.time_commitment.concat(time_commitment.toString()) : time_commitment
+
+  const updated_difficulty = CPObject.difficulty ? CPObject.difficulty.concat(difficulty.toString()) : difficulty
 
   const count = await knex("Course_Professor").where({course_id:course_id,prof_id:prof_id}).update({
     satisfaction: updated_satisfaction, 

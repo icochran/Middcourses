@@ -3,17 +3,17 @@ import {
     signOut,
     useSession
   } from "next-auth/client"
+import Button from "react-bootstrap/Button";
   
   export default function LoginWidget() {
     const [ session ] = useSession()
   
     if (session){
   return (<div>
-            <p>Signed in as {session.user.email} <button onClick={signOut}>Sign out</button> </p>
            </div>);
     }else{
       return (<div>
-              <button onClick={signIn}>Sign in</button>
+              <Button variant="primary" size="lg" onClick={signIn}>Sign in</Button>
            </div>);
   
     }

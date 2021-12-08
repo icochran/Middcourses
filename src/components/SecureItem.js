@@ -2,19 +2,19 @@ import {useSession} from "next-auth/client"
 import NavBar from "../components/NavBar"
 import CardGrid from "../components/CardGrid"
 import styles from "../styles/Home.module.css"
+import { style } from "dom-helpers";
 
 export default function SecureItem({setSearchBarInput, departments, professors, setFilterBy, filterBy, courses}){
   const [session] = useSession();
     return (
         <div>
-            {(session) ? <div> <NavBar
+            {(session) ? <div><div className={styles.navBarTop}><NavBar
   setSearchBar = {setSearchBarInput}
   departments={departments} 
   prof={professors}
-  setFilterBy={setFilterBy}/>
- <div className={styles.wrapper}>
-    <h2>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
-  </div>
+  setFilterBy={setFilterBy}/></div>
+ 
+    <h2 className={styles.centerH2}>Filtering by: {filterBy === "" ? "None" : filterBy}</h2>
   <div className={styles.wrapper}>
     <div>
       <CardGrid courses={courses}/>

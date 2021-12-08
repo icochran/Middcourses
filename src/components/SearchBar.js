@@ -10,34 +10,6 @@ import Stack from "react-bootstrap/Stack";
 export default function SearchBar({ searchByCallback }) {
     const [searchBarText, setSearchBarText] = useState("");
 
-    // <input 
-    //             type = "text" 
-    //             value = {searchBarText}
-    //             id = "searchBar"
-    //             placeholder = "Search"
-    //             onChange = {(e) => {
-    //                 setSearchBarText(e.target.value);
-    //             }}
-    //             onKeyPress = {(e) => {
-    //                 if (e.key === "Enter" && searchBarText){
-    //                     searchByCallback(searchBarText);
-    //                 }
-    //                 else if (e.key === "Enter") {
-    //                     searchByCallback();
-    //                 }
-    //             }}
-    //         /> 
-    //         <button 
-    //             disabled = {(searchBarText === "" ? true : false)}
-    //             onClick = {() => searchByCallback(searchBarText)}
-    //         >Search</button>
-    //         <button 
-    //             onClick = {() => {
-    //                 setSearchBarText("");
-    //                 searchByCallback();
-    //             }}
-    //         >Clear</button>
-
     return (
         <div>
             <Form className="d-flex">
@@ -68,7 +40,7 @@ export default function SearchBar({ searchByCallback }) {
                     onClick={() => searchByCallback(searchBarText)}
                 >Search</Button>
                 <Button
-                    style={{width: "90px"}}
+                    className={styles.clearButton}
                     variant="outline-primary"
                     onClick={() => {
                         setSearchBarText("");

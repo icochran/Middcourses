@@ -4,18 +4,22 @@ import NavbarBrand from "react-bootstrap/NavbarBrand";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import SearchBar from "./SearchBar";
-
-
+import {
+    signOut,
+    useSession
+  } from "next-auth/client"
 
 
 export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
+
+    const [ session ] = useSession()
 
     const depts = departments.map(dept => <NavDropdown.Item data-testid = "depts" key={dept} onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);
     const profs = prof.map(professor => <NavDropdown.Item data-testid = "profs" key={professor} onClick={() => setFilterBy(professor)}>{professor}</NavDropdown.Item>);
 
     return (
         
-        <Navbar bg="light" fixed="top">
+        <Navbar bg="light">
             <Container fluid>
                 <NavbarBrand>MiddCourses</NavbarBrand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -34,6 +38,11 @@ export default function NavBar({setSearchBar, setFilterBy, departments, prof}) {
                     </Nav>
                     <Nav>
                         <SearchBar searchByCallback = {setSearchBar}/>
+                    </Nav>
+                    <Nav>
+                        <NavDropdown title={`Hi, ${session.user.email}!`}>
+                            <NavDropdown.Item data-testid = "signOut" onClick={signOut}>Sign Out</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import styles from "../styles/Home.module.css"
 import Flippy, { FrontSide, BackSide } from "react-flippy"

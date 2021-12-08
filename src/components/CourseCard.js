@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
-export default function CourseCard({ course, changeState, seeDetails, setAddReview }) {
+export default function CourseCard({ course, seeDetails, setAddReview }) {
   const [profName, setProfName] = useState(course.profs[0].prof_name);
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 

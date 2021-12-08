@@ -57,7 +57,10 @@
   height: 70px;
 }
 
-
+.nReviews{
+  font-size: 15px;
+  text-align: right;
+}
 /* Defines the name of the course in the course card */
 .className{
   font-size: 20px;

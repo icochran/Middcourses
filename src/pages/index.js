@@ -176,7 +176,7 @@ export default function MainPage() {
         <h1 className="title">Midd Courses</h1>
         <LoginWidget />
         <div className={styles.card}>
-          <SecureItem setSearchBarInput ={setSearchBarInput} setSortBy={setSortBy} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} setRating={setRating}/>
+          <SecureItem setSearchBarInput ={setSearchBarInput} setSortBy={setSortBy} sortBy={sortBy} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} setRating={setRating}/>
         </div> 
         </main>
     </div>

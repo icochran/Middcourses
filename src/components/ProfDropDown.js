@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button"
 import PropTypes from "prop-types";
 
 export default function ProfDropDown({profs, profName, setProfName}) {
-  //const [prof, setProf] = useState("Professor");
 
   const profSet = new Set();
   profs.forEach((professor) => profSet.add(professor.prof_name.trim()));
@@ -16,13 +15,13 @@ export default function ProfDropDown({profs, profName, setProfName}) {
     professors = professors.slice(1);
   }
   
-  let profList = professors.map((professor) => (
+  let profList = professors.map((name) => (
     <Dropdown.Item 
-      key={professor} 
+      key={name} 
       onClick={() => {
         setProfName(professor);
       }}
-      >{professor}</Dropdown.Item>
+      >{name}</Dropdown.Item>
   ));
 
   if (profs.length > 1) {
@@ -49,13 +48,12 @@ export default function ProfDropDown({profs, profName, setProfName}) {
     <Button variant="success">No Professor Listed</Button>
     );
   } else {
+    let name = profs[0].prof_name
+    if (profs[0].prof_name === "") {
+      name = "No Specific Professor"
+    }
     return (
-      <Button variant="success" className="text-center">{profs[0].prof_name}</Button>
-      // <Dropdown>
-      //   <Dropdown.Toggle variant="success" id="dropdown-basic">
-      //     {profs[0].prof_name}
-      //   </Dropdown.Toggle>
-      // </Dropdown>
+      <Button variant="success" className="text-center">{name}</Button>
     );
   }
 }

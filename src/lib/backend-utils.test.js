@@ -13,7 +13,8 @@ describe("Tests of the database utility functions", () => {
     beforeAll(async ()=>{
         // we need to construct a course of the correct form from the seed data
         // pick an arbitrary course from the collection
-        sample_course = data[230];
+        const [,,,,,,,,,,,,,,,,,,,, twenty] = data
+        sample_course = twenty
     });
 
     beforeEach(async () => {

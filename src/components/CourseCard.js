@@ -8,18 +8,6 @@ import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
 export default function CourseCard({ course, seeDetails, setAddReview, profName, setProfName }) {
-  /*const [profName, setProfName] = useState((()=> {
-    if (course.profs.length===1){
-      return course.profs[0].prof_name
-    } else if (course.profs.length>1){
-      return "Aggregate"
-    } 
-    return undefined
-  }));*/
-
-  console.log("IM RESTARTING");
-  console.log(profName);
-
   const courseDetails = {...course}
 
   let prof;
@@ -50,7 +38,7 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
   } else {
     prof.prof_name = "No specific Professor";
   }
-
+  const numReviews = prof.difficulty.length
   //for now we are just using the array of the first professor, though there are multiple
   const difficultyArray = prof.difficulty;
   const interestingArray = prof.interest;
@@ -81,7 +69,7 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
   const courseInteresting100 = arrayToPercentage(interestingArray);
   const courseTimeCommitment100 = arrayToPercentage(timeCommitmentArray);
   const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
-
+  
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;
 
@@ -121,7 +109,7 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
             />
-      
+            <p className={styles.nReviews}>{`${numReviews} Reviews`} </p>
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >

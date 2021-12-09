@@ -3,35 +3,79 @@ import Head from "next/head"
 import styles from "../styles/Home.module.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import useCollection from "../hooks/useCollection"
-
-import { useState} from "react"
+import {useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
-
 import LoginWidget from "../components/LoginWidget.js"
 import SecureItem from "../components/SecureItem.js"
 
 export default function MainPage() {
-
+    const {data: collection, setData: setCollection} = useCollection();
     const [filterBy, setFilterBy] = useState("")
     const [sortBy, setSortBy] = useState("Satisfaction")
     const [searchBarInput, setSearchBarInput] = useState()
-    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    // before the arrays held integers
+    const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
     const average = ((numbers) => {
         if (numbers.length > 0) {
             return numbers.reduce(reducer) / numbers.length;
         } else {
-            return 0
+            return -1
+        }
+    })
+    // use this average for difficulty and time commitment
+    const average2 = ((numbers) => {
+        if (numbers.length > 0) {
+            return numbers.reduce(reducer) / numbers.length;
+        } else {
+            return 10
         }
     })
 
-    const collection = useCollection();
+    const setRating = async (courseid, prof_name, satisfaction, interest, time_commitment, difficulty) => {      
+      const newRating = {
+        course_id: courseid, 
+        prof_name: prof_name, 
+        satisfaction: satisfaction, 
+        interest: interest, 
+        time_commitment: time_commitment, 
+        difficulty: difficulty
+      }
+
+      console.log(newRating);
+
+      const response = await fetch(
+        `/api/courses/${courseid}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(newRating),
+          headers: new Headers({ "Content-type": "application/json" }),
+        }
+      )
+
+      if(!response.ok) {
+        throw new Error(response.statusText);
+      }
+          
+      const updated_course = await response.json();
+
+      const updated_collection = collection.map((course) => {
+        if(course.id===courseid){
+          return updated_course;
+        }
+        return course
+      });
+
+      setCollection(updated_collection);
+    };
 
     let courses = collection.filter((course) => {
-        if (average(course.profs[0].satisfaction) >= 4) {
+        // need to find the aggregate satisfaction for each course.
+        let aggregateSum = 0
+        course.profs.forEach(prof => aggregateSum += average(prof.satisfaction))
+        if (aggregateSum/course.profs.length >= 4) {
             return course
         }
     });
-
 
     if (searchBarInput) {
         const newInput = searchBarInput.toLowerCase();
@@ -52,7 +96,12 @@ export default function MainPage() {
     const departments = Array.from(deptSet).sort();
 
     const profSet = new Set();
-    collection.forEach((course) => course.profs.forEach((prof) => profSet.add(prof.prof_name.trim())));
+    collection.forEach((course) => course.profs.forEach((prof) =>{
+        if (!profSet.has(prof)) {
+            profSet.add(prof.prof_name.trim())
+        }
+    }));
+     
     let professors = Array.from(profSet).sort((prof1, prof2) => {
         const prof1Last = prof1.substr(prof1.indexOf("."));
         const prof2Last = prof2.substr(prof2.indexOf("."));
@@ -61,6 +110,7 @@ export default function MainPage() {
     if (!professors[0]) {
         professors = professors.slice(1);
     }
+
 
     if (filterBy) {
         courses = collection.filter((course) => {
@@ -92,8 +142,8 @@ export default function MainPage() {
         courses.sort((courseA, courseB) => {
             let DifficultyA = 0
             let DifficultyB = 0
-            courseA.profs.forEach(prof => DifficultyA += average(prof.difficulty))
-            courseB.profs.forEach(prof => DifficultyB += average(prof.difficulty))
+            courseA.profs.forEach(prof => DifficultyA += average2(prof.difficulty))
+            courseB.profs.forEach(prof => DifficultyB += average2(prof.difficulty))
             DifficultyA = DifficultyA/courseA.profs.length
             DifficultyB = DifficultyB/courseB.profs.length
             return DifficultyA - DifficultyB
@@ -103,8 +153,8 @@ export default function MainPage() {
         courses.sort((courseA, courseB) => {
             let TCA = 0
             let TCB = 0
-            courseA.profs.forEach(prof => TCA += average(prof.time_commitment))
-            courseB.profs.forEach(prof => TCB += average(prof.time_commitment))
+            courseA.profs.forEach(prof => TCA += average2(prof.time_commitment))
+            courseB.profs.forEach(prof => TCB += average2(prof.time_commitment))
             TCA = TCA/courseA.profs.length
             TCB = TCB/courseB.profs.length
             return TCA - TCB
@@ -124,29 +174,28 @@ export default function MainPage() {
     else if (sortBy === "Satisfaction") {
         courses.sort((courseA, courseB) => {
             let SatisfactionA = 0
-            let SatisfactionB = 0
+            let SatisfactionB = 0     
             courseA.profs.forEach(prof => SatisfactionA += average(prof.satisfaction))
-            courseB.profs.forEach(prof => SatisfactionB += average(prof.satisfaction))
+            courseB.profs.forEach(prof => SatisfactionB += average(prof.satisfaction)  )
             SatisfactionA = SatisfactionA/courseA.profs.length
             SatisfactionB = SatisfactionB/courseB.profs.length
-            return SatisfactionA - SatisfactionB
+            return SatisfactionB - SatisfactionA
         })
     }
 
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Midd Courses</title>
+      </Head>
 
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Midd Courses</title>
-            </Head>
-
-            <main>
-                <h1 className="title">Midd Courses</h1>
-                <LoginWidget />
-                <div className={styles.card}>
-                    <SecureItem setSearchBarInput={setSearchBarInput} departments={departments} professors={professors} setSortBy={setSortBy} sortBy = {sortBy} setFilterBy={setFilterBy} filterBy={filterBy} courses={courses} />
-                </div>
-            </main>
-        </div>
+        <main>
+        <h1 className="title">Midd Courses</h1>
+        <LoginWidget />
+        <div className={styles.card}>
+          <SecureItem setSearchBarInput ={setSearchBarInput} setSortBy={setSortBy} sortBy={sortBy} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} setRating={setRating}/>
+        </div> 
+        </main>
+    </div>
     );
 }

@@ -4,13 +4,13 @@ import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 import ProfDropDown from "./ProfDropDown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-export default function Review({ course, changeState }) {
-  const [prof, setProf] = useState(course.profs[0]);
+export default function Review({ course, changeState, setRating, profName, setProfName }) {
+  //when setting the rating, you can still set the rating for aggregate
   const [difficulty, setDifficulty] = useState();
   const [interest, setInterest] = useState();
   const [satisfaction, setSatisfaction] = useState();
@@ -28,7 +28,7 @@ export default function Review({ course, changeState }) {
       <Card style={{height:"32rem"}}>
         <Card.Body className="text-center"  className={styles.classHeader}>
           <Card.Title className={styles.reviewCourseTitle}>{courseName}</Card.Title>
-          <ProfDropDown profs={course.profs} setProfName={setProf} />
+          <ProfDropDown profs={course.profs} profName={profName} setProfName={setProfName} />
         </Card.Body>
         <Card.Body >
             <p className={styles.aspectSpacing}>Difficulty</p>
@@ -171,18 +171,6 @@ export default function Review({ course, changeState }) {
               >
                 5
               </Button>
-              <Button
-                variant={time === 6 ? "primary" : "secondary"}
-                onClick={() => setTime(6)}
-              >
-                6
-              </Button>
-              <Button
-                variant={time === 7 ? "primary" : "secondary"}
-                onClick={() => setTime(7)}
-              >
-                7
-              </Button>
             </ButtonGroup>
           </div>
         </Card.Body>
@@ -190,11 +178,14 @@ export default function Review({ course, changeState }) {
           ←Back
         </button>
         <Button
-          disabled={!difficulty || !interest || !satisfaction || !time}
+          disabled={!difficulty || !interest || !satisfaction || !time || profName==="Aggregate"}
           id="submit"
           variant="success"
           className={styles.submitBtn}
-          onClick={changeState}
+          onClick={ () => {
+            setRating(course.id, profName, satisfaction, interest, time, difficulty);
+            changeState();
+          }}
         >
           Submit
         </Button>
@@ -207,4 +198,5 @@ export default function Review({ course, changeState }) {
 Review.propTypes = {
   course: PropTypes.object.isRequired,
   changeState: PropTypes.func,
+  setRating: PropTypes.func,
 };

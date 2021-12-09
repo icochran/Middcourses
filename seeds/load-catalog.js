@@ -15,7 +15,8 @@ exports.seed = async function (knex) {
   })
 
   //make the prof data match the layout of our table
-  const prof_data = [];
+  const profData = [];
+
   let prof_id_count = 0;
   data.forEach((item) => {
     const professors = item.profs;
@@ -29,13 +30,13 @@ exports.seed = async function (knex) {
 
       //just one prof
       if (!(prof_name.includes(":"))){
-        for(let j=0; j<prof_data.length; j++) {
-            if(new_prof.prof_name === prof_data[j].prof_name) {
+        for(let j=0; j<profData.length; j++) {
+            if(new_prof.prof_name === profData[j].prof_name) {
               repeat_professor_flag = true;
             }
         }        
         if(!repeat_professor_flag){
-            prof_data.push(new_prof);
+            profData.push(new_prof);
             prof_id_count += 1;
         }
       }
@@ -49,13 +50,13 @@ exports.seed = async function (knex) {
             fall_prof_name = fall_prof_name.trim()
             const fall_prof = {"prof_name": fall_prof_name, "id": prof_id_count}
             //pushing to DB
-            for(let j=0; j<prof_data.length; j++) {
-                if(fall_prof.prof_name === prof_data[j].prof_name) {
+            for(let j=0; j<profData.length; j++) {
+                if(fall_prof.prof_name === profData[j].prof_name) {
                 repeat_professor_flag = true;
                 }
             }        
             if(!repeat_professor_flag){
-                prof_data.push(fall_prof);
+                profData.push(fall_prof);
                 prof_id_count += 1;
             }
         }
@@ -68,24 +69,32 @@ exports.seed = async function (knex) {
             spring_prof_name = spring_prof_name.trim()
             const spring_prof = {"prof_name": spring_prof_name, "id": prof_id_count}
             //pushing to DB
-            for(let j=0; j<prof_data.length; j++) {
-                if(spring_prof.prof_name === prof_data[j].prof_name) {
+            for(let j=0; j<profData.length; j++) {
+                if(spring_prof.prof_name === profData[j].prof_name) {
                 repeat_professor_flag = true;
                 }
             }        
             if(!repeat_professor_flag){
-                prof_data.push(spring_prof);
+                profData.push(spring_prof);
                 prof_id_count += 1;
             }
         }
       }
     }
   });
+
+  const profSet = new Set();
+  profData.forEach((prof) =>{
+    if (!profSet.has(prof)) {
+      profSet.add(prof)
+    }
+  });
+  const prof_data = Array.from(profSet)
   
   const course_prof_map = [];
   data.forEach((course) => { //go through each course
     course.profs.forEach((prof_object) => { //go through each professor in that course
-      for(let i=0; i<prof_data.length;i++){ //find each professor's id by iterating through the prof_data
+      for(let i=0; i<prof_data.length;i++){ //find each professor's id by iterating through the profData
         if(prof_data[i].prof_name===prof_object.prof_name){
           course_prof_map.push({
             course_id: course.id,

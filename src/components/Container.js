@@ -6,10 +6,19 @@ import CourseCard from "../components/CourseCard";
 import Review from "../components/Review"
 import DetailedCourseCard from "../components/DetailedCourseCard"
 
-function Container({course}) {
+function Container({course, setRating}) {
   const [reviewing, setReviewing] = useState(false);
   const [detailed, setDetailed] = useState(false);
   const [back, setBack] = useState(false);
+  const [profName, setProfName] = useState((()=> {
+    if (course.profs.length===1){
+      return course.profs[0].prof_name
+    } else if (course.profs.length>1){
+      return "Aggregate"
+    } 
+    return undefined
+  }));
+
 
   let View = CourseCard;
 
@@ -47,6 +56,8 @@ function Container({course}) {
             setDetailed(!detailed);
           }}
           setAddReview = {handleAddReviewClick}
+          profName={profName}
+          setProfName={setProfName}
         />
       </FrontSide>
       <BackSide className = {styles.center}>
@@ -59,6 +70,9 @@ function Container({course}) {
             setDetailed(!detailed);
           }}
           setBack = {handleDetailBackClick}
+          setRating= {setRating}
+          profName={profName}
+          setProfName={setProfName}
         />
       </BackSide>
     </Flippy>

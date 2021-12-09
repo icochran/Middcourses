@@ -1,22 +1,18 @@
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import ProfDropDown from "./ProfDropDown";
-import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
-export default function CourseCard({ course, seeDetails, setAddReview }) {
-  const [profName, setProfName] = useState("Aggregate");
-  const reducer = (previousValue, currentValue) => previousValue + currentValue;
-  
+
+export default function CourseCard({ course, seeDetails, setAddReview, profName, setProfName }) {
   const courseDetails = {...course}
 
   let prof;
   if (profName !== "Aggregate") {
     prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
-  } 
-  else { // aggregate
+  } else if(profName==="Aggregate"){
     //cumulative value
     const p_in = courseDetails.profs.reduce((previous, current) => {
       return previous.concat(current.interest);
@@ -38,6 +34,8 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
       interest: p_in,
       time_commitment: p_time,
     };
+  } else {
+    prof.prof_name = "No specific Professor";
   }
   const numReviews = prof.difficulty.length
   //for now we are just using the array of the first professor, though there are multiple
@@ -47,18 +45,32 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
   const satisfactionArray = prof.satisfaction;
   const courseName = course.class_name;
 
-  //get the averages of the arrays as a number between 1 and 100
-  const courseDifficulty100 =
-    difficultyArray.length===0 ? 0 : (difficultyArray.reduce(reducer) / difficultyArray.length) * 10;
-  const courseInteresting100 =
-    interestingArray.length===0 ? 0 : (interestingArray.reduce(reducer) / interestingArray.length) * 10;
-  const courseTimeCommitment100 =
-    timeCommitmentArray.length===0 ? 0 : (timeCommitmentArray.reduce(reducer) / timeCommitmentArray.length) * 10;
-  const courseTimeCommitmentHours =
-    Math.round((courseTimeCommitment100 / 10) * 100) / 100;
-  const courseSatisfactionAverage =
-    satisfactionArray.length===0 ? 0 : satisfactionArray.reduce(reducer) / satisfactionArray.length;
+  function arrayToPercentage(array) {
+    if(array.length>0) {
+      let total=0;
+      array.forEach((e) => total+=parseInt(e));
+      return (total/array.length*20)
+    }
+    return 0;
+  }
 
+  function arrayToAverage(array) {
+    if(array.length>0) {
+      let total=0;
+      array.forEach((e) => total+=parseInt(e));
+      return total/array.length;
+    }
+    return 0;
+  }
+
+  //get the averages of the arrays as a number between 1 and 100
+  const courseDifficulty100 = arrayToPercentage(difficultyArray);
+  const courseInteresting100 = arrayToPercentage(interestingArray);
+  const courseTimeCommitment100 = arrayToPercentage(timeCommitmentArray);
+  const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
+
+  const timePerWeek = arrayToAverage(timeCommitmentArray)
+  
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;
 
@@ -81,7 +93,7 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
           <Card.Title data-testid="courseName" className={styles.courseTitle}>{courseName}</Card.Title>
         </Card.Body>
         <div className = {styles.profBar}>
-        <ProfDropDown profs={course.profs} setProfName={setProfName} />
+        <ProfDropDown profs={course.profs} profName={profName} setProfName={setProfName} />
         </div>
         </div>
         <Card.Body >
@@ -89,25 +101,25 @@ export default function CourseCard({ course, seeDetails, setAddReview }) {
             <RatingBar
               aspect="Difficulty"
               percentage={courseDifficulty100}
-              numHours={undefined}
             />
             <RatingBar
-              aspect="Interesting"
+              aspect="Interest"
               percentage={courseInteresting100}
-              numHours={undefined}
             />
             <RatingBar
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
-              numHours={courseTimeCommitmentHours ? courseTimeCommitmentHours : undefined}
+              time = {timePerWeek}
             />
             <p className={styles.nReviews}>{`${numReviews} Reviews`} </p>
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >
-            <Button id="review" onClick={()=>setAddReview()} variant="secondary" >
+            {profName === "Aggregate"? <Button id="noreview" variant="secondary" >
+              Select Professor </Button>
+              : <Button id="review" onClick={()=>setAddReview()} variant="secondary" >
               + Add Review
-            </Button>
+            </Button>}
             <Button id="detailed" onClick={seeDetails} variant="secondary">
               Details
             </Button>
@@ -124,41 +136,3 @@ CourseCard.propTypes = {
   course: PropTypes.object.isRequired,
 };
 
-{
-  /* <div className={styles.classBox} style={classBoxStyle} role="gridcell">
-      <div className={styles.classHeader}>
-        <span data-testid="courseName" className={styles.className}>
-          {courseName}
-        </span>
-        <div className={styles.profBar}>
-          <ProfDropDown profs={course.profs} setProfName={setProfName} />
-        </div>
-      </div>
-
-      <div className={styles.courseBody}>
-        <RatingBar
-          aspect="Difficulty"
-          percentage={courseDifficulty100}
-          numHours={undefined}
-        />
-        <RatingBar
-          aspect="Interesting"
-          percentage={courseInteresting100}
-          numHours={undefined}
-        />
-        <RatingBar
-          aspect="Time Commitment"
-          percentage={courseTimeCommitment100}
-          numHours={courseTimeCommitmentHours}
-        />
-      </div>
-      <Stack direction="horizontal" gap={3}>
-        <Button id="review" onClick={changeState} variant="secondary">
-          + Add Review
-        </Button>
-        <Button id="detailed" onClick={seeDetails} variant="secondary">
-          Details
-        </Button>
-      </Stack>
-    </div> */
-}

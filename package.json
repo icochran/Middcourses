@@ -17,6 +17,7 @@
     "url": "https://github.com/csci0312-f21/project-middcourses-2-0"
   },
   "scripts": {
+    "heroku:start": "next start -p $PORT",
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",

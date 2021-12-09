@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.string("dept");
         table.string("class_num")
         table.text("course_desc");
-        table.integer("id");
+        table.integer("id").unique();
     }).createTable("Professors", table => {
         table.string("prof_name").unique().notNullable();
         table.integer("id").unique().notNullable();

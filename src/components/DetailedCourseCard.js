@@ -34,7 +34,7 @@ if ((courseDescription.lastIndexOf(")"))!==-1 && courseDescription.length-course
         <p>{courseDescription}</p>
         <p>{prereqs}</p>
       </div>
-      <Button size="sm" variant="outline-secondary" onClick={()=>setBack()}>←Back</Button>
+      <Button data-testid="backbutton" size="sm" variant="outline-secondary" onClick={()=>setBack()}>←Back</Button>
     </Card>
   );
 }

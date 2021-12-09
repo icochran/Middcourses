@@ -19,7 +19,7 @@ export default function ProfDropDown({profs, profName, setProfName}) {
     <Dropdown.Item 
       key={name} 
       onClick={() => {
-        setProfName(professor);
+        setProfName(name);
       }}
       >{name}</Dropdown.Item>
   ));
@@ -30,8 +30,7 @@ export default function ProfDropDown({profs, profName, setProfName}) {
         key={"agg"} 
         onClick={() => {
           setProfName("Aggregate");
-        }}
-      >Aggregate</Dropdown.Item>,profList
+        }}>Aggregate</Dropdown.Item>,profList
     ]
     return (
       <Dropdown>

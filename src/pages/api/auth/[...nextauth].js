@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
-//import Providers from "next-auth/providers";
-import GoogleProvider from "next-auth/providers/google"
+import Providers from "next-auth/providers";
 
 async function signIn(user) {
     return user.email.endsWith("@middlebury.edu");
@@ -8,12 +7,11 @@ async function signIn(user) {
 
 const options = {
   providers: [
-  
-
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    })
+    Providers.Auth0({
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      domain: process.env.AUTH0_DOMAIN,
+    }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks:{signIn: signIn}

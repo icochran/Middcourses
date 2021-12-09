@@ -18,7 +18,7 @@ exports.up = function(knex) {
         table.string("difficulty").notNullable();
         table.foreign("course_id").references("Courses.id").onDelete("CASCADE");
         table.foreign("prof_id").references("Professors.id").onDelete("CASCADE");
-    });
+    })
 };
 
 exports.down = function(knex) {

@@ -41,10 +41,10 @@ for course in courses:
 
     for prof_name in prof_names:
         prof_name=prof_name.strip()
-        profs.append({"prof_name":prof_name, "satisfaction": [0],
-        "difficulty": [0],
-        "interest": [0],
-        "time_commitment": [0]})
+        profs.append({"prof_name":prof_name, "satisfaction": [],
+        "difficulty": [],
+        "interest": [],
+        "time_commitment": []})
 
     course_desc = course.find(attrs = {"class":"course_description"}).text
 
@@ -59,5 +59,5 @@ for course in courses:
 
     id_generator+=1
 
-with open('./data/seed.json', 'w') as outfile:
+with open('data/seed.json', 'w') as outfile:
     json.dump(data, outfile)

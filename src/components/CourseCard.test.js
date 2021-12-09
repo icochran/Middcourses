@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import CourseCard from "./CourseCard";
 import Container from "./Container"
 
 //Must render Container in order to see the course Card becuase there are too many props in CourseCard now that need to be satisfied

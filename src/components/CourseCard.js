@@ -1,7 +1,6 @@
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 import ProfDropDown from "./ProfDropDown";
-import { useState } from "react";
 import RatingBar from "./RatingBar.js";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
@@ -113,9 +112,11 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >
-            <Button id="review" onClick={()=>setAddReview()} variant="secondary" >
+            {profName === "Aggregate"? <Button id="noreview" variant="secondary" >
+              Select Professor </Button>
+              : <Button id="review" onClick={()=>setAddReview()} variant="secondary" >
               + Add Review
-            </Button>
+            </Button>}
             <Button id="detailed" onClick={seeDetails} variant="secondary">
               Details
             </Button>

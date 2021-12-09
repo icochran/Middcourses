@@ -166,25 +166,19 @@ export default function MainPage() {
         })
     }
 
-
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Midd Courses</title>
-            </Head>
-
   return (
     <div className={styles.container}>
       <Head>
         <title>Midd Courses</title>
       </Head>
 
-      <main>
+        <main>
         <h1 className="title">Midd Courses</h1>
         <LoginWidget />
         <div className={styles.card}>
-          <SecureItem setSearchBarInput ={setSearchBarInput} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} setRating={setRating}/> 
-            </main>
-        </div>
+          <SecureItem setSearchBarInput ={setSearchBarInput} setSortBy={setSortBy} departments={departments} professors={professors} setFilterBy={setFilterBy} filterBy = {filterBy} courses={courses} setRating={setRating}/>
+        </div> 
+        </main>
+    </div>
     );
 }

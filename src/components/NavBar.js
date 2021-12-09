@@ -12,7 +12,6 @@ import {
 
 export default function NavBar({setSearchBar, setFilterBy, setSortBy, departments, prof}) {
 
-
     const [ session ] = useSession()
 
     const depts = departments.map(dept => <NavDropdown.Item data-testid = "depts" key={dept} onClick={() => setFilterBy(dept)}>{dept}</NavDropdown.Item>);

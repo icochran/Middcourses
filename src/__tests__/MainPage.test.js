@@ -27,7 +27,7 @@ describe("MainPage: Integration Tests", () => {
         fireEvent.click(searchbutton);
 
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
-        expect(courses).toEqual(["Computer Systems", "Computer Engineering", "Computer Architecture"]);
+        expect(courses).toEqual(["Computer Architecture", "Computer Systems", "Computer Engineering"]);
     });
 
     test("Search by title (uppercase): only courses with titles that match search are displayed", () => {
@@ -55,7 +55,7 @@ describe("MainPage: Integration Tests", () => {
         fireEvent.click(searchbutton);
 
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
-        expect(courses).toEqual(["Software Development", "Computer Systems", "Computer Engineering", "Computer Architecture"]);
+        expect(courses).toEqual(["Computer Architecture", "Software Development", "Computer Systems", "Computer Engineering"]);
     });
 
     test("Search by prof (uppercase): only courses with profs that match search are displayed", () => {
@@ -81,7 +81,7 @@ describe("MainPage: Integration Tests", () => {
         const CSbutton = await screen.getByText("CSCI");
         fireEvent.click(CSbutton);
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
-        expect(courses).toEqual(["Software Development", "Computer Systems", "Computer Engineering", "Computer Architecture"]);
+        expect(courses).toEqual(["Computer Architecture", "Software Development", "Computer Systems", "Computer Engineering"]);
     });
 
     test("Filter by prof: only courses with profs that match filter are displayed", async () => {

@@ -109,9 +109,9 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
             <RatingBar
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
+              time = {timePerWeek}
             />
             <p className={styles.nReviews}>{`${numReviews} Reviews`} </p>
-            <p className={styles.nReviews}>{`${timePerWeek} hours per week`} </p>
         </Card.Body>
         <Card.Body >
           <Stack direction="horizontal"  gap={4} >

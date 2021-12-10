@@ -9,12 +9,11 @@ import {
 
 describe("Tests of the database utility functions", () => {
     let sample_course;
-
+    //let profName;
     beforeAll(async ()=>{
         // we need to construct a course of the correct form from the seed data
         // pick an arbitrary course from the collection
-        const [,,,,,,,,,,,,,,,,,,,, twenty] = data
-        sample_course = twenty
+        sample_course = data[Math.floor(data.length/2)];
     });
 
     beforeEach(async () => {
@@ -62,9 +61,6 @@ describe("Tests of the database utility functions", () => {
         expect(test_course.dept).toEqual(sample_course.dept);
         expect(test_course.id).toEqual(sample_course.id);
         for(let i=0; i<test_course.length; i++){
-            /********************************************
-            * HOW DO I GET THIS TO WORK WHEN THE DATABASE STARTS TO GET REVIEWS SO THE SAMPLE COURSE WONT NECESARRILY HAVE THE SAME REVIEWS AS THE RECIEVED COURSE
-            *********************************************/
             expect(test_course.profs[i].prof_id).toEqual(sample_course.profs[i].prof_id);
             expect(test_course.profs[i].prof_name).toEqual(sample_course.profs[i].prof_name);
             expect(test_course.profs[i].interest).toEqual(sample_course.profs[i].interest);
@@ -75,27 +71,7 @@ describe("Tests of the database utility functions", () => {
     });
 
     test("reviewCourse: updates the rating for a single professor", async ()=>{
-        const updated = await reviewCourse(sample_course.id, "S. Pecsok", 2, 2, 2, 2);
-
+        const updated = await reviewCourse(sample_course.id, sample_course.profs[0].prof_name, 2, 2, 2, 2);
         expect(updated).toBeTruthy();
     });
-
-    /*test("reviewCourse: correctly averages the ratings", async ()=>{
-        
-    });
-
-
-    test("reviewCourse: updates the rating for a the correct professor", async ()=>{
-
-    });
-
-
-    test("updateFilmRating: returns false on bad id", async ()=>{
-        const newCourse = { ...sample_course, rating: 4 };
-
-        const updated = await updateFilmRating(-1, newFilm.rating);
-
-        expect(updated).toBeFalsy();
-    });*/
-
 });

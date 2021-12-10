@@ -54,11 +54,13 @@ describe("CardGrid: CardGrid tests", () => {
               ],
               "course_desc":"Class where you learn Data Structures",
               "id": 2
-            }]  });
+            }];
+           });
 
   test("CardGrid: displays grid", () => {
-    const { getByRole } = render(<CardGrid courses={courses} />);
-    expect(getByRole("grid")).toBeInTheDocument();
+    render(<CardGrid courses = {courses}/>);
+    expect(screen.getAllByTestId("grid").length === 1).toBeTruthy(); 
+    
   });
 
   test("CardGrid: displays all cards given", () => {

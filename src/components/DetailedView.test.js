@@ -14,7 +14,7 @@ describe("DetailedView tests", () => {
     });
     
     test("DetailedView: clicking details button shows detail view", () => {
-        render(<CourseCard course={testData[0]} seeDetails = {handler}/>);
+        render(<CourseCard course={testData[0]} seeDetails = {handler} profName={"C. Andrews"}/>);
         const detailbutton = screen.queryByRole("button", { name: "Details" });
         expect(detailbutton).toBeVisible;
 

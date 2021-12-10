@@ -7,7 +7,7 @@ export default function CardGrid({courses, setRating}) {
      const courseList = courses.map(course => (<Container key={course.id} course={course} setRating={setRating}/>)) ;
 
     return(
-        <div className={styles.listView} role="grid">
+        <div className={styles.listView} data-testid="grid">
             {courseList.length === 0 ? "No courses match your search criteria." : courseList} 
         </div> 
         );

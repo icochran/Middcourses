@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import CourseCard from "./CourseCard";
+import Container from "./Container"
 
-
+//Must render Container in order to see the course Card becuase there are too many props in CourseCard now that need to be satisfied
+//That is why we have to render the Container
 
 describe("CourseCard: CourseCard tests", () => {
   let course1;
@@ -77,49 +78,51 @@ describe("CourseCard: CourseCard tests", () => {
                 }
               ],
               "course_desc":"In this course regression analysis is introduced. The major focus is on quantifying relationships between economic variables. Multiple regression identifies the effect of several exogenous variables on an endogenous variable. After exploring the classical regression model, fundamental assumptions underlying this model will be relaxed, and further new techniques will be introduced. Methods for testing hypotheses about the regression coefficients are developed throughout the course. Both theoretical principles and practical applications will be emphasized. The course goal is for each student to employ regression analysis as a research tool and to justify and defend the techniques used. (MATH 0121; and ECON 0150 or ECON 0155; and ECON 0210) 3 hrs. lect., 1 hr. lab",
-              "id": 1
+              "id": 4
             };
           });
 
     test("CourseCard: displays class title", () => {
-        render(<CourseCard course={course1} />);
-        expect(screen.getByText(course1.class_name)).toBeVisible();
+        render(<Container course={course1}/>);
+        const title = screen.getByTestId("courseName");
+        expect(title).toBeVisible();
+        expect(title.innerHTML === course1.class_name).toBeTruthy();
     });
 
     test("CourseCard: displays 3 different rating bars (not necessarily the right level)", () => {
-        render(<CourseCard course={course1} />);
+        render(<Container course={course1} />);
         expect(screen.queryAllByTestId("Bar").length === 3).toBeTruthy();
     });
 
     test("CourseCard: displays course time commitment in hours", () => {
-        const { getByText } = render(<CourseCard course={course1} />);
+        render(<Container course={course1} />);
+        const tcHours = screen.getByTestId("hrsPerWeek");
         const timeCommitmentArray = course1.profs[0].time_commitment;
-        const courseTimeCommitment100 = (timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length)*10
-        const courseTimeCommitmentHours = Math.round(courseTimeCommitment100/10*100)/100;
-        expect(getByText(`${courseTimeCommitmentHours} hours`)).toBeInTheDocument();
-        expect(getByText(`${courseTimeCommitmentHours} hours`)).toBeVisible();
+        const courseTimeCommitmentHours= Math.round((timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length))
+        expect(tcHours.innerHTML).toEqual(`${courseTimeCommitmentHours} hours per week `);
+        expect(tcHours).toBeVisible();
     });
 
     test("CourseCard: courses with no reviews are blue", () => {
-      render(<CourseCard course={course2} />);
+      render(<Container course={course2} />);
       const card = screen.getByTestId("courseCard");
       expect(card).toHaveClass("classBoxNoReview");
     });
 
     test("CourseCard: courses with satisfaction >= 4 are green", () => {
-      render(<CourseCard course={course3} />);
+      render(<Container course={course3} />);
       const card = screen.getByTestId("courseCard");
       expect(card).toHaveClass("classBoxHigh");
     });
 
     test("CourseCard: courses with 2 <= satisfaction < 4 are yellow", () => {
-      render(<CourseCard course={course4} />);
+      render(<Container course={course4} />);
       const card = screen.getByTestId("courseCard");
       expect(card).toHaveClass("classBoxMedium");
     });
          
     test("CourseCard: courses with satisfaction < 2 are red", () => {
-      render(<CourseCard course={course1} />);
+      render(<Container course={course1} />);
       const card = screen.getByTestId("courseCard");
       expect(card).toHaveClass("classBoxLow");
     });

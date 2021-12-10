@@ -185,6 +185,7 @@ export default function Review({ course, changeState, setRating, profName, setPr
           onClick={ () => {
             setRating(course.id, profName, satisfaction, interest, time, difficulty);
             changeState();
+            setDifficulty(); setInterest(); setTime(); setSatisfaction();
           }}
         >
           Submit

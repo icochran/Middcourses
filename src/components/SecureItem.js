@@ -7,7 +7,7 @@ export default function SecureItem({setSearchBarInput, departments, professors, 
   const [session] = useSession();
     return (
         <div>
-            {(session) ? <div><div className={styles.navBarTop}><NavBar
+            {(session) ? <div><div data-testid="navBar" className={styles.navBarTop}><NavBar
   setSearchBar = {setSearchBarInput}
   departments={departments} 
   setSortBy = {setSortBy}

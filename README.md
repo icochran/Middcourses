@@ -16,9 +16,11 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 ## Getting Started
 
 In the repository, create a file called .env.development.local and copy and paste the following:
-NEXTAUTH_SECRET= "a long, randomly-generated string stored in env"
-GOOGLE_CLIENT_ID= "933419971748-v35k2b7c3e6d4koe16d4jraucjqugm5v.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET= "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"
+AUTH0_CLIENT_ID='yz3al0Ge3FYcMgrGfYDq8oR5mJv2YbPH'
+AUTH0_CLIENT_SECRET= "J_-ilknAYZLqsuwQzQjpZBqor7Mp6jxzEHLcE1NZZED_4ONoljcOWQOcHHTIcudA"
+AUTH0_DOMAIN= 'dev-0-15yeg9.us.auth0.com'
+NEXTAUTH_SECRET= 'a long, randomly-generated string stored in env'
+NEXTAUTH_URL= 'http://localhost:3000'
 
 
 Then, run the development server:

@@ -10,6 +10,7 @@ jest.mock("next-auth/client");
 
 
 describe("MainPage: Integration Tests", () => {
+    useCollection.mockReturnValue({data: testData});
     const handler = jest.fn();
 
     beforeEach(() => {
@@ -17,7 +18,7 @@ describe("MainPage: Integration Tests", () => {
     });
 
     test("Search by title (lowercase): only courses with titles that match search are displayed", () => {
-        useCollection.mockReturnValue(testData);
+       
         useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
@@ -27,11 +28,11 @@ describe("MainPage: Integration Tests", () => {
         fireEvent.click(searchbutton);
 
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
-        expect(courses).toEqual(["Computer Architecture", "Computer Systems", "Computer Engineering"]);
+        expect(courses).toEqual(["Computer Engineering", "Computer Systems", "Computer Architecture"]);
     });
 
     test("Search by title (uppercase): only courses with titles that match search are displayed", () => {
-        useCollection.mockReturnValue(testData);
+        
         useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
@@ -45,7 +46,7 @@ describe("MainPage: Integration Tests", () => {
     });
 
     test("Search by prof (lowercase): only courses with profs that match search are displayed", () => {
-        useCollection.mockReturnValue(testData);
+        
         useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
@@ -55,11 +56,11 @@ describe("MainPage: Integration Tests", () => {
         fireEvent.click(searchbutton);
 
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
-        expect(courses).toEqual(["Computer Architecture", "Software Development", "Computer Systems", "Computer Engineering"]);
+        expect(courses).toEqual(["Computer Engineering", "Computer Systems", "Software Development", "Computer Architecture"]);
     });
 
     test("Search by prof (uppercase): only courses with profs that match search are displayed", () => {
-        useCollection.mockReturnValue(testData);
+        
         useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const searchInput = screen.getByPlaceholderText("Search");
@@ -73,7 +74,7 @@ describe("MainPage: Integration Tests", () => {
     });
 
     test("Filter by dept: only courses with dept that match filter are displayed", async () => {
-        useCollection.mockReturnValue(testData);
+        
         useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const deptText = screen.getByText("Department");
@@ -81,11 +82,11 @@ describe("MainPage: Integration Tests", () => {
         const CSbutton = await screen.getByText("CSCI");
         fireEvent.click(CSbutton);
         const courses = screen.queryAllByTestId("courseName").map((course) => course.textContent);
-        expect(courses).toEqual(["Computer Architecture", "Software Development", "Computer Systems", "Computer Engineering"]);
+        expect(courses).toEqual(["Computer Engineering", "Computer Systems", "Software Development", "Computer Architecture"]);
     });
 
     test("Filter by prof: only courses with profs that match filter are displayed", async () => {
-        useCollection.mockReturnValue(testData);
+       
         useSession.mockReturnValue([{user: {name:"someone"}}, false]);
         render(<MainPage/>);
         const profb = screen.getByText("Professor");

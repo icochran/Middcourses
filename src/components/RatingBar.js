@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.css";
 import PropTypes from "prop-types";
 
-export default function RatingBar({aspect, percentage, time}) {
+export default function RatingBar({aspect, percentage}) {
 
   const barStyle = {
     width: `${percentage}%`,
@@ -13,7 +13,6 @@ export default function RatingBar({aspect, percentage, time}) {
       <p className={styles.aspectSpacing}>{aspect}</p>
       <div className={styles.BarBackground}>
         <span data-testid="Bar" className={styles.ratingBar} style={barStyle} />
-        {time? <p className={styles.nReviews} data-testid="hrsPerWeek">{`${time} hours per week`} </p> : <p/>}
       </div>
     </>
   );
@@ -21,6 +20,5 @@ export default function RatingBar({aspect, percentage, time}) {
 
 RatingBar.propTypes = {
   aspect: PropTypes.string.isRequired,
-  percentage: PropTypes.number.isRequired,
-  time: PropTypes.number
+  percentage: PropTypes.number.isRequired
 };

@@ -29,11 +29,5 @@ describe("CourseCard: CourseCard tests", () => {
     test("RatingBar: displays bar name", () => {
         render(<RatingBar aspect="Difficulty" percentage={50}/>);
         expect(screen.getByText("Difficulty")).toBeVisible();
-    });
-
-    test("RatingBar: Displays course time commitment if it is a time commitment bar", () => {
-      const { getByText } = render(<RatingBar aspect="Time Commitment" percentage={50} time={2} />);
-      expect(getByText("2 hours per week")).toBeInTheDocument();
-      expect(getByText("2 hours per week")).toBeVisible();
     });           
 });

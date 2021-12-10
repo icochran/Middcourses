@@ -70,8 +70,6 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
   const courseTimeCommitment100 = arrayToPercentage(timeCommitmentArray);
   const courseSatisfactionAverage = arrayToAverage(satisfactionArray);
 
-  const timePerWeek = arrayToAverage(timeCommitmentArray).toFixed(2);
-  
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;
 
@@ -98,7 +96,6 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
         </div>
         </div>
         <Card.Body >
-          
             <RatingBar
               aspect="Difficulty"
               percentage={courseDifficulty100}
@@ -110,7 +107,6 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
             <RatingBar
               aspect="Time Commitment"
               percentage={courseTimeCommitment100}
-              time = {timePerWeek}
             />
             <p className={styles.nReviews}>{`${numReviews} Reviews`} </p>
         </Card.Body>

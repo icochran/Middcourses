@@ -98,7 +98,6 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
         </div>
         </div>
         <Card.Body >
-          
             <RatingBar
               aspect="Difficulty"
               percentage={courseDifficulty100}

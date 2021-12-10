@@ -13,7 +13,6 @@ export default function RatingBar({aspect, percentage, time}) {
       <p className={styles.aspectSpacing}>{aspect}</p>
       <div className={styles.BarBackground}>
         <span data-testid="Bar" className={styles.ratingBar} style={barStyle} />
-        {time? <p className={styles.nReviews} data-testid="hrsPerWeek">{`${time} hours per week`} </p> : <p/>}
       </div>
     </>
   );

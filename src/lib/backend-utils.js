@@ -15,7 +15,7 @@ export const knex = knexInitializer(
 
 function convert_review(string) {
   if(string.length===0) {
-    return []; //change this to [] when the seed is updated
+    return [];
   } else {
     const attribute_array = string.split("");
     return attribute_array;
@@ -64,9 +64,9 @@ export async function getCourse(id) {
 }
 
 export async function reviewCourse(course_id, prof_name, satisfaction, interest, time_commitment, difficulty) {
-  const prof_id = await knex("Professors").select().where({prof_name:prof_name}).pluck("id");
+  const [prof_id] = await knex("Professors").select().where({prof_name:prof_name}).pluck("id");
 
-  const CPObject = await knex("Course_Professor").select().where({course_id:course_id,prof_id:prof_id});
+  const [CPObject] = await knex("Course_Professor").select().where({course_id:course_id,prof_id:prof_id});
 
   const updated_satisfaction = CPObject.satisfaction ? CPObject.satisfaction.concat(satisfaction.toString()) : satisfaction.toString()
 

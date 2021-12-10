@@ -35,13 +35,11 @@ export default function MainPage() {
       const newRating = {
         course_id: courseid, 
         prof_name: prof_name, 
-        satisfaction: satisfaction, 
-        interest: interest, 
-        time_commitment: time_commitment, 
-        difficulty: difficulty
+        satisfaction: satisfaction.toString(), 
+        interest: interest.toString(), 
+        time_commitment: time_commitment.toString(), 
+        difficulty: difficulty.toString()
       }
-
-      console.log(newRating);
 
       const response = await fetch(
         `/api/courses/${courseid}`,

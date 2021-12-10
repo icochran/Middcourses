@@ -99,7 +99,7 @@ describe("CourseCard: CourseCard tests", () => {
         const tcHours = screen.getByTestId("hrsPerWeek");
         const timeCommitmentArray = course1.profs[0].time_commitment;
         const courseTimeCommitmentHours= Math.round((timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length))
-        expect(tcHours.innerHTML).toEqual(`${courseTimeCommitmentHours} hours per week `);
+        expect(tcHours.innerHTML).toEqual(`${courseTimeCommitmentHours.toFixed(2)} hours per week `);
         expect(tcHours).toBeVisible();
     });
 

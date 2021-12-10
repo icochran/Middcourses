@@ -21,7 +21,7 @@ const handler = nc()
     const { id } = req.query;
     const {prof_name, satisfaction, interest, time_commitment, difficulty} = req.body;
 
-    const success = await reviewCourse(+id, prof_name, +satisfaction, +interest, +time_commitment, +difficulty);
+    const success = await reviewCourse(+id, prof_name, satisfaction, interest, time_commitment, difficulty);
 
     if (success){
       res.status(200).json(success);

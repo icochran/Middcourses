@@ -94,15 +94,6 @@ describe("CourseCard: CourseCard tests", () => {
         expect(screen.queryAllByTestId("Bar").length === 3).toBeTruthy();
     });
 
-    test("CourseCard: displays course time commitment in hours", () => {
-        render(<Container course={course1} />);
-        const tcHours = screen.getByTestId("hrsPerWeek");
-        const timeCommitmentArray = course1.profs[0].time_commitment;
-        const courseTimeCommitmentHours= Math.round((timeCommitmentArray.reduce((previousValue, currentValue) => previousValue + currentValue))/(timeCommitmentArray.length))
-        expect(tcHours.innerHTML).toEqual(`${courseTimeCommitmentHours.toFixed(2)} hours per week `);
-        expect(tcHours).toBeVisible();
-    });
-
     test("CourseCard: courses with no reviews are blue", () => {
       render(<Container course={course2} />);
       const card = screen.getByTestId("courseCard");

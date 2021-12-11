@@ -12,6 +12,8 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 **Note: I've provided the processes for interacting with this project if you have a local installation. Running on Replit simplifies many of these steps (but not all of them, so please do read through).**
 
+**Note: Run the servers only on firefox react-flippy does not work on other browsers well **
+
 ## Beggining Steps 
 
 Run the following

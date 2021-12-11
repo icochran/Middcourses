@@ -26,19 +26,25 @@ To create a new app using Heroku (you will need to have signed up for Heroku and
 heroku login
 ```
 ```bash
-heroku create
+heroku create <project_name>
 ```
 ```bash
 git push heroku main
 ```
+
 In your Heroku dashboard on the web, go to the resources tab, and download the add-on "Heroku Postgres."
-Update Config Vars in Settings on your dashboard to look like the .env.development.local file
+
+Update Config Vars in Settings on your dashboard to look like the .env.development.local file expect change/add these:
+
+NEXTAUTH_URL = "https://project_name.herokuapp.com/"
+PGSSLMODE = no-verify
+
 Click the more button in your heroku dashboard to open up the console and then run the following commands:
 ```bash
 npx knex migrate:latest
 ```
 ```bash
---- npx knex seed:run
+npx knex seed:run
 ```
 
 ## Getting Started

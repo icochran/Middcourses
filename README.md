@@ -15,7 +15,7 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 ## Steps to deploy to heroku
 Add following script to package.json
 ```bash
-"heroku:start": "next start -p $PORT"`
+"heroku:start": "next start -p $PORT"
 ```
 Create file called Procfile and fill it with
 ```bash
@@ -44,6 +44,11 @@ npx knex migrate:latest
 ## Getting Started
 
 Make the .env.development.local file as we described over slack.
+
+Run the following
+```bash
+npm install
+```
 
 If you want to scrape the review data, Then run the following command,
 ```bash

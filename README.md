@@ -14,18 +14,32 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 ## Steps to deploy to heroku
 Add following script to package.json
---- "heroku:start": "next start -p $PORT"`
+```bash
+"heroku:start": "next start -p $PORT"`
+```
 Create file called Procfile and fill it with
---- web: npm run heroku:start
+```bash
+web: npm run heroku:start
+```
 To create a new app using Heroku (you will need to have signed up for Heroku and install the command-line tool), run the following commands
---- heroku login
---- heroku create
---- git push heroku main
+```bash
+heroku login
+```
+```bash
+heroku create
+```
+```bash
+git push heroku main
+```
 In your Heroku dashboard on the web, go to the resources tab, and download the add-on "Heroku Postgres."
 Update Config Vars in Settings on your dashboard to look like the .env.development.local file
 Click the more button in your heroku dashboard to open up the console and then run the following commands:
---- npx knex migrate:latest
+```bash
+npx knex migrate:latest
+```
+```bash
 --- npx knex seed:run
+```
 
 ## Getting Started
 

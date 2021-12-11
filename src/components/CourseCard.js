@@ -7,39 +7,40 @@ import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
 export default function CourseCard({ course, seeDetails, setAddReview, profName, setProfName }) {
-  const courseDetails = {...course}
+ 
+  let inS = ""
+  let timeS = ""
+  let satS = ""
+  let difS = ""
 
   let prof;
   if (profName !== "Aggregate") {
     prof = course.profs.find((a) => a.prof_name === profName || a.prof_name === " ".concat(profName)); // some profs have a space before name, might want to fix in scraping
   } else if(profName==="Aggregate"){
-    //cumulative value
-    const p_in = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.interest);
-    }, []);
-    const p_time = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.time_commitment);
-    }, []);
-    const p_satisfaction = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.satisfaction);
-    }, []);
-    const p_dif = courseDetails.profs.reduce((previous, current) => {
-      return previous.concat(current.difficulty);
-    }, []);
-
+    
+    course.profs.forEach((person) => {
+      inS += person.interest.join()
+      timeS += person.time_commitment.join()
+      satS += person.satisfaction.join()
+      difS += person.difficulty.join()
+    })
+    inS = inS.replace(/,/g,"")
+    timeS =timeS.replace(/,/g,"")
+    satS = satS.replace(/,/g,"")
+    difS = difS.replace(/,/g,"")
     prof = {
       prof_name: "Aggregate",
-      satisfaction: p_satisfaction,
-      difficulty: p_dif,
-      interest: p_in,
-      time_commitment: p_time,
+      satisfaction: satS.split(""),
+      difficulty: difS.split(""),
+      interest: inS.split(""),
+      time_commitment: timeS.split(""),
     };
   } else {
     prof.prof_name = "No specific Professor";
   }
 
   const numReviews = prof.difficulty.length
-  //for now we are just using the array of the first professor, though there are multiple
+  
   const difficultyArray = prof.difficulty;
   const interestingArray = prof.interest;
   const timeCommitmentArray = prof.time_commitment;
@@ -50,7 +51,7 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
     if(array.length>0) {
       let total=0;
       array.forEach((e) => total+=parseInt(e));
-      return (total/array.length*20)
+      return ((total/array.length)*20)
     }
     return 0;
   }
@@ -58,7 +59,7 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
   function arrayToAverage(array) {
     if(array.length>0) {
       let total=0;
-      array.forEach((e) => total+=parseInt(e));
+      array.forEach((e) => {total+=parseInt(e)});
       return total/array.length;
     }
     return 0;
@@ -72,7 +73,6 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
 
   //using the courseSatisfactionAverage set the color to red green or yellow
   let style = styles.classBoxNoReview;
-
   if (courseSatisfactionAverage >= 4) {
     style = styles.classBoxHigh;
   } else if (courseSatisfactionAverage >= 2) {
@@ -80,7 +80,7 @@ export default function CourseCard({ course, seeDetails, setAddReview, profName,
   } else if (courseSatisfactionAverage > 0) {
     style = styles.classBoxLow;
   }
-
+  
   return (
     <div className={style} data-testid="courseCard">
       <Card

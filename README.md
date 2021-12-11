@@ -45,7 +45,7 @@ npx knex migrate:latest
 
 Make the .env.development.local file as we described over slack.
 
-Then run the following command,
+If you want to scrape the review data, Then run the following command,
 ```bash
 --- npx knex seed:run
 ```

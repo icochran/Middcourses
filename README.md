@@ -12,6 +12,42 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 **Note: I've provided the processes for interacting with this project if you have a local installation. Running on Replit simplifies many of these steps (but not all of them, so please do read through).**
 
+## Beggining Steps 
+
+Run the following
+```bash
+npm install
+```
+
+You will need to set up an account with Auth0. 
+
+On the 'Getting Started' page, select 'Create Application'.
+
+Give your application a good name and then select 'Regular Web Application' (we want both the front and back end).
+
+On the next page, you can select the technology (Node), but it isn't essential.
+
+Go to the Settings tab. On this page, there are three pieces of information that you want:
+
+the domain
+the client ID
+the client secret
+
+Scroll down and add "http://localhost:3000/api/auth/callback/auth0" as an Allowed Callback URL
+
+You will also need to create a .env.development.local file to hold a collection of environment variables that you should not include in your repository. They are:
+
+AUTH0_CLIENT_ID (obtain from Auth0)
+
+AUTH0_CLIENT_SECRET (obtain from Auth0)
+
+AUTH0_DOMAIN (obtain from Auth0)
+
+NEXTAUTH_SECRET (a string of your own devising)
+
+NEXTAUTH_URL = 'http://localhost:3000'
+
+
 ## Steps to deploy to heroku
 Add following script to package.json
 ```bash
@@ -34,7 +70,7 @@ git push heroku main
 
 In your Heroku dashboard on the web, go to the resources tab, and download the add-on "Heroku Postgres."
 
-Update Config Vars in Settings on your dashboard to look like the .env.development.local file expect change/add these:
+Update Config Vars in Settings on your dashboard to look like the .env.development.local file except change/add these:
 
 NEXTAUTH_URL = "https://project_name.herokuapp.com/"
 
@@ -47,22 +83,16 @@ npx knex migrate:latest
 ```bash
 npx knex seed:run
 ```
+Lastly go back to your Auth0 Account and add "https://project_name.herokuapp.com/api/auth/callback/auth0 as another Allowed Callback URL on the settings page
 
 Now back on in your terminal type:
 ```bash
 heroku open
 ```
 
-## Getting Started
+## Getting Started 
 
-Make the .env.development.local file as we described over slack.
-
-Run the following
-```bash
-npm install
-```
-
-If you want to scrape the review data, Then run the following command,
+If you want to scrape the review data locally, Then run the following command,
 ```bash
 npx knex seed:run
 ```

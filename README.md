@@ -32,7 +32,9 @@ Click the more button in your heroku dashboard to open up the console and then r
 Make the .env.development.local file as we described over slack.
 
 Then run the following command,
+```bash
 --- npx knex seed:run
+```
 Then, run the development server:
 
 ```bash

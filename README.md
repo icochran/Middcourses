@@ -12,17 +12,27 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 **Note: I've provided the processes for interacting with this project if you have a local installation. Running on Replit simplifies many of these steps (but not all of them, so please do read through).**
 
+## Steps to deploy to heroku
+Add following script to package.json
+--- "heroku:start": "next start -p $PORT"`
+Create file called Procfile and fill it with
+--- web: npm run heroku:start
+To create a new app using Heroku (you will need to have signed up for Heroku and install the command-line tool), run the following commands
+--- heroku login
+--- heroku create
+--- git push heroku main
+In your Heroku dashboard on the web, go to the resources tab, and download the add-on "Heroku Postgres."
+Update Config Vars in Settings on your dashboard to look like the .env.development.local file
+Click the more button in your heroku dashboard to open up the console and then run the following commands:
+--- npx knex migrate:latest
+--- npx knex seed:run
 
 ## Getting Started
 
-In the repository, create a file called .env.development.local and copy and paste the following:
-AUTH0_CLIENT_ID='yz3al0Ge3FYcMgrGfYDq8oR5mJv2YbPH'
-AUTH0_CLIENT_SECRET= "J_-ilknAYZLqsuwQzQjpZBqor7Mp6jxzEHLcE1NZZED_4ONoljcOWQOcHHTIcudA"
-AUTH0_DOMAIN= 'dev-0-15yeg9.us.auth0.com'
-NEXTAUTH_SECRET= 'a long, randomly-generated string stored in env'
-NEXTAUTH_URL= 'http://localhost:3000'
+Make the .env.development.local file as we described over slack.
 
-
+Then run the following command,
+--- npx knex seed:run
 Then, run the development server:
 
 ```bash

@@ -37,6 +37,7 @@ In your Heroku dashboard on the web, go to the resources tab, and download the a
 Update Config Vars in Settings on your dashboard to look like the .env.development.local file expect change/add these:
 
 NEXTAUTH_URL = "https://project_name.herokuapp.com/"
+
 PGSSLMODE = no-verify
 
 Click the more button in your heroku dashboard to open up the console and then run the following commands:
@@ -45,6 +46,11 @@ npx knex migrate:latest
 ```
 ```bash
 npx knex seed:run
+```
+
+Now back on in your terminal type:
+```bash
+heroku open
 ```
 
 ## Getting Started
@@ -58,7 +64,7 @@ npm install
 
 If you want to scrape the review data, Then run the following command,
 ```bash
---- npx knex seed:run
+npx knex seed:run
 ```
 Then, run the development server:
 

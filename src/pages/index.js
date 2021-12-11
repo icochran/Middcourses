@@ -13,21 +13,15 @@ export default function MainPage() {
     const [filterBy, setFilterBy] = useState("")
     const [sortBy, setSortBy] = useState("Satisfaction")
     const [searchBarInput, setSearchBarInput] = useState()
-    // before the arrays held integers
-    const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
-    const average = ((numbers) => {
-        if (numbers.length > 0) {
-            return numbers.reduce(reducer) / numbers.length;
-        } else {
-            return -1
+
+    const sumArray = ((arr)=> {
+        if (arr.length > 0) {
+            let sum = 0
+            arr.forEach((num) => sum += parseInt(num))
+            return sum
         }
-    })
-    // use this average for difficulty and time commitment
-    const average2 = ((numbers) => {
-        if (numbers.length > 0) {
-            return numbers.reduce(reducer) / numbers.length;
-        } else {
-            return 10
+        else {
+            return 0
         }
     })
 
@@ -69,8 +63,11 @@ export default function MainPage() {
     let courses = collection.filter((course) => {
         // need to find the aggregate satisfaction for each course.
         let aggregateSum = 0
-        course.profs.forEach(prof => aggregateSum += average(prof.satisfaction))
-        if (aggregateSum/course.profs.length >= 4) {
+        let totalReviews = 0
+        course.profs.forEach((prof) => {
+            totalReviews += prof.satisfaction.length
+            aggregateSum += sumArray(prof.satisfaction)})
+        if (aggregateSum/totalReviews >= 4) {
             return course
         }
     });
@@ -140,21 +137,62 @@ export default function MainPage() {
         courses.sort((courseA, courseB) => {
             let DifficultyA = 0
             let DifficultyB = 0
-            courseA.profs.forEach(prof => DifficultyA += average2(prof.difficulty))
-            courseB.profs.forEach(prof => DifficultyB += average2(prof.difficulty))
-            DifficultyA = DifficultyA/courseA.profs.length
-            DifficultyB = DifficultyB/courseB.profs.length
+            let reviewLengthA = 0
+            let reviewLengthB = 0
+            let noReviewsA = true
+            let noReviewsB = true
+            courseA.profs.forEach(prof => {
+                reviewLengthA += prof.difficulty.length
+                DifficultyA += sumArray(prof.difficulty)
+                if (prof.difficulty.length !== 0) {
+                    noReviewsA = false
+                }})
+            courseB.profs.forEach(prof => {
+                reviewLengthB += prof.difficulty.length
+                DifficultyB += sumArray(prof.difficulty)
+                if (prof.difficulty.length !== 0) {
+                    noReviewsB = false
+                }})
+            DifficultyA = DifficultyA/reviewLengthA
+            DifficultyB = DifficultyB/reviewLengthB
+            if (noReviewsA) {
+                DifficultyA = 10
+            }
+            if (noReviewsB) {
+                DifficultyB = 10
+            }
             return DifficultyA - DifficultyB
+            
         })
     }
     else if (sortBy === "Time Commitment") {
         courses.sort((courseA, courseB) => {
             let TCA = 0
             let TCB = 0
-            courseA.profs.forEach(prof => TCA += average2(prof.time_commitment))
-            courseB.profs.forEach(prof => TCB += average2(prof.time_commitment))
-            TCA = TCA/courseA.profs.length
-            TCB = TCB/courseB.profs.length
+            let reviewLengthA = 0
+            let reviewLengthB = 0
+            let noReviewsA = true
+            let noReviewsB = true
+            courseA.profs.forEach(prof => {
+                reviewLengthA += prof.time_commitment.length
+                TCA += sumArray(prof.time_commitment)
+                if (prof.time_commitment.length !== 0) {
+                    noReviewsA = false
+                }})
+            courseB.profs.forEach(prof => {
+                reviewLengthB += prof.time_commitment.length
+                TCB += sumArray(prof.time_commitment)
+                if (prof.time_commitment.length !== 0) {
+                    noReviewsB = false
+                }})
+                TCA = TCA/reviewLengthA
+                TCB = TCB/reviewLengthB
+            if (noReviewsA) {
+                TCA = 10
+            }
+            if (noReviewsB) {
+                TCB = 10
+            }
             return TCA - TCB
         })
     }
@@ -162,23 +200,66 @@ export default function MainPage() {
         courses.sort((courseA, courseB) => {
             let InterestA = 0
             let InterestB = 0
-            courseA.profs.forEach(prof => InterestA += average(prof.interest))
-            courseB.profs.forEach(prof => InterestB += average(prof.interest))
-            InterestA = InterestA/courseA.profs.length
-            InterestB = InterestB/courseB.profs.length
-            return InterestB - InterestA
+            let reviewLengthA = 0
+            let reviewLengthB = 0
+            let noReviewsA = true
+            let noReviewsB = true
+            courseA.profs.forEach(prof => {
+                reviewLengthA += prof.interest.length
+                InterestA += sumArray(prof.interest)
+                if (prof.interest.length !== 0) {
+                    noReviewsA = false
+                }})
+            courseB.profs.forEach(prof => {
+                reviewLengthB += prof.interest.length
+                InterestB += sumArray(prof.interest)
+                if (prof.interest.length !== 0) {
+                    noReviewsB = false
+                }})
+                InterestA = InterestA/reviewLengthA
+                InterestB = InterestB/reviewLengthB
+            if (noReviewsA) {
+                InterestA = -1
+            }
+            if (noReviewsB) {
+                InterestB = -1
+            }
+            return InterestA - InterestB
         })
     }
     else if (sortBy === "Satisfaction") {
         courses.sort((courseA, courseB) => {
             let SatisfactionA = 0
             let SatisfactionB = 0     
-            courseA.profs.forEach(prof => SatisfactionA += average(prof.satisfaction))
-            courseB.profs.forEach(prof => SatisfactionB += average(prof.satisfaction)  )
-            SatisfactionA = SatisfactionA/courseA.profs.length
-            SatisfactionB = SatisfactionB/courseB.profs.length
-            return SatisfactionB - SatisfactionA
+            let reviewLengthA = 0
+            let reviewLengthB = 0
+            let noReviewsA = true
+            let noReviewsB = true
+            courseA.profs.forEach(prof => {
+                reviewLengthA += prof.satisfaction.length
+                SatisfactionA += sumArray(prof.satisfaction)
+                if (prof.satisfaction.length !== 0) {
+                    noReviewsA = false
+                }})
+            courseB.profs.forEach(prof => {
+                reviewLengthB += prof.satisfaction.length
+                SatisfactionB += sumArray(prof.satisfaction)
+                if (prof.satisfaction.length !== 0) {
+                    noReviewsB = false
+                }})
+            SatisfactionA = SatisfactionA/reviewLengthA
+            SatisfactionB = SatisfactionB/reviewLengthB
+            if (noReviewsA) {
+                SatisfactionA = -1
+            }
+            if (noReviewsB) {
+                SatisfactionB = -1
+            }
+            return SatisfactionA - SatisfactionB
         })
+    }
+    if (sortBy === "Interest" || sortBy === "Satisfaction") {
+        courses.reverse()
     }
 
   return (

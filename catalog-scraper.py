@@ -36,15 +36,32 @@ for course in courses:
         prof_names = new.split(",")
     else:
         prof_names = professors_list.split(",")
+
+    
         
     profs = []
 
     for prof_name in prof_names:
         prof_name=prof_name.strip()
-        profs.append({"prof_name":prof_name, "satisfaction": [],
-        "difficulty": [],
-        "interest": [],
-        "time_commitment": []})
+        add = True
+        for prof in profs:
+            for x in prof.values():
+                if (x == prof_name):
+                    add = False
+        if (add):
+            
+            profs.append({"prof_name":prof_name, "satisfaction": [],
+            "difficulty": [],
+            "interest": [],
+            "time_commitment": []})
+        #prof_name=prof_name.strip()
+
+        # if (prof_name not in profs):
+        #     profs.append({"prof_name":prof_name, "satisfaction": [],
+        #     "difficulty": [],
+        #     "interest": [],
+        #     "time_commitment": []})
+        
 
     course_desc = course.find(attrs = {"class":"course_description"}).text
 
@@ -59,5 +76,5 @@ for course in courses:
 
     id_generator+=1
 
-with open('data/seed.json', 'w') as outfile:
+with open('./data/seed.json', 'w') as outfile:
     json.dump(data, outfile)
